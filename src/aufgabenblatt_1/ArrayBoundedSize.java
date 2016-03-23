@@ -109,8 +109,8 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 			e.printStackTrace();
 		}
 		if(andereListe instanceof ArrayBoundedSize<?>) {
-			for(int i=0;i<=andereListe.groesseDerListe();i++){
-				einfuegen((E) andereListe.elementAnPosition(i), anzahlDerElemente+i);
+			for(int i=0;i<andereListe.groesseDerListe();i++){
+				einfuegen((E) andereListe.elementAnPosition(i), anzahlDerElemente);
 			}
 		}
 		
