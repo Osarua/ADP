@@ -27,8 +27,10 @@ public interface Liste<E> {
 	 * Wenn die Position < 0 || Position > Kapazitaet wird auch eine Exeption geworfen. 
 	 * @param element Welches in die List eingefuegt werden soll 
 	 * @param position An dieser Position soll das Element hinzugefuegt werden
+	 * @throws IllegalArgumentException Element hat eine Referenz auf null
+	 * @throws IndexOutOfBoundsException Position < 0 || Position > Kapazitaet
 	 */
-	public void einfuegen(E element, int position);
+	public void einfuegen(E element, int position) throws IndexOutOfBoundsException,IllegalArgumentException;
  
  	/**
 	 * delete: LIST X POS -> LIST
@@ -40,8 +42,9 @@ public interface Liste<E> {
 	 * wird das Element nicht entfernt und eine Exception geworfen. 
 	 * Dies ist auch der fall, wenn an einem korrekten Index kein Element ist. 
 	 * @param position an dieser Position soll ein Element entfernt werden
+	 * @throws IndexOutOfBoundsException Position < 0 || Position > Kapazitaet
 	 */
-	public void entfernen(int position);
+	public void entfernen(int position) throws IndexOutOfBoundsException;
  
 	/**
 	 * find: LIST X ELEM -> POS
@@ -52,8 +55,9 @@ public interface Liste<E> {
 	 * Exception geworfen. Dies passiert auch, wenn das Element Null ist.
 	 * @param element nach dem die Liste durchsucht werden soll
 	 * @return int Position des gefundenen Element oder -1 fuer nicht gefunden
+	 * @throws IllegalArgumentException Element hat eine Referenz auf null
 	 */
-	public int finden(E element);
+	public int finden(E element) throws IllegalArgumentException;
 
 	/**
 	 * retrieve: LIST X POS -> ELEM
@@ -64,8 +68,9 @@ public interface Liste<E> {
 	 * den Wert null hat an dieser Position.
 	 * @param position des Element in der Liste
 	 * @return Object Element an dieser Position 
+	 * @throws IndexOutOfBoundsException Position < 0 || Position > Kapazitaet
 	 */
-	public Object elementAnPosition(int position);
+	public Object elementAnPosition(int position) throws IndexOutOfBoundsException;
 
 	/**
 	 * concat: LIST X LIST -> LIST
@@ -76,8 +81,9 @@ public interface Liste<E> {
 	 * Anzahl der Elemente um die anzahl der neuen Elmenten. Die anzufuegende Liste wird am Ende dieser Liste
 	 * "angehaengt". Wird die Lise mit einem Array Implementiert, vergoessert sich ggf. dieses.
 	 * @param liste Die mit dieser zusammengefuegt werden soll
+	 * @throws  IllegalArgumentException Liste<E> andereListe darf nicht null sein
 	 */
-	public void listenZusammenfuegen(Liste<E> andereListe);
+	public void listenZusammenfuegen(Liste<E> andereListe) throws IllegalArgumentException;
 
 	/**
 	 * size: LIST -> INT

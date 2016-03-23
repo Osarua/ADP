@@ -26,22 +26,20 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 	 * wird erzeugt mit einer Anfangskapizitaet. Wenn die anfangsKapazitaet <=0 wird eine
 	 * Exception geworfen.   
 	 * @param anfangsKapazitaet des Arrays
+	 * @throws IllegalArgumentException anfangsKapazitaet <=0
 	 */
-	public ArrayBoundedSize(int anfangsKapazitaet) {
+	public ArrayBoundedSize(int anfangsKapazitaet) throws IllegalArgumentException {
 		anzahlDerElemente = 0;
-		try {
-			if (anfangsKapazitaet <= 0) {
-				throw new IllegalArgumentException("Ungueltige Anfangskapazitaet: " + anfangsKapazitaet);
-			}
-		} catch (IllegalArgumentException e) {
-			System.out.print(e.getMessage());
-			e.printStackTrace();
+		if (anfangsKapazitaet <= 0) {
+			throw new IllegalArgumentException("Ungueltige Anfangskapazitaet: " + anfangsKapazitaet);
+		} else {
+			liste = new Object[anfangsKapazitaet];
 		}
-		liste = new Object[anfangsKapazitaet];
 	}
 
 	@Override
-	public void einfuegen(E element, int position) {
+	public void einfuegen(Object element, int position) 
+			throws IndexOutOfBoundsException,IllegalArgumentException {
 		gueltigePosition(position);
 		elementMussUngleichNullSein(element);
 		if (anzahlDerElemente < liste.length) {
@@ -50,7 +48,6 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 			}
 		} else {
 			arrayVergroessern();
-			
 		}
 		liste[position] = element;
 		anzahlDerElemente++;
@@ -71,7 +68,7 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 	}
 	
 	@Override
-	public void entfernen(int position) {
+	public void entfernen(int position) throws IndexOutOfBoundsException {
 		gueltigePosition(position);
 		for (int i = position; i < (anzahlDerElemente - 1); i++) {
 			liste[i] = liste[i + 1];
@@ -81,7 +78,7 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 	}
 
 	@Override
-	public int finden(E element) {
+	public int finden(E element) throws IllegalArgumentException {
 		elementMussUngleichNullSein(element);
 		for (int i = 0; i < anzahlDerElemente; i++) {
 			if (element.equals(liste[i])) {
@@ -92,28 +89,22 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 	}
 
 	@Override
-	public Object elementAnPosition(int position) {
+	public Object elementAnPosition(int position) throws IndexOutOfBoundsException {
 		gueltigePosition(position);
 		return liste[position];
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	@Override
-	public void listenZusammenfuegen(Liste<E> andereListe) {
-		try {
-			if (andereListe == null) {
-				throw new IllegalArgumentException("Liste darf nicht null sein");
-			}
-		} catch (IllegalArgumentException e) {
-			System.out.print(e.getMessage());
-			e.printStackTrace();
+	public void listenZusammenfuegen(Liste<E> andereListe) throws IllegalArgumentException {
+		if (andereListe == null) {
+			throw new IllegalArgumentException("Liste<E> andereListe darf nicht null sein");
 		}
-		if(andereListe instanceof ArrayBoundedSize<?>) {
-			for(int i=0;i<andereListe.groesseDerListe();i++){
-				einfuegen((E) andereListe.elementAnPosition(i), anzahlDerElemente);
+		if (andereListe instanceof ArrayBoundedSize<?>) {
+			for (int i = 0; i < andereListe.groesseDerListe(); i++) {
+				einfuegen(andereListe.elementAnPosition(i), anzahlDerElemente);
 			}
 		}
-		
 	}
 
 	@Override
@@ -126,15 +117,11 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 	 * Precondition: keine
 	 * Postcondition: Wirft eine Exception, fall das Element die Referenz null hat.
 	 * @param element welches ueberprueft werden soll
+	 * @throws IllegalArgumentException Element hat Referenz auf null
 	 */
-	private void elementMussUngleichNullSein(E element) {
-		try {
-			if (element == null) {
-				throw new IllegalArgumentException("Element darf nicht null sein");
-			}
-		} catch (IllegalArgumentException e) {
-			System.out.print(e.getMessage());
-			e.printStackTrace();
+	private void elementMussUngleichNullSein(Object element) throws IllegalArgumentException {
+		if (element == null) {
+			throw new IllegalArgumentException("Element darf nicht null sein");
 		}
 	}
 	
@@ -143,19 +130,14 @@ public class ArrayBoundedSize<E> implements Liste<E>{
      * Precondition: keine
      * Postcondition: Wirft eine Exception, wenn der Index zugriff mit dem 
      * aktuellen Parameter ungueltig ist.
-     * Dies tritt ein, wenn die Position Position(Index) < 0 || Index > Kapazitaet 
+     * Dies tritt ein, wenn die Position(Index) < 0 || Position > Kapazitaet ist.
      * @param position welche ueberprueft werden soll
+     * @throws IndexOutOfBoundsException Position < 0 || Position > Kapazitaet
      */
-	private void gueltigePosition(int position) {
-		try {
-			if ((position < 0) || (position > liste.length)) {
-				throw new IndexOutOfBoundsException("Ungueltiger Index zugriff: " + position);
-			}
-		} catch (IndexOutOfBoundsException e) {
-			System.out.print(e.getMessage());
-			e.printStackTrace();
+	private void gueltigePosition(int position) throws IndexOutOfBoundsException {
+		if ((position < 0) || (position > liste.length)) {
+			throw new IndexOutOfBoundsException("Ungueltiger Index zugriff: " + position);
 		}
 	}
-	
 }
  
