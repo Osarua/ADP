@@ -115,7 +115,7 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 	}
 
 	/**
-	 * notNull: LIST X ELEM -> ELEM 
+	 * notNull: ELEM -> ELEM 
 	 * Precondition: keine
 	 * Postcondition: Wirft eine Exception, fall das Element die Referenz null hat.
 	 * @param element welches ueberprueft werden soll
