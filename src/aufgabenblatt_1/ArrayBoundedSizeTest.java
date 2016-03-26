@@ -150,7 +150,6 @@ public class ArrayBoundedSizeTest {
 		exception.expectMessage("Anzahl der Elemente muss groesser 0 sein");	
 		aBsString.entfernen(0);
 		assertEquals("Element sollte null sein",aBsString.elementAnPosition(0),null);
-		assertEquals("Anzahl der Elemente sollte 0 sein",aBsString.groesseDerListe(),-2);
 	}
 	
 	/**

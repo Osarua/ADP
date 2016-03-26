@@ -137,7 +137,7 @@ public class ArrayBoundedSize<E> implements Liste<E>{
      * @throws IndexOutOfBoundsException Position < 0 || Position >= Kapazitaet
      */
 	private void gueltigePosition(int position) throws IndexOutOfBoundsException {
-		if ((position < 0) || (position >= liste.length)) {
+		if ((position < 0) || (position > liste.length-1)) {
 			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + position);
 		}
 	}
