@@ -1,7 +1,4 @@
 package aufgabenblatt_1;
-
-import aufgabenblatt_1.EinfachVerketteteListe.Knoten;
-
 /**
  * TI3 ADP, SS16 
  * @author Julian
@@ -14,27 +11,35 @@ import aufgabenblatt_1.EinfachVerketteteListe.Knoten;
 public class ArrayNextPrevIndex<E> implements Liste<E>{
 	
 	/**
-	 * Innere Klasse für einen Knoten mit einem Element. Ein Knoten hat eine Referenz 
+	 * Innere Klasse fuer einen Knoten mit einem Element. 
+	 * Ein Knoten hat eine Referenz auf das next- und previous Element(Knoten).
 	 */
 	public class Knoten {
-		
+
 		/**
 		 * Element(Inhalt) des Knoten
 		 */
 		E element;
-		
+
 		/**
-		 * Verweis auf den Nachfolger Knoten in der Liste
+		 * Verweis auf den vorigen Knoten
 		 */
-		Knoten nachfolger;
-		
-		public Knoten(E elementPar,Knoten nachfolgerPar){
+		Knoten previous;
+
+		/**
+		 * Verweis auf den naechsten Knoten
+		 */
+		Knoten next;
+
+		public Knoten(E elementPar, Knoten previousPar, Knoten nextPar) {
 			element = elementPar;
-			nachfolger = nachfolgerPar;
-		}	
+			previous = previousPar;
+			next = nextPar;
+		}
 	}
+	
 	/**
-	 * Liste(Array Bounded Size) von Elementen
+	 * Liste(Array) von Elementen mit next- und previous-Index
 	 */
 	private Object[] liste;
 
@@ -42,8 +47,6 @@ public class ArrayNextPrevIndex<E> implements Liste<E>{
 	 * Die Anzahl der enhaltenen Elemente in der Liste
 	 */
 	private int anzahlDerElemente;
-	
-	
 
 	/**
 	 * construct: ANFANGSKAP X LIST -> LIST
@@ -96,14 +99,12 @@ public class ArrayNextPrevIndex<E> implements Liste<E>{
 	public void entfernen(int position) throws IndexOutOfBoundsException,IllegalArgumentException {
 		gueltigePosition(position);
 		if (anzahlDerElemente > 0) {
-			for (int i = position; i < (anzahlDerElemente - 1); i++) {
+			for (int i = position; i < (anzahlDerElemente); i++) {
 				liste[i] = liste[i + 1];
 			}
 			liste[anzahlDerElemente - 1] = null;
 			anzahlDerElemente--;
-		} else {
-			throw new IllegalArgumentException("Anzahl der Elemente muss groesser 0 sein");
-		}
+		} 
 	}
 
 	@Override
@@ -131,7 +132,10 @@ public class ArrayNextPrevIndex<E> implements Liste<E>{
 		if (andereListe instanceof ArrayBoundedSize<?>) {
 			for (int i = 0; i < andereListe.groesseDerListe(); i++) {
 				einfuegen((E) andereListe.elementAnPosition(i), anzahlDerElemente);
-			}
+			} 
+		} else {
+			throw new IllegalArgumentException("Die konkrete Klasse die das Interface Liste<E>"
+					+ "implementiert muss vom Typ ArrayNextPrevIndex<E> sein");
 		}
 	}
 	

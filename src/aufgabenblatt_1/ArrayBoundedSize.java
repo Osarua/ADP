@@ -37,6 +37,11 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 		}
 	}
 
+	/**
+	 * Postcondition: Falls die groesse des Arrays nicht ausreicht 
+	 * wird ein groesseres Array allokiert.
+	 * @throws IndexOutOfBoundsException Position < 0 || Position >= Laenge der Liste
+	 */
 	@Override
 	public void einfuegen(E element, int position) throws 
 	IndexOutOfBoundsException, IllegalArgumentException {
@@ -55,7 +60,7 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 	/**
 	 * plusCapacity: LIST X INT -> LIST
 	 * Precondition: keine
-	 * Postcondition: Array Liste ist um alte Kapazitaet * 3/2+1 vergroessert. 
+	 * Postcondition: Array ist um alte Kapazitaet * 3/2+1 vergroessert. 
 	 */
 	private void arrayVergroessern() {
 		Object[] listePlus;
@@ -66,18 +71,19 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 		liste = listePlus;
 	}
 	
+	/**
+	 * @throws IndexOutOfBoundsException Position < 0 || Position >= Laenge der Liste
+	 */
 	@Override
-	public void entfernen(int position) throws IndexOutOfBoundsException,IllegalArgumentException {
+	public void entfernen(int position) throws IndexOutOfBoundsException {
 		gueltigePosition(position);
 		if (anzahlDerElemente > 0) {
-			for (int i = position; i < (anzahlDerElemente - 1); i++) {
+			for (int i = position; i < (anzahlDerElemente ); i++) {
 				liste[i] = liste[i + 1];
 			}
 			liste[anzahlDerElemente - 1] = null;
 			anzahlDerElemente--;
-		} else {
-			throw new IllegalArgumentException("Anzahl der Elemente muss groesser 0 sein");
-		}
+		} 
 	}
 
 	@Override
@@ -90,12 +96,18 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 		return -1;
 	}
 
+	/**
+	 * @throws IndexOutOfBoundsException Position < 0 || Position >= Laenge der Liste
+	 */
 	@Override
 	public Object elementAnPosition(int position) throws IndexOutOfBoundsException {
 		gueltigePosition(position);
 		return liste[position];
 	}
 
+	/**
+	 * Postcondition: Falls die groesse des Arrays nicht ausreicht wird ein groesseres Array allokiert.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void listenZusammenfuegen(Liste<E> andereListe) throws IllegalArgumentException {
@@ -106,6 +118,9 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 			for (int i = 0; i < andereListe.groesseDerListe(); i++) {
 				einfuegen((E) andereListe.elementAnPosition(i), anzahlDerElemente);
 			}
+		} else {
+			throw new IllegalArgumentException("Die konkrete Klasse die das Interface Liste<E>"
+					+ "implementiert muss vom Typ ArrayBoundedSize<E> sein");
 		}
 	}
 	
@@ -137,7 +152,7 @@ public class ArrayBoundedSize<E> implements Liste<E>{
      * @throws IndexOutOfBoundsException Position < 0 || Position >= Kapazitaet
      */
 	private void gueltigePosition(int position) throws IndexOutOfBoundsException {
-		if ((position < 0) || (position > liste.length-1)) {
+		if ((position < 0) || (position >= liste.length)) {
 			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + position);
 		}
 	}

@@ -242,6 +242,13 @@ public class EinfachVerketteteListeTest {
 		aBsNumber2.einfuegen(-4, 0);
 		aBsNumber.listenZusammenfuegen(aBsNumber2);
 		assertEquals("Sollte Groesse 2 haben", aBsNumber.groesseDerListe(), 2);
+		// Testfall das die Liste nicht vom Typ EinfachVerketteteListe<E> ist
+		Liste<Number> eVl = new ArrayBoundedSize<>(1);
+		eVl.einfuegen(1, 0);
+		exception.expect(IllegalArgumentException.class);
+		exception.expectMessage("Die konkrete Klasse die das Interface Liste<E>"
+					+ "implementiert muss vom Typ EinfachVerketteteListe<E> sein");
+		aBsNumber.listenZusammenfuegen(eVl);
 	}
 
 	/**

@@ -146,10 +146,6 @@ public class ArrayBoundedSizeTest {
 		aBsString.entfernen(0);
 		assertEquals("Element sollte nicht in der Liste sein",aBsString.elementAnPosition(0),null);
 		assertEquals("Anzahl der Elemente sollte 0 sein",aBsString.groesseDerListe(),0);
-		exception.expect(IllegalArgumentException.class);
-		exception.expectMessage("Anzahl der Elemente muss groesser 0 sein");	
-		aBsString.entfernen(0);
-		assertEquals("Element sollte null sein",aBsString.elementAnPosition(0),null);
 	}
 	
 	/**
@@ -245,9 +241,9 @@ public class ArrayBoundedSizeTest {
 	 */
 	@Test
 	public void testListenZusammenfuegen() {
-		ArrayBoundedSize<Integer> aBs = new ArrayBoundedSize<>(1);
+		Liste<Integer> aBs = new ArrayBoundedSize<>(1);
 		aBs.einfuegen(1, 0);
-		ArrayBoundedSize<Integer> aBsDiff = new ArrayBoundedSize<>(1);
+		Liste<Integer> aBsDiff = new ArrayBoundedSize<>(1);
 		aBsDiff.einfuegen(2, 0);
 		aBs.listenZusammenfuegen(aBsDiff);
 		assertEquals("Sollte Groesse 2 haben", aBs.groesseDerListe(), 2);
@@ -264,6 +260,13 @@ public class ArrayBoundedSizeTest {
 		aBsNumber2.einfuegen(-4, 0);
 		aBsNumber.listenZusammenfuegen(aBsNumber2);
 		assertEquals("Sollte Groesse 2 haben", aBsNumber.groesseDerListe(), 2);
+		// Testfall das die Liste nicht vom Typ ArrayBoundedSize<E> ist
+		Liste<Number> eVl = new EinfachVerketteteListe<>();
+		eVl.einfuegen(1, 0);
+		exception.expect(IllegalArgumentException.class);
+		exception.expectMessage("Die konkrete Klasse die das Interface Liste<E>"
+					+ "implementiert muss vom Typ ArrayBoundedSize<E> sein");
+		aBsNumber.listenZusammenfuegen(eVl);
 	}
 
 	/**

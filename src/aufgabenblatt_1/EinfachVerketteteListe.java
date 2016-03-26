@@ -46,7 +46,8 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 	/**
 	 * construct: -> LIST
 	 * Precondition: keine
-	 * Postcondition: Initialisiert die Liste. Anzahl der Elemente ist 0. 
+	 * Postcondition: Initialisiert die Liste. Anzahl der Elemente ist 0.
+	 *  
 	 */
 	public EinfachVerketteteListe()  {
 		anzahlDerElemente = 0;
@@ -54,10 +55,13 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 		listenEnde= listenKopf ;
 	}
 	
+	/**
+	 * @throws IndexOutOfBoundsException Position < 0 || Position > Laenge der Liste
+	 */
 	@Override
 	public void einfuegen(E element, int position) throws IndexOutOfBoundsException, IllegalArgumentException {
 		elementMussUngleichNullSein(element);
-		unGueltigePosition(position);
+		gueltigePosition(position);
 		if(position==anzahlDerElemente) {
 			einfuegenNach(element,listenEnde);
 		} else {
@@ -68,9 +72,12 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 		}
 	
 	/**
+	 * addNach: -> LISTE X ELEM X KNOTEN -> LISTE
+	 * Precondition: Wird von der Methode einfuegen(E,int) aufgerufen.
+	 * Postcondition: Liste enthaelt einen Knoten mit Element und Referenz auf
+	 * den nachfolger Knoten.
 	 * @param element Element das in die Liste eingefuegt werden soll
-	 * @param vorgaenger Knoten, hinter dem das neue Element eingefuegt 
-	 * werden soll.
+	 * @param vorgaenger Knoten, hinter dem das neue Element eingefuegt  werden soll.
 	 */
 	private void einfuegenNach(E element, Knoten vorgaenger) {
 		Knoten knotenNeu = new Knoten(element, vorgaenger.nachfolger);
@@ -80,9 +87,12 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 		}
 	}
 
+	/**
+	 * 	@throws IndexOutOfBoundsException Position < 0 || Position > Laenge der Liste
+	 */
 	@Override
 	public void entfernen(int position) throws IndexOutOfBoundsException {
-		unGueltigePosition(position);
+		gueltigePosition(position);
 		if(position==0){
 			listenKopf.nachfolger = listenKopf.nachfolger.nachfolger;
 		} else {
@@ -107,9 +117,12 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 		return -1;
 	}
 
+	/**
+	 * 	@throws IndexOutOfBoundsException Position < 0 || Position > Laenge der Liste
+	 */
 	@Override
 	public Object elementAnPosition(int position) throws IndexOutOfBoundsException {
-		unGueltigePosition(position);
+		gueltigePosition(position);
 		int i = 0;
 		Knoten knotenTest = listenKopf;
 		while (knotenTest.nachfolger != null) {
@@ -122,9 +135,18 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 		return knotenTest.element;
 	}
 
-
+	/**
+	 * retrieve: LIST X POS -> KNOTEN
+	 * Precondition: keine
+	 * Postcondition: Es wird der Knoten an der uebergebenen Position zurueckgegeben.
+	 * Falls der aktuelle Parameter position ausserhalb des gueltigen Indexbereich der Liste liegt
+	 * wird eine Exception geworfen. 
+	 * @param position des Knoten in der Liste
+	 * @return Knoten an dieser Position 
+	 * @throws IndexOutOfBoundsException Position < 0 || Position > Laenge der Liste
+	 */
 	public Knoten knotenAnPosition(int position) throws IndexOutOfBoundsException {
-		unGueltigePosition(position);
+		gueltigePosition(position);
 		int i = 0;
 		Knoten knotenTest = listenKopf;
 		while (knotenTest.nachfolger != null) {
@@ -145,8 +167,11 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 		}
 		if (andereListe instanceof EinfachVerketteteListe<?>) {
 			for (int i = 0; i < andereListe.groesseDerListe(); i++) {
-				einfuegen( (E) andereListe.elementAnPosition(i), anzahlDerElemente);
+				einfuegen((E) andereListe.elementAnPosition(i), anzahlDerElemente);
 			}
+		} else {
+			throw new IllegalArgumentException("Die konkrete Klasse die das Interface Liste<E>"
+					+ "implementiert muss vom Typ EinfachVerketteteListe<E> sein");
 		}
 	}
 
@@ -169,14 +194,14 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 	}
 	
     /**
-     * truePosition: 
+     * truePosition: LIST X POS -> POS
      * Precondition: keine
      * Postcondition: Wirft eine Exception, weil der Index zugriff mit dem 
      * aktuellen Parameter ungueltig war.
      * @param position welche ueberprueft werden soll
-     * @throws IndexOutOfBoundsException 
+	 * @throws IndexOutOfBoundsException Position < 0 || Position > Laenge der Liste
      */
-	private void unGueltigePosition(int position) throws IndexOutOfBoundsException {
+	private void gueltigePosition(int position) throws IndexOutOfBoundsException {
 		if ((position < 0) || (position > anzahlDerElemente)) {
 			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + position);
 		}
