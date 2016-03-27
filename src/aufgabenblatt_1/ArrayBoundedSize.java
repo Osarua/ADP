@@ -38,7 +38,7 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 	}
 
 	/**
-	 * Postcondition: Falls die groesse des Arrays nicht ausreicht 
+	 * Erweiterte Postcondition: Falls die groesse des Arrays nicht ausreicht 
 	 * wird ein groesseres Array allokiert.
 	 * @throws IndexOutOfBoundsException Position < 0 || Position >= Laenge der Liste
 	 */
@@ -106,7 +106,9 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 	}
 
 	/**
-	 * Postcondition: Falls die groesse des Arrays nicht ausreicht wird ein groesseres Array allokiert.
+	 * Erweiterte Postcondition: Falls die groesse des Arrays nicht ausreicht 
+	 * wird ein groesseres Array allokiert.
+	 * @throws IllegalArgumentException andereListe muss vom Typ ArrayBoundedSize<E> sein
 	 */
 	@SuppressWarnings("unchecked")
 	@Override

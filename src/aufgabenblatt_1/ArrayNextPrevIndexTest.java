@@ -114,14 +114,14 @@ public class ArrayNextPrevIndexTest {
 	
 	/**
 	 *  Testet ob die IndexOutOfBoundsException Exception ausgeloesst wird, wenn der 
-	 *  aktuelle Parameter position >= Kapazitaet ist.
+	 *  aktuelle Parameter position > Kapazitaet-2 ist.
 	 */
 	@Test
 	public void testEinfuegenIndexOutOfBoundsExceptionKap(){
 		Liste<String> aBsString = new ArrayNextPrevIndex<>(3);
 		exception.expect(IndexOutOfBoundsException.class);
-		exception.expectMessage("Ungueltiger Index Zugriff: 3");
-		aBsString.einfuegen("a", 3);
+		exception.expectMessage("Ungueltiger Index Zugriff: 4");
+		aBsString.einfuegen("a", 4);
 	}
 	
 	/**
@@ -151,7 +151,7 @@ public class ArrayNextPrevIndexTest {
 	/**
 	 * Testet die Methode entfernen(int), wenn ein Element in der Mitte der Liste entfernt wird.
 	 */
-	
+	@Test
 	public void testEntfernenMitte(){
 		Liste<Character> aBsChar = new ArrayNextPrevIndex<>(4);
 		aBsChar.einfuegen('a', 0);

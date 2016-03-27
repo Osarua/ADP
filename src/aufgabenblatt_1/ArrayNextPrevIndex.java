@@ -47,8 +47,14 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements Liste<E>{
 	 */
 	private int anzahlDerElemente;
 	
+	/**
+	 * Anfang der Liste
+	 */
 	private Knoten listenKopf;
 	
+	/**
+	 * Ende der Liste
+	 */
 	private Knoten listenEnde;
 	
 	/**
@@ -73,19 +79,35 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements Liste<E>{
 		}
 	}
 
+	/**
+	 * Erweiterte Postcondition: Die Elemente sind 
+	 * durch einen next- und previous-Index aufsteigend sortiert.
+	 * @throws IndexOutOfBoundsException Position < 0 || Position > Kapazitaet-2
+	 */
 	@Override
-	public void einfuegen(E element, int position) throws 
-	IndexOutOfBoundsException, IllegalArgumentException {
+	public void einfuegen(E element, int position) throws IndexOutOfBoundsException, 
+	IllegalArgumentException {
 		gueltigePosition(position);
 		elementMussUngleichNullSein(element);
-		if (anzahlDerElemente >= liste.length-2) {
+		if (anzahlDerElemente >= liste.length - 2) {
 			arrayVergroessern();
 		}
 		for (int i = (anzahlDerElemente - 1); i >= position; --i) {
 			liste[i + 1] = liste[i];
-		}	
+		}
 		Knoten knotenAdd = new Knoten(element, null, null);
-		liste[position+1] = knotenAdd;	
+		liste[position + 1] = knotenAdd;
+		knotenEinfuegen(knotenAdd);
+		anzahlDerElemente++;
+	}
+	
+	/**
+	 * addKnoten: KNOTEN X LISTE -> LISTE
+	 * Precondition: Hilfsmethode, welche von einfuegen(E, int) aufgerufen wird.
+	 * Postcondition: Knoten befindet sich in der aufsteigend sortierten Liste.
+	 * Der Knoten zeigt auf den korrekten next und previous-Index.
+	 */
+	private void knotenEinfuegen(Knoten knotenAdd){
 		if (anzahlDerElemente == 0) {
 			listenKopf.next = knotenAdd;
 			knotenAdd.previous = listenKopf;
@@ -94,25 +116,24 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements Liste<E>{
 		} else {
 			Knoten durchlauf = listenKopf;
 			int vergleich = 0;
-			while (durchlauf.next !=null) {
+			while (durchlauf.next != null) {
 				vergleich = durchlauf.next.element.compareTo(knotenAdd.element);
 				if (vergleich >= 0) {
 					knotenAdd.next = durchlauf.next;
 					knotenAdd.next.previous = knotenAdd;
 					durchlauf.next = knotenAdd;
 					knotenAdd.previous = durchlauf;
-						break;
-					} else if(durchlauf.next.equals(listenEnde.previous)){
-							durchlauf.next.next= knotenAdd;
-							knotenAdd.previous = durchlauf.next;
-							knotenAdd.next = listenEnde;
-							listenEnde.previous = knotenAdd;
-						break;
-					}
+					break;
+				} else if (durchlauf.next.equals(listenEnde.previous)) {
+					durchlauf.next.next = knotenAdd;
+					knotenAdd.previous = durchlauf.next;
+					knotenAdd.next = listenEnde;
+					listenEnde.previous = knotenAdd;
+					break;
+				}
 				durchlauf = durchlauf.next;
 			}
 		}
-		anzahlDerElemente++;
 	}
 
 	/**
@@ -130,16 +151,30 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements Liste<E>{
 		liste[liste.length-1] = listenEnde;
 	}
 	
+	/**
+	 *  @throws IndexOutOfBoundsException Position < 0 || Position > Kapazitaet-2
+	 */
 	@Override
-	public void entfernen(int position) throws IndexOutOfBoundsException,IllegalArgumentException {
+	public void entfernen(int position) throws IndexOutOfBoundsException {
 		gueltigePosition(position);
 		if (anzahlDerElemente > 0) {
+			int iNext =0;
+			 Knoten anPosition = listenKopf.next;
+				while(iNext<position){
+					anPosition = anPosition.next;
+					iNext++;
+				} if(anPosition.next.equals(listenEnde)){
+					anPosition.previous.next= listenEnde;
+				}
+				Knoten knotenDanach = anPosition.next;
+				 anPosition.previous.next = knotenDanach;
+				 knotenDanach.previous = anPosition.previous;
 			for (int i = position; i < (anzahlDerElemente); i++) {
 				liste[i] = liste[i + 1];
 			}
-			liste[anzahlDerElemente - 1] = null;
-			anzahlDerElemente--;
-		} 
+		}
+		liste[anzahlDerElemente] = null;
+		anzahlDerElemente--;
 	}
 
 	@Override
@@ -152,6 +187,9 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements Liste<E>{
 		return -1;
 	}
 
+	/**
+	 * @throws IndexOutOfBoundsException Position < 0 || Position > Kapazitaet-2
+	 */
 	@Override
 	public Object elementAnPosition(int position) throws IndexOutOfBoundsException {
 		gueltigePosition(position);
@@ -164,13 +202,16 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements Liste<E>{
 		return anPosition.element;
 	}
 
+	/**
+	 * @throws IllegalArgumentException andereListe muss vom Typ ArrayNextPrevIndex<E> sein
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void listenZusammenfuegen(Liste<E> andereListe) throws IllegalArgumentException {
 		if (andereListe == null) {
 			throw new IllegalArgumentException("Liste<E> andereListe darf nicht null sein");
 		}
-		if (andereListe instanceof ArrayBoundedSize<?>) {
+		if (andereListe instanceof ArrayNextPrevIndex<?>) {
 			for (int i = 0; i < andereListe.groesseDerListe(); i++) {
 				einfuegen((E) andereListe.elementAnPosition(i), anzahlDerElemente);
 			} 
@@ -203,12 +244,12 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements Liste<E>{
      * Precondition: keine
      * Postcondition: Wirft eine Exception, wenn der Index zugriff mit dem 
      * aktuellen Parameter ungueltig ist.
-     * Dies tritt ein, wenn die Position(Index) < 0 || Position >= Laenge der Liste ist.
+     * Dies tritt ein, wenn die Position(Index) < 0 || Position > Laenge-2 der Liste ist.
      * @param position welche ueberprueft werden soll
-     * @throws IndexOutOfBoundsException Position < 0 || Position >= Kapazitaet
+     * @throws IndexOutOfBoundsException Position < 0 || Position > Kapazitaet-2
      */
 	private void gueltigePosition(int position) throws IndexOutOfBoundsException {
-		if ((position < 0) || (position > liste.length+1)) {
+		if ((position < 0) || (position > liste.length-2)) {
 			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + position);
 		}
 	}

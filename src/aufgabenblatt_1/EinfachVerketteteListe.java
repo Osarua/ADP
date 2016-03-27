@@ -159,6 +159,9 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 		return knotenTest;
 	}
 	
+	/**
+	 * @throws IllegalArgumentException andereListe muss vom Typ EinfachVerketteteListe<E> sein
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void listenZusammenfuegen(Liste<E> andereListe) throws IllegalArgumentException {
