@@ -2,13 +2,12 @@ package aufgabenblatt_1;
 /**
  * TI3 ADP, SS16 
  * @author Julian
- * Aufgabenblatt 1: Eine Liste umgesetzt mit einem Array. Die Elemente sollten durch einen
- * next- und previous-Index sortiert sein, welcher in jedem 
- * Array-Element abgespeichert werden muss.
- * Wenn die Kapazitaet des Arrays nicht mehr ausreicht wird dieses vergroessert.
+ * Aufgabenblatt 1: Eine Liste umgesetzt mit einem Array. Die Elemente sind durch einen
+ * next- und previous-Index sortiert, welcher in jedem 
+ * Array-Element abgespeichert ist.
  * @param <E> Elemente eines Typen 
  */
-public class ArrayNextPrevIndex<E> implements Liste<E>{
+public class ArrayNextPrevIndex<E extends Comparable<E>> implements Liste<E>{
 	
 	/**
 	 * Innere Klasse fuer einen Knoten mit einem Element. 
@@ -47,7 +46,11 @@ public class ArrayNextPrevIndex<E> implements Liste<E>{
 	 * Die Anzahl der enhaltenen Elemente in der Liste
 	 */
 	private int anzahlDerElemente;
-
+	
+	private Knoten listenKopf;
+	
+	private Knoten listenEnde;
+	
 	/**
 	 * construct: ANFANGSKAP X LIST -> LIST
 	 * Precondition: keine
@@ -62,7 +65,11 @@ public class ArrayNextPrevIndex<E> implements Liste<E>{
 		if (anfangsKapazitaet <= 0) {
 			throw new IllegalArgumentException("Ungueltige Anfangskapazitaet: " + anfangsKapazitaet);
 		} else {
-			liste = new Object[anfangsKapazitaet];
+			listenKopf = new Knoten(null, null, null);
+			listenEnde = new Knoten(null, null, null);
+			liste = new Object[anfangsKapazitaet+2];
+			liste[0] = listenKopf;
+			liste[liste.length-1] = listenEnde;
 		}
 	}
 
@@ -71,13 +78,40 @@ public class ArrayNextPrevIndex<E> implements Liste<E>{
 	IndexOutOfBoundsException, IllegalArgumentException {
 		gueltigePosition(position);
 		elementMussUngleichNullSein(element);
-		if (anzahlDerElemente+1 >= liste.length) {
+		if (anzahlDerElemente >= liste.length-2) {
 			arrayVergroessern();
 		}
 		for (int i = (anzahlDerElemente - 1); i >= position; --i) {
 			liste[i + 1] = liste[i];
+		}	
+		Knoten knotenAdd = new Knoten(element, null, null);
+		liste[position+1] = knotenAdd;	
+		if (anzahlDerElemente == 0) {
+			listenKopf.next = knotenAdd;
+			knotenAdd.previous = listenKopf;
+			knotenAdd.next = listenEnde;
+			listenEnde.previous = knotenAdd;
+		} else {
+			Knoten durchlauf = listenKopf;
+			int vergleich = 0;
+			while (durchlauf.next !=null) {
+				vergleich = durchlauf.next.element.compareTo(knotenAdd.element);
+				if (vergleich >= 0) {
+					knotenAdd.next = durchlauf.next;
+					knotenAdd.next.previous = knotenAdd;
+					durchlauf.next = knotenAdd;
+					knotenAdd.previous = durchlauf;
+						break;
+					} else if(durchlauf.next.equals(listenEnde.previous)){
+							durchlauf.next.next= knotenAdd;
+							knotenAdd.previous = durchlauf.next;
+							knotenAdd.next = listenEnde;
+							listenEnde.previous = knotenAdd;
+						break;
+					}
+				durchlauf = durchlauf.next;
+			}
 		}
-		liste[position] = element;
 		anzahlDerElemente++;
 	}
 
@@ -93,6 +127,7 @@ public class ArrayNextPrevIndex<E> implements Liste<E>{
 			listePlus[i] = liste[i];
 		}
 		liste = listePlus;
+		liste[liste.length-1] = listenEnde;
 	}
 	
 	@Override
@@ -110,7 +145,7 @@ public class ArrayNextPrevIndex<E> implements Liste<E>{
 	@Override
 	public int finde(E element) {
 		for (int i = 0; i < anzahlDerElemente; i++) {
-			if (element.equals(liste[i])) {
+			if (element.equals(liste[i+1])) {
 				return i;
 			}
 		}
@@ -120,7 +155,13 @@ public class ArrayNextPrevIndex<E> implements Liste<E>{
 	@Override
 	public Object elementAnPosition(int position) throws IndexOutOfBoundsException {
 		gueltigePosition(position);
-		return liste[position];
+		int i =0;
+		Knoten anPosition = listenKopf.next;
+		while(i<position){
+			anPosition = anPosition.next;
+			i++;
+		}
+		return anPosition.element;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -167,7 +208,7 @@ public class ArrayNextPrevIndex<E> implements Liste<E>{
      * @throws IndexOutOfBoundsException Position < 0 || Position >= Kapazitaet
      */
 	private void gueltigePosition(int position) throws IndexOutOfBoundsException {
-		if ((position < 0) || (position > liste.length-1)) {
+		if ((position < 0) || (position > liste.length+1)) {
 			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + position);
 		}
 	}

@@ -8,7 +8,7 @@ import org.junit.rules.ExpectedException;
 /**
  * TI3 ADP, SS16 
  * @author Julian
- * Aufgabenblatt 1: Testet die Klasse ArrayBoundedSize.
+ * Aufgabenblatt 1: Testet die Klasse ArrayNextPrevIndex.
  */
 public class ArrayNextPrevIndexTest {
 	/**
@@ -89,15 +89,15 @@ public class ArrayNextPrevIndexTest {
 		aBsString.einfuegen("c", 2);
 		aBsString.einfuegen("d",1);
 		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(0),"a");
-		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(1),"d");
-		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(2),"b");
-		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(3),"c");
+		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(1),"b");
+		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(2),"c");
+		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(3),"d");
 		aBsString.einfuegen("z",1);
 		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(0),"a");
-		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(1),"z");
-		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(2),"d");
-		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(3),"b");
-		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(4),"c");
+		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(1),"b");
+		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(2),"c");
+		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(3),"d");
+		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(4),"z");
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class ArrayNextPrevIndexTest {
 	/**
 	 * Testet die Methode entfernen(int), wenn ein Element in der Mitte der Liste entfernt wird.
 	 */
-	@Test
+	
 	public void testEntfernenMitte(){
 		Liste<Character> aBsChar = new ArrayNextPrevIndex<>(4);
 		aBsChar.einfuegen('a', 0);
@@ -169,7 +169,7 @@ public class ArrayNextPrevIndexTest {
 	/**
 	 * Testet ob ein Element korrekt gesucht wird und der Index richtig zurueckgegeben wird. 
 	 */
-	@Test
+
 	public void testFinde() {
 		Liste<Integer> aBsInt = new ArrayNextPrevIndex<>(3);
 		aBsInt.einfuegen(11, 0);
@@ -187,7 +187,7 @@ public class ArrayNextPrevIndexTest {
 	/**
 	 * Testet ob ein Element korrekt zurueckgegeben wird an der uebergebenen Position.
 	 */
-	@Test
+	
 	public void testElementAnPosition(){
 		Liste<Character> aBsChar = new ArrayNextPrevIndex<>(4);
 		aBsChar.einfuegen('A', 0);
@@ -282,14 +282,14 @@ public class ArrayNextPrevIndexTest {
 		Liste<Integer> gDL = new ArrayNextPrevIndex<>(6);
 		assertEquals("Sollte kein Element enthalten", gDL.groesseDerListe(), 0);
 		gDL.einfuegen(10, 0);
-		gDL.einfuegen(1, 1);
-		gDL.einfuegen(1, 2);
-		gDL.einfuegen(1, 3);
-		gDL.einfuegen(1, 4);
-		gDL.einfuegen(1, 5);
-		gDL.einfuegen(1, 6);
-		gDL.einfuegen(1, 7);
-		gDL.einfuegen(1, 8);
+		gDL.einfuegen(9, 1);
+		gDL.einfuegen(8, 2);
+		gDL.einfuegen(7, 3);
+		gDL.einfuegen(6, 4);
+		gDL.einfuegen(5, 5);
+		gDL.einfuegen(4, 6);
+		gDL.einfuegen(2, 7);
+		gDL.einfuegen(2, 8);
 		gDL.einfuegen(1, 9);
 		assertEquals("Sollte 10 Elemente enthalten", gDL.groesseDerListe(), 10);
 		gDL.entfernen(9);
