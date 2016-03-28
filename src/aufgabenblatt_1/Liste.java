@@ -2,7 +2,8 @@ package aufgabenblatt_1;
 
 /**
  * TI3 ADP, SS16 
- * @author Julian
+ * Gruppe: Julian Magierski (julian.magierski@haw-hamburg.de)
+ * Kristian Exß (kristian.exss@haw-hamburg) 
  * Aufgabenblatt 1: Ein Interface für eine Liste mit Elementen.
  * Es gibt genau sechs Operationen(öffentliche Methoden) die auf einer Liste 
  * ausgefuehrt werden koennen. Objektmengen der Funktionen: ELEM, LIST, POS.

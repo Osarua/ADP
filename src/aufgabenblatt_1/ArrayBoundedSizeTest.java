@@ -7,7 +7,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 /**
  * TI3 ADP, SS16 
- * @author Julian
+ * Gruppe: Julian Magierski (julian.magierski@haw-hamburg.de)
+ * Kristian Exﬂ (kristian.exss@haw-hamburg) 
  * Aufgabenblatt 1: Testet die Klasse ArrayBoundedSize.
  */
 public class ArrayBoundedSizeTest {

@@ -1,7 +1,8 @@
 package aufgabenblatt_1;
 /**
  * TI3 ADP, SS16 
- * @author Julian
+ * Gruppe: Julian Magierski (julian.magierski@haw-hamburg.de)
+ * Kristian Exﬂ (kristian.exss@haw-hamburg) 
  * Aufgabenblatt 1: Eine Liste umgesetzt mit einem Array. Die Elemente sind durch einen
  * next- und previous-Index sortiert, welcher in jedem 
  * Array-Element abgespeichert ist.
@@ -88,7 +89,7 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements Liste<E>{
 	public void einfuegen(E element, int position) throws IndexOutOfBoundsException, 
 	IllegalArgumentException {
 		gueltigePosition(position);
-		elementMussUngleichNullSein(element);
+		elementUngleichNull(element);
 		if (anzahlDerElemente >= liste.length - 2) {
 			arrayVergroessern();
 		}
@@ -183,7 +184,7 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements Liste<E>{
 
 	@Override
 	public int finde(E element) throws IllegalArgumentException {
-		elementMussUngleichNullSein(element);
+		elementUngleichNull(element);
 		for (int i = 0; i < anzahlDerElemente; i++) {
 			if (element.equals(liste[i+1])) {
 				return i;
@@ -238,7 +239,7 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements Liste<E>{
 	 * @param element welches ueberprueft werden soll
 	 * @throws IllegalArgumentException Element hat Referenz auf null
 	 */
-	private void elementMussUngleichNullSein(Object element) throws IllegalArgumentException {
+	private void elementUngleichNull(Object element) throws IllegalArgumentException {
 		if (element == null) {
 			throw new IllegalArgumentException("Element darf nicht null sein");
 		}

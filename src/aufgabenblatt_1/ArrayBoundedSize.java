@@ -2,7 +2,8 @@ package aufgabenblatt_1;
 
 /**
  * TI3 ADP, SS16 
- * @author Julian
+ * Gruppe: Julian Magierski (julian.magierski@haw-hamburg.de)
+ * Kristian Exﬂ (kristian.exss@haw-hamburg) 
  * Aufgabenblatt 1: Eine Liste umgesetzt mit einem Array fester Groesse.
  * Wenn die Kapazitaet des Arrays nicht mehr ausreicht wird dieses vergroessert.
  * @param <E> Elemente eines Typen 
@@ -46,7 +47,7 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 	public void einfuegen(E element, int position) throws 
 	IndexOutOfBoundsException, IllegalArgumentException {
 		gueltigePosition(position);
-		elementMussUngleichNullSein(element);
+		elementUngleichNull(element);
 		if (anzahlDerElemente+1 >= liste.length) {
 			arrayVergroessern();
 		}
@@ -90,7 +91,7 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 
 	@Override
 	public int finde(E element) throws IllegalArgumentException {
-		elementMussUngleichNullSein(element);
+		elementUngleichNull(element);
 		for (int i = 0; i < anzahlDerElemente; i++) {
 			if (element.equals(liste[i])) {
 				return i;
@@ -141,7 +142,7 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 	 * @param element welches ueberprueft werden soll
 	 * @throws IllegalArgumentException Element hat Referenz auf null
 	 */
-	private void elementMussUngleichNullSein(Object element) throws IllegalArgumentException {
+	private void elementUngleichNull(Object element) throws IllegalArgumentException {
 		if (element == null) {
 			throw new IllegalArgumentException("Element darf nicht null sein");
 		}
