@@ -91,20 +91,24 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 	 * 	@throws IndexOutOfBoundsException Position < 0 || Position > Laenge der Liste
 	 */
 	@Override
-	public void entfernen(int position) throws IndexOutOfBoundsException {
+	public void entfernen(int position) throws IndexOutOfBoundsException,IllegalArgumentException {
 		gueltigePosition(position);
-		if(position==0){
-			listenKopf.nachfolger = listenKopf.nachfolger.nachfolger;
+		if (anzahlDerElemente > 0) {
+			if (position == 0) {
+				listenKopf.nachfolger = listenKopf.nachfolger.nachfolger;
+			} else {
+				Knoten knotenSub = knotenAnPosition(position - 1);
+				knotenSub.nachfolger = knotenSub.nachfolger.nachfolger;
+			}
 		} else {
-			Knoten knotenSub = knotenAnPosition(position-1);
-			knotenSub.nachfolger= knotenSub.nachfolger.nachfolger;
+			throw new IllegalArgumentException("Anzahl der Elemente muss groesser 0 sein");
 		}
 		anzahlDerElemente--;
 	}
-
 	
 	@Override
-	public int finde(E element) {
+	public int finde(E element) throws IllegalArgumentException {
+		elementMussUngleichNullSein(element);
 		int i = 0;
 		Knoten knotenTest = listenKopf;
 		while (knotenTest.nachfolger != null) {
@@ -162,15 +166,16 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 	/**
 	 * @throws IllegalArgumentException andereListe muss vom Typ EinfachVerketteteListe<E> sein
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void listenZusammenfuegen(Liste<E> andereListe) throws IllegalArgumentException {
 		if (andereListe == null) {
 			throw new IllegalArgumentException("Liste<E> andereListe darf nicht null sein");
 		}
 		if (andereListe instanceof EinfachVerketteteListe<?>) {
+			Knoten knoten = ((EinfachVerketteteListe<E>) andereListe).knotenAnPosition(0);
 			for (int i = 0; i < andereListe.groesseDerListe(); i++) {
-				einfuegen((E) andereListe.elementAnPosition(i), anzahlDerElemente);
+				einfuegen(knoten.element, anzahlDerElemente);
+				knoten = knoten.nachfolger;
 			}
 		} else {
 			throw new IllegalArgumentException("Die konkrete Klasse die das Interface Liste<E>"

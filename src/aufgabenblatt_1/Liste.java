@@ -37,13 +37,14 @@ public interface Liste<E> {
 	 * Postcondition: Die Liste beinhaltet nicht mehr das Element an dieser Position(Index).
 	 * Wird das Element nicht am Ende der Liste Entfernt muessen alle Elemente um eins 
 	 * nach vorne verschoben werden. Dekrementierung(minus eins) der Anzahl der Elmente in
-	 * der Liste. Wird auf einen ungueltigen Index zugegriffen (Position < 0 || Position > Kapazitaet)
-	 * wird das Element nicht entfernt und eine Exception geworfen. 
-	 * Dies ist auch der fall, wenn die Anzahl der Elemente <= 0 ist 
+	 * der Liste. Wird auf einen ungueltigen Index zugegriffen wird das Element nicht 
+	 * entfernt und eine Exception geworfen. Dies ist auch der fall, wenn die Anzahl 
+	 * der Elemente <= 0 ist 
 	 * @param position an dieser Position soll ein Element entfernt werden
 	 * @throws IndexOutOfBoundsException Wenn position(Index) ausserhalb der Liste liegt.
+	 * @throws IllegalArgumentException Anzahl der Elemente(Groesse der Liste) muss groesser 0 sein
 	 */
-	public void entfernen(int position) throws IndexOutOfBoundsException;
+	public void entfernen(int position) throws IndexOutOfBoundsException,IllegalArgumentException;
  
 	/**
 	 * find: LIST X ELEM -> POS
@@ -52,15 +53,16 @@ public interface Liste<E> {
 	 * zurueckgegeben oder es wird nicht gefunden. Dann wird -1 zurueckgegeben.
 	 * @param element nach dem die Liste durchsucht werden soll
 	 * @return int Position des gefundenen Element oder -1 fuer nicht gefunden
+	 * @throws IllegalArgumentException Element hat Referenz auf null
 	 */
-	public int finde(E element);
+	public int finde(E element) throws IllegalArgumentException;
 
 	/**
 	 * retrieve: LIST X POS -> ELEM
 	 * Precondition: keine
 	 * Postcondition: Es wird das Element an der uebergebenen Position zurueckgegeben.
 	 * Falls der aktuelle Parameter position ausserhalb des gueltigen Indexbereich der Liste
-	 * liegt wird eine Exception geworfen. Die Methode wird auch ausgefuehr, wenn das Element 
+	 * liegt wird eine Exception geworfen. Die Methode wird auch ausgefuehrt, wenn das Element 
 	 * den Wert null hat an dieser Position.
 	 * @param position des Element in der Liste
 	 * @return Object Element an dieser Position 
@@ -70,13 +72,15 @@ public interface Liste<E> {
 
 	/**
 	 * concat: LIST X LIST -> LIST
-	 * Precondition: Die hinzuzufuegende Liste muss zum Typen der Liste kompatibel sein.
-	 * Postcondition: andereListe muss mit den konkreten dieser Liste kompatibel sein. 
+	 * Precondition: andereListe muss das Interface Liste<E> implementieren
+	 * Postcondition: andereListe muss mit den konkreten Typen dieser Liste kompatibel sein. 
 	 * Ansonsten wird eine Exception geworfen. Wenn die beiden Listen Typen kompatibel sind, fuegt 
 	 * die Methode diese zusammen. Dabei erhoeht sich die Anzahl der Elemente um die anzahl 
 	 * der neuen Elmenten. Die anzufuegende Liste wird am Ende dieser Liste "angehaengt".
 	 * @param liste Die mit dieser zusammengefuegt werden soll
-	 * @throws  IllegalArgumentException Liste<E> andereListe darf nicht null sein
+	 * @throws IllegalArgumentException Liste<E> andereListe darf nicht null sein
+	 * @throws IllegalArgumentException andereListe muss mit den konkreten 
+	 * Typen dieser Liste kompatibel sein
 	 */
 	public void listenZusammenfuegen(Liste<E> andereListe) throws IllegalArgumentException;
 
@@ -84,9 +88,7 @@ public interface Liste<E> {
 	 * size: LIST -> INT
 	 * Precondition: keine 
 	 * Postcondition: Methode gibt die Anzahl der Elemente in der Liste zurueck. 
-	 * @return int, die Anzahl der Elemente in der Liste
+	 * @return int die Anzahl der Elemente in der Liste
 	 */
 	public int groesseDerListe();
-
-	
 }

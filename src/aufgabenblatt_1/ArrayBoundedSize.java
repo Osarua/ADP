@@ -75,19 +75,22 @@ public class ArrayBoundedSize<E> implements Liste<E>{
 	 * @throws IndexOutOfBoundsException Position < 0 || Position >= Laenge der Liste
 	 */
 	@Override
-	public void entfernen(int position) throws IndexOutOfBoundsException {
+	public void entfernen(int position) throws IndexOutOfBoundsException, IllegalArgumentException {
 		gueltigePosition(position);
 		if (anzahlDerElemente > 0) {
 			for (int i = position; i < (anzahlDerElemente ); i++) {
 				liste[i] = liste[i + 1];
 			}
-			liste[anzahlDerElemente - 1] = null;
-			anzahlDerElemente--;
-		} 
+		} else {
+			throw new IllegalArgumentException("Anzahl der Elemente muss groesser 0 sein");
+		}
+		liste[anzahlDerElemente - 1] = null;
+		anzahlDerElemente--;
 	}
 
 	@Override
-	public int finde(E element) {
+	public int finde(E element) throws IllegalArgumentException {
+		elementMussUngleichNullSein(element);
 		for (int i = 0; i < anzahlDerElemente; i++) {
 			if (element.equals(liste[i])) {
 				return i;

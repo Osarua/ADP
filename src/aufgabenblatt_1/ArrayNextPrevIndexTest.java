@@ -236,6 +236,19 @@ public class ArrayNextPrevIndexTest {
 	}
 	
 	/**
+	 *  Fuer den Fall das die Anzahl der Elemente == 0 ist
+	 */
+	
+	public void testEntfernennIllegalArgumentException(){
+		Liste<Character> aBsString = new ArrayNextPrevIndex<>(1);
+		aBsString.einfuegen('a', 0);
+		aBsString.entfernen(0);
+		exception.expect(IllegalArgumentException.class);
+		exception.expectMessage("Anzahl der Elemente muss groesser 0 sein");
+		aBsString.entfernen(1);
+	}
+	
+	/**
 	 * Testet die Methode listenZusammenfuegen(Liste<E>). Wird eine
 	 * Liste von gleichen Typ korrekt am Ende der Liste angefuegt? 
 	 */

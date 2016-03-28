@@ -155,30 +155,35 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements Liste<E>{
 	 *  @throws IndexOutOfBoundsException Position < 0 || Position > Kapazitaet-2
 	 */
 	@Override
-	public void entfernen(int position) throws IndexOutOfBoundsException {
+	public void entfernen(int position) throws IndexOutOfBoundsException,IllegalArgumentException {
 		gueltigePosition(position);
 		if (anzahlDerElemente > 0) {
-			int iNext =0;
-			 Knoten anPosition = listenKopf.next;
-				while(iNext<position){
-					anPosition = anPosition.next;
-					iNext++;
-				} if(anPosition.next.equals(listenEnde)){
-					anPosition.previous.next= listenEnde;
-				}
-				Knoten knotenDanach = anPosition.next;
-				 anPosition.previous.next = knotenDanach;
-				 knotenDanach.previous = anPosition.previous;
+			int iNext = 0;
+			Knoten anPosition = listenKopf.next;
+			while (iNext < position) {
+				anPosition = anPosition.next;
+				iNext++;
+			}
+			if (anPosition.next.equals(listenEnde)) {
+				anPosition.previous.next = listenEnde;
+			}
+			Knoten knotenDanach = anPosition.next;
+			anPosition.previous.next = knotenDanach;
+			knotenDanach.previous = anPosition.previous;
 			for (int i = position; i < (anzahlDerElemente); i++) {
 				liste[i] = liste[i + 1];
 			}
+
+		} else {
+			throw new IllegalArgumentException("Anzahl der Elemente muss groesser 0 sein");
 		}
 		liste[anzahlDerElemente] = null;
 		anzahlDerElemente--;
 	}
 
 	@Override
-	public int finde(E element) {
+	public int finde(E element) throws IllegalArgumentException {
+		elementMussUngleichNullSein(element);
 		for (int i = 0; i < anzahlDerElemente; i++) {
 			if (element.equals(liste[i+1])) {
 				return i;
