@@ -7,11 +7,10 @@ import java.util.List;
  * Kristian Exﬂ (kristian.exss@haw-hamburg) 
  * Aufgabenblatt 3: Rekursive Sortierverfahren: Quicksort  
  */
-public class PivotRandom implements Pivot {
+public class PivotRandom<E> implements Pivot<E> {
 
 	@Override
-	public int findePivot(List<?> listePar) {
-		// TODO Auto-generated method stub
-		return 0;
+	public E getPivot(List<E> listePar) {
+		return null;
 	}
 }

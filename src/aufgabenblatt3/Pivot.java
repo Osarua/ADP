@@ -7,7 +7,7 @@ import java.util.List;
  * Kristian Exﬂ (kristian.exss@haw-hamburg) 
  * Aufgabenblatt 3: Rekursive Sortierverfahren: Quicksort  
  */
-public interface Pivot {
+public interface Pivot<E>{
 
-	public int findePivot(List<?> listePar);
+	public E getPivot(List<E> liste);
 }
