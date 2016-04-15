@@ -7,10 +7,13 @@ import java.util.List;
  * Kristian Exﬂ (kristian.exss@haw-hamburg) 
  * Aufgabenblatt 3: Rekursive Sortierverfahren: Quicksort  
  */
-public class PivotRandom<E> implements Pivot<E> {
+public class PivotRandom<E extends Comparable<E>> implements Pivot<E> {
 
+	/**
+	 * Liefert das randomisiert berechnete Pivot Element der Liste.
+	 */
 	@Override
-	public E getPivot(List<E> listePar) {
-		return null;
+	public E getPivot(List<E> liste) {
+		return liste.get((int) (liste.size() * Math.random()));
 	}
 }
