@@ -6,42 +6,36 @@ import java.util.List;
  * Gruppe: Julian Magierski (julian.magierski@haw-hamburg.de)
  * Kristian Exﬂ (kristian.exss@haw-hamburg) 
  * Aufgabenblatt 3: Rekursive Sortierverfahren: Quicksort  
- * Die Klasse hat eine Methode quicksort(Liste<E>, int, int), welche den
- * Sortieralgorithmus Quicksort implementiert. Die Vorgabe zur Wahl des Pivot 
- * Elements kann den Konstruktur uebergeben werden.
- * 
  */
-public class Quicksort<E extends Comparable<E>> {
+public class PivotMedian<E extends Comparable<E>> implements Pivot<E> {
 	
 	/**
-	 * Pivot Vorgabe
+	 * Pivotsuchverfahren
 	 */
-	private Pivot<E> pivot;
-	
-	/**
-	 * Default Konstruktor mit setzten des Pivot am Ende
-	 * der Liste. 
-	 */
-	public Quicksort() {
-		this(new PivotAmEnde<E>()); 
+	Pivot<E> pivot;
+
+	public PivotMedian(){
+		pivot = new PivotMedianOfThreeRandom<E>();
 	}
 
 	/**
-	 * Konstruktur mit Angabe zur Wahl des Pivot.
-	 * @param pivotPar Vorgabe zur Wahl des Pivot Elements
+	 * Liefert das Median Element(Schlussel) aus einer Liste.
 	 */
-	public Quicksort(Pivot<E> pivotPar) {
-		pivot=pivotPar;
+	@Override
+	public E getPivot(List<E> liste) {
+		int mitte = (liste.size()-1)/2 ;
+		return medianElement(liste, 0, liste.size()-1, mitte );
 	}
 	
 	/**
-	 * Die Methode sortiert eine uebergebene Liste aufsteigend.
-	 * Als Vorgabe dient der Sortieralgorithmus Quicksort.
-	 * @param liste Die zu sortierende Liste
-	 * @param links Begin (Index) der Liste
-	 * @param rechts letzter Index der Liste
+	 * Diese Methode wahlt den Median aus mit den Rang k. 
+	 * @param liste In dieser Liste wird gesucht
+	 * @param links Index des ersten Elements
+	 * @param rechts Index des letzten Elements
+	 * @param k Element mit den Rang k
+	 * @return
 	 */
-	public void quicksort(List<E> liste, int links, int rechts) {
+	private E medianElement(List<E> liste, int links, int rechts, int k) {
 		if (links < rechts) {
 			int lZeiger = links;
 			int rZeiger = rechts;
@@ -59,8 +53,15 @@ public class Quicksort<E extends Comparable<E>> {
 					rZeiger = rZeiger - 1;
 				}
 			}
-			quicksort(liste, links, rZeiger);
-			quicksort(liste, lZeiger, rechts);
+			if (k <= rZeiger) {
+				return medianElement(liste, links, rZeiger, k);
+			} else if (k >= lZeiger) {
+				return medianElement(liste, lZeiger, rechts, k);
+			} else {
+				return liste.get(k);
+			}
+		} else {
+			return liste.get(k);
 		}
 	}
 	
@@ -77,5 +78,4 @@ public class Quicksort<E extends Comparable<E>> {
 		liste.set(links, liste.get(rechts));
 		liste.set(rechts, temp);
 	}
-	
 }

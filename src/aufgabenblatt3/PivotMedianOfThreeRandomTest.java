@@ -13,7 +13,7 @@ import org.junit.Test;
  * Aufgabenblatt 3: Rekursive Sortierverfahren: Quicksort  
  * Testet die Klasse PivotMedianOfThree
  */
-public class PivotMedianOfThreeTest {
+public class PivotMedianOfThreeRandomTest {
 
 	/**
 	 * Testet ob der Median den Mittleren Wert hat.
@@ -24,7 +24,7 @@ public class PivotMedianOfThreeTest {
 		arrL.add(2);
 		arrL.add(2);
 		arrL.add(2);
-		Pivot<Integer> pivoMedian = new PivotMedianOfThree<Integer>();
+		Pivot<Integer> pivoMedian = new PivotMedianOfThreeRandom<Integer>();
 		assertEquals((int) pivoMedian.getPivot(arrL),2);
 		arrL.set(1, 4);
 		arrL.set(2, 8);
@@ -54,7 +54,7 @@ public class PivotMedianOfThreeTest {
 	 */
 	@Test
 	public void testQsPivotMedianOfThreeBestCase() {
-		Quicksort<Integer> qs = new Quicksort<>(new PivotMedianOfThree<Integer>());  
+		Quicksort<Integer> qs = new Quicksort<>(new PivotMedianOfThreeRandom<Integer>());  
 		List<Integer> arrayL = new ArrayList<>();
 		arrayL.add(10);
 		arrayL.add(9);
@@ -115,7 +115,7 @@ public class PivotMedianOfThreeTest {
 	 */
 	@Test
 	public void  testQsPivotMedianOfThreeAverageCase() {
-		Quicksort<Integer> qs = new Quicksort<>();  
+		Quicksort<Integer> qs = new Quicksort<>(new PivotMedianOfThreeRandom<Integer>());  
 		List<Integer> arrayL = new ArrayList<>();
 		arrayL.add(8);
 		arrayL.add(1);

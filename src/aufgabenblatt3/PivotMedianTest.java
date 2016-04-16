@@ -4,13 +4,13 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class PivotRandomTest {
+public class PivotMedianTest {
 
 	/**
 	 * Die Methode "Testet" den Worstcase bei der Wahl des randomiserten Pivots.
 	 */
 	@Test
-	public void testQsPivotRandomWorstCase() {
+	public void testQsPivotMedianWorstCase() {
 		
 	}
 	
@@ -18,7 +18,7 @@ public class PivotRandomTest {
 	 * 
 	 */
 	@Test
-	public void testQsPivotRandomBestCase() {
+	public void testQsPivotMedianBestCase() {
 		
 	}
 	
@@ -26,7 +26,7 @@ public class PivotRandomTest {
 	 * 
 	 */
 	@Test
-	public void testQsPivotRandomAverageCase() {
+	public void testQsPivotMedianAverageCase() {
 		
 	}
 

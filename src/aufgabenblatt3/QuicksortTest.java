@@ -51,8 +51,8 @@ public class QuicksortTest {
 	 * eine Liste mit Integer Elementen genommen.
 	 */
 	@Test
-	public void testQsIntegerPivotMedian() {
-		Quicksort<Integer> qs = new Quicksort<>(new PivotMedianOfThree<Integer>());  
+	public void testQsIntegerPivotMedianRandom() {
+		Quicksort<Integer> qs = new Quicksort<>(new PivotMedianOfThreeRandom<Integer>());  
 		List<Integer> arrayL = new ArrayList<>();
 		arrayL.add(8);
 		arrayL.add(1);
@@ -79,8 +79,8 @@ public class QuicksortTest {
 	 * Testet die Methode mit ein paar mehr Integer Werten.
 	 */
 	@Test
-	public void testQsIntegerPivotMedianEtwasMehr() {
-		Quicksort<Integer> qs = new Quicksort<>(new PivotMedianOfThree<Integer>());
+	public void testQsIntegerPivotMedianRandomEtwasMehr() {
+		Quicksort<Integer> qs = new Quicksort<>(new PivotMedianOfThreeRandom<Integer>());
 		List<Integer> arrayL = new ArrayList<>();
 		int max = 1000000;
 		for (int i = 1; i <= max; i++) {
@@ -110,8 +110,8 @@ public class QuicksortTest {
 	 * eine Liste mit Integer Elementen genommen.
 	 */
 	@Test
-	public void testQsIntegerPivotRandom() {
-		Quicksort<Integer> qs = new Quicksort<>(new PivotRandom<Integer>());  
+	public void testQsIntegerPivotMedian() {
+		Quicksort<Integer> qs = new Quicksort<>(new PivotMedian<Integer>());  
 		List<Integer> arrayL = new ArrayList<>();
 		arrayL.add(80);
 		arrayL.add(10);
@@ -138,8 +138,8 @@ public class QuicksortTest {
 	 * Hier wird die Methode mit einem String getestet.
 	 */
 	@Test
-	public void testQsStringPivotRandom() {
-		Quicksort<String> qs = new Quicksort<>(new PivotRandom<String>());  
+	public void testQsStringPivotMedian() {
+		Quicksort<String> qs = new Quicksort<>(new PivotMedian<String>());  
 		List<String> arrayL = new ArrayList<>();
 		arrayL.add("C");
 		arrayL.add("U");
@@ -151,7 +151,7 @@ public class QuicksortTest {
 		arrayL.add("R");
 		arrayL.add("I");
 		arrayL.add("S");
-		qs.quicksort(arrayL, 0, arrayL.size()-1);
+		qs.quicksort(arrayL, 0, arrayL.size());
 		assertEquals(arrayL.get(0),"C");
 		assertEquals(arrayL.get(1),"C");
 		assertEquals(arrayL.get(2),"I");
