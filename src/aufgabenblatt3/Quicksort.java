@@ -45,7 +45,7 @@ public class Quicksort<E extends Comparable<E>> {
 		if (links < rechts) {
 			int lZeiger = links;
 			int rZeiger = rechts;
-			E pivotElement = (E) pivot.getPivot(liste.subList(links, rechts)); 
+			E pivotElement = (E) pivot.getPivot(liste.subList(links, rechts));
 			while (lZeiger <= rZeiger) {
 				while (liste.get(lZeiger).compareTo(pivotElement) < 0) {
 					lZeiger = lZeiger + 1;

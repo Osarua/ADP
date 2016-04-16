@@ -43,66 +43,7 @@ public class QuicksortTest {
 		assertEquals((int) arrayL.get(7),9);
 		assertEquals((int) arrayL.get(8),10);
 	}
-	
-	/**
-	 * Diesmal ist die Liste zu begin absteigend sortiert.
-	 */
-	@Test
-	public void testQsIntegerPivotAmEndeAbst() {
-		Quicksort<Integer> qs = new Quicksort<>();  
-		List<Integer> arrayL = new ArrayList<>();
-		arrayL.add(10);
-		arrayL.add(9);
-		arrayL.add(8);
-		arrayL.add(7);
-		arrayL.add(6);
-		arrayL.add(5);
-		arrayL.add(4);
-		arrayL.add(3);
-		arrayL.add(2);
-		arrayL.add(1);	
-		qs.quicksort(arrayL, 0, arrayL.size()-1);
-		assertEquals((int) arrayL.get(0),1);
-		assertEquals((int) arrayL.get(1),2);
-		assertEquals((int) arrayL.get(2),3);
-		assertEquals((int) arrayL.get(3),4);
-		assertEquals((int) arrayL.get(4),5);
-		assertEquals((int) arrayL.get(5),6);
-		assertEquals((int) arrayL.get(6),7);
-		assertEquals((int) arrayL.get(7),8);
-		assertEquals((int) arrayL.get(8),9);
-		assertEquals((int) arrayL.get(9),10);
-	}
-	
-	/**
-	 * Liste ist zu begin aufsteigend sortiert.
-	 */
-	@Test
-	public void testQsIntegerPivotAmEndeAufst() {
-		Quicksort<Integer> qs = new Quicksort<>();  
-		List<Integer> arrayL = new ArrayList<>();
-		arrayL.add(1);
-		arrayL.add(2);
-		arrayL.add(3);
-		arrayL.add(4);
-		arrayL.add(5);
-		arrayL.add(6);
-		arrayL.add(7);
-		arrayL.add(8);
-		arrayL.add(9);
-		arrayL.add(10);	
-		qs.quicksort(arrayL, 0, arrayL.size()-1);
-		assertEquals((int) arrayL.get(0),1);
-		assertEquals((int) arrayL.get(1),2);
-		assertEquals((int) arrayL.get(2),3);
-		assertEquals((int) arrayL.get(3),4);
-		assertEquals((int) arrayL.get(4),5);
-		assertEquals((int) arrayL.get(5),6);
-		assertEquals((int) arrayL.get(6),7);
-		assertEquals((int) arrayL.get(7),8);
-		assertEquals((int) arrayL.get(8),9);
-		assertEquals((int) arrayL.get(9),10);
-	}
+
 	
 	/**
 	 * Testet die Quicksort Methode mit dem Pivot 
