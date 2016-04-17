@@ -1,4 +1,4 @@
-package aufgabenblatt3;
+package aufgabenblatt_3;
 
 import static org.junit.Assert.*;
 
@@ -151,7 +151,7 @@ public class QuicksortTest {
 		arrayL.add("R");
 		arrayL.add("I");
 		arrayL.add("S");
-		qs.quicksort(arrayL, 0, arrayL.size());
+		qs.quicksort(arrayL, 0, arrayL.size()-1);
 		assertEquals(arrayL.get(0),"C");
 		assertEquals(arrayL.get(1),"C");
 		assertEquals(arrayL.get(2),"I");

@@ -1,4 +1,4 @@
-package aufgabenblatt3;
+package aufgabenblatt_3;
 
 import static org.junit.Assert.*;
 
@@ -14,58 +14,24 @@ import org.junit.Test;
  * Testet die Klasse PivotMedianOfThree
  */
 public class PivotMedianOfThreeRandomTest {
-
-	/**
-	 * Testet ob der Median den Mittleren Wert hat.
-	 */
-	@Test
-	public void testMedian() {
-		List<Integer> arrL = new ArrayList<>();
-		arrL.add(2);
-		arrL.add(2);
-		arrL.add(2);
-		Pivot<Integer> pivoMedian = new PivotMedianOfThreeRandom<Integer>();
-		assertEquals((int) pivoMedian.getPivot(arrL),2);
-		arrL.set(1, 4);
-		arrL.set(2, 8);
-		assertEquals((int) pivoMedian.getPivot(arrL),4);
-		arrL.set(1, 8);
-		arrL.set(2, 4);
-		assertEquals((int) pivoMedian.getPivot(arrL),4);
-		arrL.set(0, 4);
-		arrL.set(1, 2);
-		arrL.set(2, 8);
-		assertEquals((int) pivoMedian.getPivot(arrL),4);
-		arrL.set(0, 4);
-		arrL.set(1, 8);
-		arrL.set(2, 2);
-		assertEquals((int) pivoMedian.getPivot(arrL),4);
-		arrL.set(0, 8);
-		arrL.set(1, 4);
-		arrL.set(2, 2);
-		assertEquals((int) pivoMedian.getPivot(arrL),4);
-		arrL.set(0, 8);
-		arrL.set(1, 2);
-		arrL.set(2, 4);
-	}
 	
 	/**
 	 * Die Liste ist vor den Aufruf von Quicksort absteigend sortiert.
 	 */
 	@Test
-	public void testQsPivotMedianOfThreeBestCase() {
+	public void testQsPivotMedianOfThreeRandomBestCase() {
 		Quicksort<Integer> qs = new Quicksort<>(new PivotMedianOfThreeRandom<Integer>());  
 		List<Integer> arrayL = new ArrayList<>();
 		arrayL.add(10);
-		arrayL.add(9);
-		arrayL.add(8);
+		arrayL.add(4);
+		arrayL.add(2);
 		arrayL.add(7);
 		arrayL.add(6);
-		arrayL.add(5);
-		arrayL.add(4);
+		arrayL.add(1);
+		arrayL.add(8);
 		arrayL.add(3);
-		arrayL.add(2);
-		arrayL.add(1);	
+		arrayL.add(9);
+		arrayL.add(5);	
 		qs.quicksort(arrayL, 0, arrayL.size()-1);
 		assertEquals((int) arrayL.get(0),1);
 		assertEquals((int) arrayL.get(1),2);
@@ -83,7 +49,7 @@ public class PivotMedianOfThreeRandomTest {
 	 * Liste ist zu begin aufsteigend sortiert.
 	 */
 	@Test
-	public void  testQsPivotMedianOfThreeWorstCase() {
+	public void  testQsPivotMedianOfThreeRandomWorstCase() {
 		Quicksort<Integer> qs = new Quicksort<>();  
 		List<Integer> arrayL = new ArrayList<>();
 		arrayL.add(1);
@@ -114,18 +80,18 @@ public class PivotMedianOfThreeRandomTest {
 	 * aus der Liste.  In diesem Test wird  eine Liste mit Integer Elementen genommen.
 	 */
 	@Test
-	public void  testQsPivotMedianOfThreeAverageCase() {
+	public void  testQsPivotMedianOfThreeRandomAverageCase() {
 		Quicksort<Integer> qs = new Quicksort<>(new PivotMedianOfThreeRandom<Integer>());  
 		List<Integer> arrayL = new ArrayList<>();
 		arrayL.add(8);
 		arrayL.add(1);
 		arrayL.add(4);
-		arrayL.add(7);
-		arrayL.add(6);
+		arrayL.add(10);
+		arrayL.add(9);
 		arrayL.add(3);
 		arrayL.add(2);
-		arrayL.add(9);
-		arrayL.add(10);
+		arrayL.add(6);
+		arrayL.add(7);
 		qs.quicksort(arrayL, 0, arrayL.size()-1);
 		assertEquals((int) arrayL.get(0),1);
 		assertEquals((int) arrayL.get(1),2);
