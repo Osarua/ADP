@@ -92,18 +92,14 @@ public class EinfachVerketteteListe<E> implements List<E> {
 	 * 	@throws IndexOutOfBoundsException pos < 0 || pos > Laenge der Liste
 	 */
 	@Override
-	public void delete(int pos) throws IndexOutOfBoundsException,IllegalArgumentException {
+	public void delete(int pos) throws IndexOutOfBoundsException {
 		gueltigePosition(pos);
-		if (anzahlDerElemente > 0) {
 			if (pos == 0) {
 				listenKopf.nachfolger = listenKopf.nachfolger.nachfolger;
 			} else {
 				Knoten knotenSub = knotenAnPosition(pos - 1);
 				knotenSub.nachfolger = knotenSub.nachfolger.nachfolger;
 			}
-		} else {
-			throw new IllegalArgumentException("Anzahl der Elemente muss groesser 0 sein");
-		}
 		anzahlDerElemente--;
 	}
 	
@@ -173,10 +169,9 @@ public class EinfachVerketteteListe<E> implements List<E> {
 		}
 		if (otherList instanceof EinfachVerketteteListe<?>) {
 			Knoten knoten = ((EinfachVerketteteListe<E>) otherList).knotenAnPosition(0);
-			for (int i = 0; i < otherList.size(); i++) {
 				insert(knoten.elem, anzahlDerElemente);
-				knoten = knoten.nachfolger;
-			}
+				anzahlDerElemente+= otherList.size()-1;
+			
 		} else {
 			throw new IllegalArgumentException("Die konkrete Klasse die das Interface Liste<E>"
 					+ "implementiert muss vom Typ EinfachVerketteteListe<E> sein");

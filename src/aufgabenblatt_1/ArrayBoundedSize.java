@@ -75,13 +75,9 @@ public class ArrayBoundedSize<E> implements List<E>{
 	 * @throws IndexOutOfBoundsException pos < 0 || pos >= Laenge der Liste
 	 */
 	@Override
-	public void delete(int pos) throws IndexOutOfBoundsException, IllegalArgumentException {
+	public void delete(int pos) throws IndexOutOfBoundsException {
 		gueltigePosition(pos);
-		if (anzahlDerElemente > 0) {
-				list[pos] = list[size()-1];
-		} else {
-			throw new IllegalArgumentException("Anzahl der Elemente muss groesser 0 sein");
-		}
+		list[pos] = list[size()-1];
 		list[size() - 1] = null;
 		anzahlDerElemente--;
 	}

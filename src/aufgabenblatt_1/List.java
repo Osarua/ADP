@@ -35,20 +35,19 @@ public interface List<E> {
  	/**
 	 * delete: LIST X POS -> LIST
 	 * Precondition: Die Position muss ein positiver Integer Wert sein und kleiner 
-	 * als die Anzahl der Elemente sein. Die Anzahl der Elemente muss größer als 0 sein.
+	 * als die Anzahl der Elemente sein. 
 	 * Postcondition: Die Liste beinhaltet nicht mehr das Element an dieser Position (Index).
 	 * Wird das Element nicht am Ende der Liste entfernt, wird die entstandene Lücke
 	 * mit einem anderen Element der Liste gefüllt. 
 	 * Die Anzahl der Elemente in der Liste wird um eins reduziert. 
 	 * @param pos an dieser Position soll ein Element entfernt werden
 	 * @throws IndexOutOfBoundsException Wenn pos außerhalb der Liste liegt.
-	 * @throws IllegalArgumentException Anzahl der Elemente muss großer 0 sein
 	 */
-	public void delete(int pos) throws IndexOutOfBoundsException,IllegalArgumentException;
+	public void delete(int pos) throws IndexOutOfBoundsException;
  
 	/**
 	 * find: LIST X ELEM -> POS
-	 * Precondition:  Der Elementtyp muss gleich dem konkreten generischen Listen-Typ sein. 
+	 * Precondition:  Der Element Typ muss gleich dem konkreten generischen Listen-Typ sein. 
 	 * Das Element darf nicht NULL sein.
 	 * Postcondition: Das Element ist in der Liste und die Position (Index) wird
 	 * zurückgegeben oder es wird nicht gefunden. Dann wird -1 zurückgegeben.

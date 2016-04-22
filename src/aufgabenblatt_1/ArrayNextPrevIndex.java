@@ -80,7 +80,7 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements List<E>{
 	/**
 	 * Erweiterte Postcondition: Die Elemente sind 
 	 * durch einen next- und previous-Index aufsteigend sortiert.
-	 * @throws IndexOutOfBoundsException pos < 0 || pos > Kapazitaet-2
+	 * @throws IndexOutOfBoundsException pos < 0 || pos >= Länge der Liste
 	 */
 	@Override
 	public void insert(E elem, int pos) throws IndexOutOfBoundsException, 
@@ -100,7 +100,7 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements List<E>{
 	}
 	
 	/**
-	 * knotenEinfuegen: KNOTEN X LISTE -> LISTE
+	 * knotenEinfuegen: KNOTEN X LIST -> LIST
 	 * Precondition: Hilfsmethode, welche von einfuegen(E, int) aufgerufen wird.
 	 * Postcondition: Knoten befindet sich in der aufsteigend sortierten Liste.
 	 * Der Knoten zeigt auf den korrekten next und previous-Index.
@@ -153,22 +153,18 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements List<E>{
 	 *  @throws IndexOutOfBoundsException pos < 0 || pos > Kapazitaet-2
 	 */
 	@Override
-	public void delete(int pos) throws IndexOutOfBoundsException,IllegalArgumentException {
+	public void delete(int pos) throws IndexOutOfBoundsException {
 		gueltigePosition(pos);
-		if (listenKopf.next!=null) {
-			@SuppressWarnings("unchecked")
-			Knoten anPosition = (ArrayNextPrevIndex<E>.Knoten) list[pos];
-			if (anPosition.next.equals(listenEnde)) {
-				anPosition.previous.next = listenEnde;
-			}
-			Knoten knotenDanach = anPosition.next;
-			anPosition.previous.next = knotenDanach;
-			knotenDanach.previous = anPosition.previous;
-				list[pos] = list[size()-1];
-		} else {
-			throw new IllegalArgumentException("Anzahl der Elemente muss groesser 0 sein");
+		@SuppressWarnings("unchecked")
+		Knoten anPosition = (ArrayNextPrevIndex<E>.Knoten) list[pos];
+		if (anPosition.next.equals(listenEnde)) {
+			anPosition.previous.next = listenEnde;
 		}
-		list[size()-1] = null;
+		Knoten knotenDanach = anPosition.next;
+		anPosition.previous.next = knotenDanach;
+		knotenDanach.previous = anPosition.previous;
+		list[pos] = list[size() - 1];
+		list[size() - 1] = null;
 		anzahlDerElemente--;
 	}
 

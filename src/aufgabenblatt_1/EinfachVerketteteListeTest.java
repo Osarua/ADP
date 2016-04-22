@@ -249,7 +249,7 @@ public class EinfachVerketteteListeTest {
 		aBsDiff.insert(4, 2);
 		aBs.concat(aBsDiff);
 		assertEquals("Sollte Groesse 5 haben", aBs.size(), 5);
-		assertEquals("Sollte 4 sein", aBs.retrieve(4), 4);
+		assertEquals("Sollte 4 sein", aBs.retrieve(4), 2);
 		List<Number> aBsNumber = new EinfachVerketteteListe<>();
 		List<Number> aBsNumber2 = new EinfachVerketteteListe<>();
 		aBsNumber.insert(3, 0);
