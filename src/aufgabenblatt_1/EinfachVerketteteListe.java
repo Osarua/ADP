@@ -6,7 +6,7 @@ package aufgabenblatt_1;
  * Aufgabenblatt 1: Eine Liste umgesetzt mit einer einfach Verketteten Liste.
  * @param <E> Elemente eines Typen 
  */
-public class EinfachVerketteteListe<E> implements Liste<E> {
+public class EinfachVerketteteListe<E> implements List<E> {
 	
 	/**
 	 * Innere Klasse für einen einfach verketten Knoten mit einem Element.  
@@ -16,7 +16,7 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 		/**
 		 * Element(Inhalt) des Knoten
 		 */
-		E element;
+		E elem;
 		
 		/**
 		 * Verweis auf den Nachfolger Knoten in der Liste
@@ -24,13 +24,13 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 		Knoten nachfolger;
 		
 		public Knoten(E elementPar,Knoten nachfolgerPar){
-			element = elementPar;
+			elem = elementPar;
 			nachfolger = nachfolgerPar;
 		}	
 	}
 	
 	/**
-	 * Die Anzahl der enhaltenen Elemente in der Liste
+	 * Die Anzahl der enthaltenen Elemente in der Liste
 	 */
 	private int anzahlDerElemente;
 	
@@ -45,7 +45,7 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 	private Knoten listenEnde;
 	
 	/**
-	 * construct: -> LIST
+	 * EinfachVerketteteListe: -> LIST
 	 * Precondition: keine
 	 * Postcondition: Initialisiert die Liste. Anzahl der Elemente ist 0.
 	 *  
@@ -57,31 +57,31 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 	}
 	
 	/**
-	 * @throws IndexOutOfBoundsException Position < 0 || Position > Laenge der Liste
+	 * @throws IndexOutOfBoundsException pos < 0 || pos > Laenge der Liste
 	 */
 	@Override
-	public void einfuegen(E element, int position) throws IndexOutOfBoundsException, IllegalArgumentException {
-		elementUngleichNull(element);
-		gueltigePosition(position);
-		if(position==anzahlDerElemente) {
-			einfuegenNach(element,listenEnde);
+	public void insert(E elem, int pos) throws IndexOutOfBoundsException, IllegalArgumentException {
+		elementUngleichNull(elem);
+		gueltigePosition(pos);
+		if(pos==anzahlDerElemente) {
+			einfuegenNach(elem,listenEnde);
 		} else {
-				Knoten knotenAdd = knotenAnPosition(position-1);
-				einfuegenNach(element,knotenAdd);
+				Knoten knotenAdd = knotenAnPosition(pos-1);
+				einfuegenNach(elem,knotenAdd);
 			}
 		anzahlDerElemente++;
 		}
 	
 	/**
-	 * addNach: -> LISTE X ELEM X KNOTEN -> LISTE
+	 * einfuegenNach: -> LISTE X ELEM X KNOTEN -> LISTE
 	 * Precondition: Wird von der Methode einfuegen(E,int) aufgerufen.
 	 * Postcondition: Liste enthaelt einen Knoten mit Element und Referenz auf
 	 * den nachfolger Knoten.
-	 * @param element Element das in die Liste eingefuegt werden soll
+	 * @param elem Element das in die Liste eingefuegt werden soll
 	 * @param vorgaenger Knoten, hinter dem das neue Element eingefuegt  werden soll.
 	 */
-	private void einfuegenNach(E element, Knoten vorgaenger) {
-		Knoten knotenNeu = new Knoten(element, vorgaenger.nachfolger);
+	private void einfuegenNach(E elem, Knoten vorgaenger) {
+		Knoten knotenNeu = new Knoten(elem, vorgaenger.nachfolger);
 		vorgaenger.nachfolger = knotenNeu;
 		if (listenEnde == vorgaenger) {
 			listenEnde = knotenNeu;
@@ -89,16 +89,16 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 	}
 
 	/**
-	 * 	@throws IndexOutOfBoundsException Position < 0 || Position > Laenge der Liste
+	 * 	@throws IndexOutOfBoundsException pos < 0 || pos > Laenge der Liste
 	 */
 	@Override
-	public void entfernen(int position) throws IndexOutOfBoundsException,IllegalArgumentException {
-		gueltigePosition(position);
+	public void delete(int pos) throws IndexOutOfBoundsException,IllegalArgumentException {
+		gueltigePosition(pos);
 		if (anzahlDerElemente > 0) {
-			if (position == 0) {
+			if (pos == 0) {
 				listenKopf.nachfolger = listenKopf.nachfolger.nachfolger;
 			} else {
-				Knoten knotenSub = knotenAnPosition(position - 1);
+				Knoten knotenSub = knotenAnPosition(pos - 1);
 				knotenSub.nachfolger = knotenSub.nachfolger.nachfolger;
 			}
 		} else {
@@ -108,13 +108,13 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 	}
 	
 	@Override
-	public int finde(E element) throws IllegalArgumentException {
-		elementUngleichNull(element);
+	public int find(E elem) throws IllegalArgumentException {
+		elementUngleichNull(elem);
 		int i = 0;
 		Knoten knotenTest = listenKopf;
 		while (knotenTest.nachfolger != null) {
 			knotenTest = knotenTest.nachfolger;
-			if (element.equals(knotenTest.element)) {
+			if (elem.equals(knotenTest.elem)) {
 				return i;
 			}
 			i++;
@@ -123,40 +123,39 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 	}
 
 	/**
-	 * 	@throws IndexOutOfBoundsException Position < 0 || Position > Laenge der Liste
+	 * 	@throws IndexOutOfBoundsException pos < 0 || pos > Laenge der Liste
 	 */
 	@Override
-	public Object elementAnPosition(int position) throws IndexOutOfBoundsException {
-		gueltigePosition(position);
+	public Object retrieve(int pos) throws IndexOutOfBoundsException {
+		gueltigePosition(pos);
 		int i = 0;
 		Knoten knotenTest = listenKopf;
 		while (knotenTest.nachfolger != null) {
 			knotenTest = knotenTest.nachfolger;
-			if (i == position) {
+			if (i == pos) {
 				break;
 			}
 			i++;
 		}
-		return knotenTest.element;
+		return knotenTest.elem;
 	}
 
 	/**
-	 * retrieve: LIST X POS -> KNOTEN
-	 * Precondition: keine
+	 * knotenAnPosition: LIST X POS -> KNOTEN
+	 * Precondition: Die Position muss ein positiver Integer sein und darf 
+     * nicht größer als die Anzahl der Elemente sein.
 	 * Postcondition: Es wird der Knoten an der uebergebenen Position zurueckgegeben.
-	 * Falls der aktuelle Parameter position ausserhalb des gueltigen Indexbereich der Liste liegt
-	 * wird eine Exception geworfen. 
-	 * @param position des Knoten in der Liste
+	 * @param pos Position des Knoten in der Liste
 	 * @return Knoten an dieser Position 
-	 * @throws IndexOutOfBoundsException Position < 0 || Position > Laenge der Liste
+	 * @throws IndexOutOfBoundsException pos < 0 || pos > Laenge der Liste
 	 */
-	public Knoten knotenAnPosition(int position) throws IndexOutOfBoundsException {
-		gueltigePosition(position);
+	public Knoten knotenAnPosition(int pos) throws IndexOutOfBoundsException {
+		gueltigePosition(pos);
 		int i = 0;
 		Knoten knotenTest = listenKopf;
 		while (knotenTest.nachfolger != null) {
 			knotenTest = knotenTest.nachfolger;
-			if (i == position) {
+			if (i == pos) {
 				break;
 			}
 			i++;
@@ -165,17 +164,17 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 	}
 	
 	/**
-	 * @throws IllegalArgumentException andereListe muss vom Typ EinfachVerketteteListe<E> sein
+	 * @throws IllegalArgumentException otherList muss vom Typ EinfachVerketteteListe<E> sein
 	 */
 	@Override
-	public void listenZusammenfuegen(Liste<E> andereListe) throws IllegalArgumentException {
-		if (andereListe == null) {
+	public void concat(List<E> otherList) throws IllegalArgumentException {
+		if (otherList == null) {
 			throw new IllegalArgumentException("Liste<E> andereListe darf nicht null sein");
 		}
-		if (andereListe instanceof EinfachVerketteteListe<?>) {
-			Knoten knoten = ((EinfachVerketteteListe<E>) andereListe).knotenAnPosition(0);
-			for (int i = 0; i < andereListe.groesseDerListe(); i++) {
-				einfuegen(knoten.element, anzahlDerElemente);
+		if (otherList instanceof EinfachVerketteteListe<?>) {
+			Knoten knoten = ((EinfachVerketteteListe<E>) otherList).knotenAnPosition(0);
+			for (int i = 0; i < otherList.size(); i++) {
+				insert(knoten.elem, anzahlDerElemente);
 				knoten = knoten.nachfolger;
 			}
 		} else {
@@ -185,34 +184,34 @@ public class EinfachVerketteteListe<E> implements Liste<E> {
 	}
 
 	@Override
-	public int groesseDerListe() {
+	public int size() {
 		return anzahlDerElemente;
 	}
 	
 	/**
-	 * notNull: ELEM -> ELEM 
-	 * Precondition: keine
-	 * Postcondition: Wirft eine Exception, fall das Element die Referenz null hat.
-	 * @param element welches ueberprueft werden soll
+	 * elementUngleichNull: ELEM -> ELEM 
+	 * Precondition: Das Element muss ungleich NULL sein.
+	 * Postcondition:  Es wurde überprüft ob das Element ungleich NULL ist
+	 * @param elem welches ueberprueft werden soll
 	 * @throws IllegalArgumentException Element hat Referenz auf null
 	 */
-	private void elementUngleichNull(Object element) throws IllegalArgumentException {
-		if (element == null) {
+	private void elementUngleichNull(Object elem) throws IllegalArgumentException {
+		if (elem == null) {
 			throw new IllegalArgumentException("Element darf nicht null sein");
 		}
 	}
 	
     /**
-     * truePosition: LIST X POS -> POS
-     * Precondition: keine
-     * Postcondition: Wirft eine Exception, weil der Index zugriff mit dem 
-     * aktuellen Parameter ungueltig war.
-     * @param position welche ueberprueft werden soll
-	 * @throws IndexOutOfBoundsException Position < 0 || Position > Laenge der Liste
+     * gueltigePosition: LIST X POS -> POS
+ 	 * Precondition: Die Position muss ein positiver Integer sein und darf 
+     * nicht größer als die Anzahl der Elemente sein.
+     * Postcondition: Es wurde überprüft ob die Position einen korrekten Index Zugriff gewährleistet.
+     * @param pos welche ueberprueft werden soll
+	 * @throws IndexOutOfBoundsException pos < 0 || pos > Anzahl der Elemente
      */
-	private void gueltigePosition(int position) throws IndexOutOfBoundsException {
-		if ((position < 0) || (position > anzahlDerElemente)) {
-			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + position);
+	private void gueltigePosition(int pos) throws IndexOutOfBoundsException {
+		if ((pos < 0) || (pos > anzahlDerElemente)) {
+			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
 		}
 	}
 }

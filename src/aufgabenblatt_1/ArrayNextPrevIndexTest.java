@@ -24,10 +24,10 @@ public class ArrayNextPrevIndexTest {
 	 */
 	@Test
 	public void testKonstruktor() {
-		Liste<Integer> aBs = new ArrayNextPrevIndex<>(1);
-		assertEquals("Sollte kein Element enthalten", aBs.groesseDerListe(), 0);
-		Liste<String> aBs2 = new ArrayNextPrevIndex<>(20);
-		assertEquals("Sollte kein Element enthalten", aBs2.groesseDerListe(), 0);
+		List<Integer> aBs = new ArrayNextPrevIndex<>(1);
+		assertEquals("Sollte kein Element enthalten", aBs.size(), 0);
+		List<String> aBs2 = new ArrayNextPrevIndex<>(20);
+		assertEquals("Sollte kein Element enthalten", aBs2.size(), 0);
 		// IllegalArgumentException erwartet, wenn aktueller Parameter ist <= 0
 		exception.expect(IllegalArgumentException.class);
 		// Die erwartete Nachricht der Exception..
@@ -51,32 +51,32 @@ public class ArrayNextPrevIndexTest {
 	 */
 	@Test
 	public void testEinfuegen(){
-		Liste<Integer> aBs= new ArrayNextPrevIndex<>(1);
-		aBs.einfuegen(1, 0);
-		assertEquals("Sollte ein Element enthalten",aBs.groesseDerListe(),1);
-		aBs.einfuegen(2, 1);
-		assertEquals("Sollte zwei Elemente enthalten",aBs.groesseDerListe(),2);
-		assertEquals("Sollte den Wert 1 haben",aBs.elementAnPosition(0),1);
-		assertEquals("Sollte den Wert 2 haben",aBs.elementAnPosition(1),2);
-		aBs.einfuegen(3, 2);
-		assertEquals("Sollte drei Elemente enthalten",aBs.groesseDerListe(),3);
-		aBs.einfuegen(4, 3);
-		assertEquals("Sollte vier Elemente enthalten",aBs.groesseDerListe(),4);
-		aBs.einfuegen(-5, 4);
-		assertEquals("Sollte 5 Elemente enthalten",aBs.groesseDerListe(),5);
-		aBs.einfuegen(6, 5);
-		assertEquals("Sollte 6 Elemente enthalten",aBs.groesseDerListe(),6);
-		aBs.einfuegen(7, 6);
-		assertEquals("Sollte 7 Elemente enthalten",aBs.groesseDerListe(),7);
-		aBs.einfuegen(0, 7);
-		assertEquals("Sollte 8 Elemente enthalten",aBs.groesseDerListe(),8);
-		aBs.einfuegen(9, 8);
-		assertEquals("Sollte 9 Elemente enthalten",aBs.groesseDerListe(),9);
-		aBs.einfuegen(10, 9);
-		assertEquals("Sollte 10 Elemente enthalten",aBs.groesseDerListe(),10);
-		aBs.einfuegen(11, 10);
-		assertEquals("Sollte 11 Elemente enthalten",aBs.groesseDerListe(),11);
-		assertEquals("Sollte den Wert 11 haben",aBs.elementAnPosition(10),11);
+		List<Integer> aBs= new ArrayNextPrevIndex<>(1);
+		aBs.insert(1, 0);
+		assertEquals("Sollte ein Element enthalten",aBs.size(),1);
+		aBs.insert(2, 1);
+		assertEquals("Sollte zwei Elemente enthalten",aBs.size(),2);
+		assertEquals("Sollte den Wert 1 haben",aBs.retrieve(0),1);
+		assertEquals("Sollte den Wert 2 haben",aBs.retrieve(1),2);
+		aBs.insert(3, 2);
+		assertEquals("Sollte drei Elemente enthalten",aBs.size(),3);
+		aBs.insert(4, 3);
+		assertEquals("Sollte vier Elemente enthalten",aBs.size(),4);
+		aBs.insert(-5, 4);
+		assertEquals("Sollte 5 Elemente enthalten",aBs.size(),5);
+		aBs.insert(6, 5);
+		assertEquals("Sollte 6 Elemente enthalten",aBs.size(),6);
+		aBs.insert(7, 6);
+		assertEquals("Sollte 7 Elemente enthalten",aBs.size(),7);
+		aBs.insert(0, 7);
+		assertEquals("Sollte 8 Elemente enthalten",aBs.size(),8);
+		aBs.insert(9, 8);
+		assertEquals("Sollte 9 Elemente enthalten",aBs.size(),9);
+		aBs.insert(10, 9);
+		assertEquals("Sollte 10 Elemente enthalten",aBs.size(),10);
+		aBs.insert(11, 10);
+		assertEquals("Sollte 11 Elemente enthalten",aBs.size(),11);
+		assertEquals("Sollte den Wert 11 haben",aBs.retrieve(10),11);
 	}
 	
 	/**
@@ -84,21 +84,21 @@ public class ArrayNextPrevIndexTest {
 	 */
 	@Test
 	public void testEinfuegenNachruecken(){
-		Liste<String> aBsString = new ArrayNextPrevIndex<>(4);
-		aBsString.einfuegen("a", 0);
-		aBsString.einfuegen("b", 1);
-		aBsString.einfuegen("c", 2);
-		aBsString.einfuegen("d",1);
-		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(0),"a");
-		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(1),"b");
-		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(2),"c");
-		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(3),"d");
-		aBsString.einfuegen("z",1);
-		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(0),"a");
-		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(1),"b");
-		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(2),"c");
-		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(3),"d");
-		assertEquals("Sollte gleich sein",aBsString.elementAnPosition(4),"z");
+		List<String> aBsString = new ArrayNextPrevIndex<>(4);
+		aBsString.insert("a", 0);
+		aBsString.insert("b", 1);
+		aBsString.insert("c", 2);
+		aBsString.insert("d",1);
+		assertEquals("Sollte gleich sein",aBsString.retrieve(0),"a");
+		assertEquals("Sollte gleich sein",aBsString.retrieve(1),"d");
+		assertEquals("Sollte gleich sein",aBsString.retrieve(2),"b");
+		assertEquals("Sollte gleich sein",aBsString.retrieve(3),"c");
+		aBsString.insert("z",1);
+		assertEquals("Sollte gleich sein",aBsString.retrieve(0),"a");
+		assertEquals("Sollte gleich sein",aBsString.retrieve(1),"z");
+		assertEquals("Sollte gleich sein",aBsString.retrieve(2),"d");
+		assertEquals("Sollte gleich sein",aBsString.retrieve(3),"b");
+		assertEquals("Sollte gleich sein",aBsString.retrieve(4),"c");
 	}
 
 	/**
@@ -107,10 +107,10 @@ public class ArrayNextPrevIndexTest {
 	 */
 	@Test
 	public void testEinfuegenIndexOutOfBoundsException(){
-		Liste<String> aBsString = new ArrayNextPrevIndex<>(4);
+		List<String> aBsString = new ArrayNextPrevIndex<>(4);
 		exception.expect(IndexOutOfBoundsException.class);
 		exception.expectMessage("Ungueltiger Index Zugriff: -1");
-		aBsString.einfuegen("a", -1);
+		aBsString.insert("a", -1);
 	}
 	
 	/**
@@ -119,10 +119,10 @@ public class ArrayNextPrevIndexTest {
 	 */
 	@Test
 	public void testEinfuegenIndexOutOfBoundsExceptionKap(){
-		Liste<String> aBsString = new ArrayNextPrevIndex<>(3);
+		List<String> aBsString = new ArrayNextPrevIndex<>(3);
 		exception.expect(IndexOutOfBoundsException.class);
 		exception.expectMessage("Ungueltiger Index Zugriff: 4");
-		aBsString.einfuegen("a", 4);
+		aBsString.insert("a", 4);
 	}
 	
 	/**
@@ -131,10 +131,10 @@ public class ArrayNextPrevIndexTest {
 	 */
 	@Test
 	public void testEinfuegenIllegalArgumentException(){
-		Liste<String> aBsString = new ArrayNextPrevIndex<>(1);
+		List<String> aBsString = new ArrayNextPrevIndex<>(1);
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage("Element darf nicht null sein");
-		aBsString.einfuegen(null, 0);	
+		aBsString.insert(null, 0);	
 	}
 	
 	/**
@@ -142,11 +142,11 @@ public class ArrayNextPrevIndexTest {
 	 */
 	@Test
 	public void testEntfernen(){
-		Liste<String> aBsString = new ArrayNextPrevIndex<>(1);
-		aBsString.einfuegen("a", 0);
-		aBsString.entfernen(0);
-		assertEquals("Element sollte nicht in der Liste sein",aBsString.elementAnPosition(0),null);
-		assertEquals("Anzahl der Elemente sollte 0 sein",aBsString.groesseDerListe(),0);
+		List<String> aBsString = new ArrayNextPrevIndex<>(1);
+		aBsString.insert("a", 0);
+		aBsString.delete(0);
+		assertEquals("Element sollte nicht in der Liste sein",aBsString.retrieve(0),null);
+		assertEquals("Anzahl der Elemente sollte 0 sein",aBsString.size(),0);
 	}
 	
 	/**
@@ -154,17 +154,17 @@ public class ArrayNextPrevIndexTest {
 	 */
 	@Test
 	public void testEntfernenMitte(){
-		Liste<Character> aBsChar = new ArrayNextPrevIndex<>(4);
-		aBsChar.einfuegen('a', 0);
-		aBsChar.einfuegen('b', 1);
-		aBsChar.einfuegen('c', 2);
-		aBsChar.einfuegen('d', 3);
-		aBsChar.entfernen(1);
-		assertEquals("Anzahl der Elemente sollte 3 sein",aBsChar.groesseDerListe(),3);
-		assertEquals("Sollte 'a' sein",aBsChar.elementAnPosition(0),'a');
-		assertEquals("Sollte 'c' sein",aBsChar.elementAnPosition(1),'c');
-		assertEquals("Sollte 'd' sein",aBsChar.elementAnPosition(2),'d');
-		assertEquals("Sollte null sein",aBsChar.elementAnPosition(3),null);
+		List<Character> aBsChar = new ArrayNextPrevIndex<>(4);
+		aBsChar.insert('a', 0);
+		aBsChar.insert('b', 1);
+		aBsChar.insert('c', 2);
+		aBsChar.insert('d', 3);
+		aBsChar.delete(1);
+		assertEquals("Anzahl der Elemente sollte 3 sein",aBsChar.size(),3);
+		assertEquals("Sollte 'a' sein",aBsChar.find('a'),0);
+		assertEquals("Sollte 'd' sein",aBsChar.retrieve(1),'d');
+		assertEquals("Sollte 'c' sein",aBsChar.retrieve(2),'c');
+		assertEquals("Sollte null sein",aBsChar.retrieve(3),null);
 	}
 
 	/**
@@ -172,17 +172,31 @@ public class ArrayNextPrevIndexTest {
 	 */
 
 	public void testFinde() {
-		Liste<Integer> aBsInt = new ArrayNextPrevIndex<>(3);
-		aBsInt.einfuegen(11, 0);
-		aBsInt.einfuegen(22, 1);
-		aBsInt.einfuegen(33, 2);
-		assertEquals("Sollte an der Position 1 sein",aBsInt.finde(22),1);
-		assertEquals("Sollte an der Position 2 sein",aBsInt.finde(33),2);
-		assertEquals("Sollte nicht in der Liste sein",aBsInt.finde(66),-1);
-		aBsInt.entfernen(0);
-		aBsInt.entfernen(1);
-		aBsInt.entfernen(2);
-		assertEquals("Sollte nicht in der Liste sein",aBsInt.finde(22),-1);
+		List<Integer> aBsInt = new ArrayNextPrevIndex<>(3);
+		aBsInt.insert(11, 0);
+		aBsInt.insert(22, 1);
+		aBsInt.insert(33, 2);
+		assertEquals("Sollte an der Position 1 sein",aBsInt.find(22),1);
+		assertEquals("Sollte an der Position 2 sein",aBsInt.find(33),2);
+		assertEquals("Sollte nicht in der Liste sein",aBsInt.find(66),-1);
+		aBsInt.delete(0);
+		aBsInt.delete(1);
+		aBsInt.delete(2);
+		assertEquals("Sollte nicht in der Liste sein",aBsInt.find(22),-1);
+	}
+	
+	/**
+	 * Testet ob ein Element korrekt gesucht wird und der Index richtig zurueckgegeben wird. 
+	 */
+
+	public void testKorrektSortiert() {
+		List<Integer> aBsInt = new ArrayNextPrevIndex<>(4);
+		aBsInt.insert(11, 0);
+		aBsInt.insert(44, 3);
+		aBsInt.insert(22, 1);
+		aBsInt.insert(33, 2);
+		aBsInt.delete(0);
+		assertEquals("Sollte nicht in der Liste sein",aBsInt.find(11),-1);
 	}
 	
 	/**
@@ -190,13 +204,13 @@ public class ArrayNextPrevIndexTest {
 	 */
 	
 	public void testElementAnPosition(){
-		Liste<Character> aBsChar = new ArrayNextPrevIndex<>(4);
-		aBsChar.einfuegen('A', 0);
-		aBsChar.einfuegen('H', 1);
-		aBsChar.einfuegen('A', 2);
-		assertEquals("Sollte gleich sein (A)",aBsChar.elementAnPosition(0),'A');
-		assertEquals("Sollte gleich sein (H)",aBsChar.elementAnPosition(1),'H');
-		assertEquals("Sollte gleich sein (A)",aBsChar.elementAnPosition(2),'A');
+		List<Character> aBsChar = new ArrayNextPrevIndex<>(4);
+		aBsChar.insert('A', 0);
+		aBsChar.insert('H', 1);
+		aBsChar.insert('A', 2);
+		assertEquals("Sollte gleich sein (A)",aBsChar.retrieve(0),'A');
+		assertEquals("Sollte gleich sein (H)",aBsChar.retrieve(1),'H');
+		assertEquals("Sollte gleich sein (A)",aBsChar.retrieve(2),'A');
 	}
 	
 	/**
@@ -204,10 +218,10 @@ public class ArrayNextPrevIndexTest {
 	 */
 	@Test
 	public void testElementAnPositionIndexOutOfBoundsException(){
-		Liste<Character> aBsChar = new ArrayNextPrevIndex<>(1);
+		List<Character> aBsChar = new ArrayNextPrevIndex<>(1);
 		exception.expect(IndexOutOfBoundsException.class);
 		exception.expectMessage("Ungueltiger Index Zugriff: -2");
-		aBsChar.elementAnPosition(-2);
+		aBsChar.retrieve(-2);
 	}
 	
 	/**
@@ -217,11 +231,11 @@ public class ArrayNextPrevIndexTest {
 	 */
 	@Test
 	public void testEntfernennIndexOutOfBoundsExceptionKap(){
-		Liste<Character> aBsChar = new ArrayNextPrevIndex<>(1);
-		aBsChar.einfuegen('a', 0);
+		List<Character> aBsChar = new ArrayNextPrevIndex<>(1);
+		aBsChar.insert('a', 0);
 		exception.expect(IndexOutOfBoundsException.class);
 		exception.expectMessage("Ungueltiger Index Zugriff: 2");
-		aBsChar.entfernen(2);
+		aBsChar.delete(2);
 	}
 	
 	/**
@@ -229,11 +243,11 @@ public class ArrayNextPrevIndexTest {
 	 */
 	@Test
 	public void testEntfernennIndexOutOfBoundsExceptionNeg(){
-		Liste<Character> aBsString = new ArrayNextPrevIndex<>(1);
-		aBsString.einfuegen('a', 0);
+		List<Character> aBsString = new ArrayNextPrevIndex<>(1);
+		aBsString.insert('a', 0);
 		exception.expect(IndexOutOfBoundsException.class);
 		exception.expectMessage("Ungueltiger Index Zugriff: -2");
-		aBsString.entfernen(-2);
+		aBsString.delete(-2);
 	}
 	
 	/**
@@ -241,12 +255,12 @@ public class ArrayNextPrevIndexTest {
 	 */
 	
 	public void testEntfernennIllegalArgumentException(){
-		Liste<Character> aBsString = new ArrayNextPrevIndex<>(1);
-		aBsString.einfuegen('a', 0);
-		aBsString.entfernen(0);
+		List<Character> aBsString = new ArrayNextPrevIndex<>(1);
+		aBsString.insert('a', 0);
+		aBsString.delete(0);
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage("Anzahl der Elemente muss groesser 0 sein");
-		aBsString.entfernen(1);
+		aBsString.delete(1);
 	}
 	
 	/**
@@ -255,25 +269,25 @@ public class ArrayNextPrevIndexTest {
 	 */
 	@Test
 	public void testListenZusammenfuegen() {
-		Liste<Integer> aBs = new ArrayNextPrevIndex<>(1);
-		aBs.einfuegen(1, 0);
-		Liste<Integer> aBsDiff = new ArrayNextPrevIndex<>(1);
-		aBsDiff.einfuegen(2, 0);
-		aBs.listenZusammenfuegen(aBsDiff);
-		assertEquals("Sollte Groesse 2 haben", aBs.groesseDerListe(), 2);
-		assertEquals("Sollte 1 sein", aBs.elementAnPosition(0), 1);
-		assertEquals("Sollte 2 sein", aBs.elementAnPosition(1), 2);
-		aBsDiff.einfuegen(3, 1);
-		aBsDiff.einfuegen(4, 2);
-		aBs.listenZusammenfuegen(aBsDiff);
-		assertEquals("Sollte Groesse 5 haben", aBs.groesseDerListe(), 5);
-		assertEquals("Sollte 4 sein", aBs.elementAnPosition(4), 4);
-		Liste<Number> aBsNumber = new ArrayBoundedSize<>(1);
-		Liste<Number> aBsNumber2 = new ArrayBoundedSize<>(1);
-		aBsNumber.einfuegen(3, 0);
-		aBsNumber2.einfuegen(-4, 0);
-		aBsNumber.listenZusammenfuegen(aBsNumber2);
-		assertEquals("Sollte Groesse 2 haben", aBsNumber.groesseDerListe(), 2);
+		List<Integer> aBs = new ArrayNextPrevIndex<>(1);
+		aBs.insert(1, 0);
+		List<Integer> aBsDiff = new ArrayNextPrevIndex<>(1);
+		aBsDiff.insert(2, 0);
+		aBs.concat(aBsDiff);
+		assertEquals("Sollte Groesse 2 haben", aBs.size(), 2);
+		assertEquals("Sollte 1 sein", aBs.retrieve(0), 1);
+		assertEquals("Sollte 2 sein", aBs.retrieve(1), 2);
+		aBsDiff.insert(3, 1);
+		aBsDiff.insert(4, 2);
+		aBs.concat(aBsDiff);
+		assertEquals("Sollte Groesse 5 haben", aBs.size(), 5);
+		assertEquals("Sollte 4 sein", aBs.retrieve(4), 4);
+		List<Number> aBsNumber = new ArrayBoundedSize<>(1);
+		List<Number> aBsNumber2 = new ArrayBoundedSize<>(1);
+		aBsNumber.insert(3, 0);
+		aBsNumber2.insert(-4, 0);
+		aBsNumber.concat(aBsNumber2);
+		assertEquals("Sollte Groesse 2 haben", aBsNumber.size(), 2);
 	}
 
 	/**
@@ -282,10 +296,10 @@ public class ArrayNextPrevIndexTest {
 	 */
 	@Test
 	public void testListenZusammenfuegenIllegalArgumentException(){
-		Liste<String> aBsString = new ArrayNextPrevIndex<>(1);
+		List<String> aBsString = new ArrayNextPrevIndex<>(1);
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage("Liste<E> andereListe darf nicht null sein");
-		aBsString.listenZusammenfuegen(null);	
+		aBsString.concat(null);	
 	}
 	
 	/**
@@ -293,22 +307,22 @@ public class ArrayNextPrevIndexTest {
 	 */
 	@Test
 	public void testGroesseDerListe(){
-		Liste<Integer> gDL = new ArrayNextPrevIndex<>(6);
-		assertEquals("Sollte kein Element enthalten", gDL.groesseDerListe(), 0);
-		gDL.einfuegen(10, 0);
-		gDL.einfuegen(9, 1);
-		gDL.einfuegen(8, 2);
-		gDL.einfuegen(7, 3);
-		gDL.einfuegen(6, 4);
-		gDL.einfuegen(5, 5);
-		gDL.einfuegen(4, 6);
-		gDL.einfuegen(2, 7);
-		gDL.einfuegen(2, 8);
-		gDL.einfuegen(1, 9);
-		assertEquals("Sollte 10 Elemente enthalten", gDL.groesseDerListe(), 10);
-		gDL.entfernen(9);
-		gDL.entfernen(8);
-		gDL.entfernen(7);
-		assertEquals("Sollte 7 Elemente enthalten", gDL.groesseDerListe(), 7);
+		List<Integer> gDL = new ArrayNextPrevIndex<>(6);
+		assertEquals("Sollte kein Element enthalten", gDL.size(), 0);
+		gDL.insert(10, 0);
+		gDL.insert(9, 1);
+		gDL.insert(8, 2);
+		gDL.insert(7, 3);
+		gDL.insert(6, 4);
+		gDL.insert(5, 5);
+		gDL.insert(4, 6);
+		gDL.insert(3, 7);
+		gDL.insert(2, 8);
+		gDL.insert(1, 9);
+		assertEquals("Sollte 10 Elemente enthalten", gDL.size(), 10);
+		gDL.delete(9);
+		gDL.delete(8);
+		gDL.delete(7);
+		assertEquals("Sollte 7 Elemente enthalten", gDL.size(), 7);
 	}
 }
