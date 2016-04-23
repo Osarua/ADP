@@ -12,8 +12,8 @@ public class Quiksort2 {
 			return listPar;
 		}
 		//int pivotIndex = mittleresPivotElement (startIndex, endIndex);
-		//int pivotIndex = zufaelligesPivotElement (startIndex, endIndex);
-		int pivotIndex = medianesPivotElement (startIndex,endIndex,(endIndex-startIndex)/2,listPar);
+		int pivotIndex = zufaelligesPivotElement (startIndex, endIndex);
+		//int pivotIndex = medianesPivotElement (startIndex,endIndex,(endIndex-startIndex)/2,listPar);
 		int pivotHash = listPar [pivotIndex].hashCode();
 		LinkedList<Object> kleiner = new LinkedList<Object>();
 		LinkedList<Object> groesser = new LinkedList<Object>();
