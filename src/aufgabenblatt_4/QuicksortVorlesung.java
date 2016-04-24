@@ -50,49 +50,49 @@ public class QuicksortVorlesung<E> {
 	 */
 	public void quicksort(E[] feld, int links, int rechts) {
 		int i = links;
-							zuweisungen++;
+							//zuweisungen++;
 		int j = rechts;
-							zuweisungen++;
-		vergleiche++;
+							//zuweisungen++;
+		//vergleiche++;
 		if (links < rechts) {
 			E pivot = feld[rechts];
-							zuweisungen++;
-							vergleiche++;
+							//zuweisungen++;
+							//vergleiche++;
 			while (i <= j) {
-							vergleiche++; 
+							//vergleiche++; 
 				while (feld[i].hashCode() < pivot.hashCode()) {
 					i = i + 1;
-							bewegungen++;
-							rechenoperationen++;
-							zuweisungen++;
-							vergleiche++; 
+							//bewegungen++;
+							//rechenoperationen++;
+							//zuweisungen++;
+							//vergleiche++; 
 				}
-							vergleiche++;
+							//vergleiche++;
 				while (feld[j].hashCode() > pivot.hashCode()) {
 					j = j - 1;
-							bewegungen++;
-							rechenoperationen++;
-							zuweisungen++;
-							vergleiche++; 
+							//bewegungen++;
+							//rechenoperationen++;
+							//zuweisungen++;
+							//vergleiche++; 
 				}
-							vergleiche++;
+							//vergleiche++;
 				if (i <= j) {
 					vertausche(feld, i, j);
-							vertauschungen++;
+							//vertauschungen++;
 					i = i + 1;
-							bewegungen++;
-							zuweisungen++;
-							rechenoperationen++;
+							//bewegungen++;
+							//zuweisungen++;
+							//rechenoperationen++;
 					j = j - 1;
-							bewegungen++;
-							zuweisungen++;
-							rechenoperationen++;
+							//bewegungen++;
+							//zuweisungen++;
+							//rechenoperationen++;
 				}
-							vergleiche++; 
+							//vergleiche++; 
 			}
-							rekursiveAufrufe++;
+							//rekursiveAufrufe++;
 			quicksort(feld, links, j);
-							rekursiveAufrufe++;
+							//rekursiveAufrufe++;
 			quicksort(feld, i, rechts);
 		}
 	}
@@ -107,11 +107,11 @@ public class QuicksortVorlesung<E> {
 	 */
 	private void vertausche(E[] feld, int i, int j) {
 		E temp = feld[i];
-							zuweisungen++;
+							//zuweisungen++;
 		feld[i] = feld[j];
-							zuweisungen++;
+							//zuweisungen++;
 		feld[j] = temp;
-							zuweisungen++;
+							//zuweisungen++;
 	}
 
 	@Override
