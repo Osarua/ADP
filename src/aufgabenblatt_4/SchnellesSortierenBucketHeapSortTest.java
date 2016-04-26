@@ -136,7 +136,7 @@ public void testSchnellesSortierenNk3() {
 		int max = 80000000;
 		int min = 70000000;
 		long zeit = System.currentTimeMillis();
-		sS.bucketsort(feldI,min, max,100000);
+		sS.bucketsort(feldI,min, max,10000);
 		zeit = System.currentTimeMillis() - zeit;
 		System.out.println(sS);
 		System.out.println("N: " + n + ", Laufzeit: " + zeit + "\n");
@@ -165,7 +165,7 @@ public void testSchnellesSortierenNk3() {
 		int max = 800000000;
 		int min = 700000000;
 		long zeit= System.currentTimeMillis();
-		sS.bucketsort(feldI,min, max,100000);
+		sS.bucketsort(feldI,min, max,10000);
 		zeit = System.currentTimeMillis() - zeit;
 		System.out.println(sS);
 		System.out.println("N: " + n + ", Laufzeit: " + zeit + "\n");

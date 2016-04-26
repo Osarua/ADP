@@ -40,7 +40,7 @@ public class ArrayBoundedSize<E> implements List<E>{
 	/**
 	 * Erweiterte Postcondition: Falls die groesse des Arrays nicht ausreicht 
 	 * wird ein groesseres Array allokiert.
-	 * @throws IndexOutOfBoundsException pos < 0 || pos >= Laenge der Liste
+	 * @throws IndexOutOfBoundsException pos < 1 || pos > Laenge der Liste
 	 */
 	@Override
 	public void insert(E elem, int pos) throws 
@@ -50,10 +50,10 @@ public class ArrayBoundedSize<E> implements List<E>{
 		if (anzahlDerElemente+1 >= list.length) {
 			arrayVergroessern();
 		}
-		for (int i = (anzahlDerElemente - 1); i >= pos; --i) {
+		for (int i = (anzahlDerElemente - 1); i >= pos-1; --i) {
 			list[i + 1] = list[i];
 		}
-		list[pos] = elem;
+		list[pos-1] = elem;
 		anzahlDerElemente++;
 	}
 
@@ -72,7 +72,7 @@ public class ArrayBoundedSize<E> implements List<E>{
 	}
 	
 	/**
-	 * @throws IndexOutOfBoundsException pos < 0 || pos >= Laenge der Liste
+	 * @throws IndexOutOfBoundsException pos < 1 || pos >= Laenge der Liste
 	 */
 	@Override
 	public void delete(int pos) throws IndexOutOfBoundsException {
@@ -94,12 +94,12 @@ public class ArrayBoundedSize<E> implements List<E>{
 	}
 
 	/**
-	 * @throws IndexOutOfBoundsException pos < 0 || pos >= Laenge der Liste
+	 * @throws IndexOutOfBoundsException pos < 1 || pos > Laenge der Liste
 	 */
 	@Override
 	public Object retrieve(int pos) throws IndexOutOfBoundsException {
 		gueltigePosition(pos);
-		return list[pos];
+		return list[pos-1];
 	}
 
 	/**
@@ -114,8 +114,8 @@ public class ArrayBoundedSize<E> implements List<E>{
 			throw new IllegalArgumentException("Liste<E> andereListe darf nicht null sein");
 		}
 		if (otherList instanceof ArrayBoundedSize<?>) {
-			for (int i = 0; i < otherList.size(); i++) {
-				insert((E) otherList.retrieve(i), anzahlDerElemente);
+			for (int i = 1; i <= otherList.size(); i++) {
+				insert((E) otherList.retrieve(i), anzahlDerElemente+1);
 			}
 		} else {
 			throw new IllegalArgumentException("Die konkrete Klasse die das Interface Liste<E>"
@@ -147,10 +147,10 @@ public class ArrayBoundedSize<E> implements List<E>{
      * nicht größer als die Anzahl der Elemente sein.
      * Postcondition: Es wurde überprüft ob die Position einen korrekten Index Zugriff gewährleistet.
      * @param position welche ueberprueft werden soll
-     * @throws IndexOutOfBoundsException pos < 0 || pos >= Laenge der Liste
+     * @throws IndexOutOfBoundsException pos < 1 || pos > Laenge der Liste
      */
 	private void gueltigePosition(int pos) throws IndexOutOfBoundsException {
-		if ((pos < 0) || (pos >= list.length)) {
+		if ((pos < 1) || (pos > list.length)) {
 			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
 		}
 	}

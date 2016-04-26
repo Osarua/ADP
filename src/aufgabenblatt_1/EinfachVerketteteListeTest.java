@@ -35,31 +35,31 @@ public class EinfachVerketteteListeTest {
 	@Test
 	public void testEinfuegen(){
 		List<Integer> aBs= new EinfachVerketteteListe<>();
-		aBs.insert(1, 0);
+		aBs.insert(1, 1);
 		assertEquals("Sollte ein Element enthalten",aBs.size(),1);
-		aBs.insert(2, 1);
+		aBs.insert(2, 2);
 		assertEquals("Sollte zwei Elemente enthalten",aBs.size(),2);
-		assertEquals("Sollte den Wert 1 haben",aBs.retrieve(0),1);
-		assertEquals("Sollte den Wert 2 haben",aBs.retrieve(1),2);
-		aBs.insert(3, 2);
+		assertEquals("Sollte den Wert 1 haben",aBs.retrieve(1),1);
+		assertEquals("Sollte den Wert 2 haben",aBs.retrieve(2),2);
+		aBs.insert(3, 3);
 		assertEquals("Sollte drei Elemente enthalten",aBs.size(),3);
-		aBs.insert(4, 3);
+		aBs.insert(4, 4);
 		assertEquals("Sollte vier Elemente enthalten",aBs.size(),4);
-		aBs.insert(-5, 4);
+		aBs.insert(-5, 5);
 		assertEquals("Sollte 5 Elemente enthalten",aBs.size(),5);
-		aBs.insert(6, 5);
+		aBs.insert(6, 6);
 		assertEquals("Sollte 6 Elemente enthalten",aBs.size(),6);
-		aBs.insert(7, 6);
+		aBs.insert(7, 7);
 		assertEquals("Sollte 7 Elemente enthalten",aBs.size(),7);
-		aBs.insert(0, 7);
+		aBs.insert(0, 8);
 		assertEquals("Sollte 8 Elemente enthalten",aBs.size(),8);
-		aBs.insert(9, 8);
+		aBs.insert(9, 9);
 		assertEquals("Sollte 9 Elemente enthalten",aBs.size(),9);
-		aBs.insert(10, 9);
+		aBs.insert(10, 10);
 		assertEquals("Sollte 10 Elemente enthalten",aBs.size(),10);
-		aBs.insert(11, 10);
+		aBs.insert(11, 11);
 		assertEquals("Sollte 11 Elemente enthalten",aBs.size(),11);
-		assertEquals("Sollte den Wert 11 haben",aBs.retrieve(10),11);
+		assertEquals("Sollte den Wert 11 haben",aBs.retrieve(11),11);
 	}
 	
 	/**
@@ -68,20 +68,20 @@ public class EinfachVerketteteListeTest {
 	@Test
 	public void testEinfuegenNachruecken(){
 		List<String> aBsString = new EinfachVerketteteListe<>();
-		aBsString.insert("a", 0);
-		aBsString.insert("b", 1);
-		aBsString.insert("c", 2);
-		aBsString.insert("d",1);
-		assertEquals("Sollte gleich sein",aBsString.retrieve(0),"a");
-		assertEquals("Sollte gleich sein",aBsString.retrieve(1),"d");
-		assertEquals("Sollte gleich sein",aBsString.retrieve(2),"b");
-		assertEquals("Sollte gleich sein",aBsString.retrieve(3),"c");
-		aBsString.insert("z",1);
-		assertEquals("Sollte gleich sein",aBsString.retrieve(0),"a");
-		assertEquals("Sollte gleich sein",aBsString.retrieve(1),"z");
+		aBsString.insert("a", 1);
+		aBsString.insert("b", 2);
+		aBsString.insert("c", 3);
+		aBsString.insert("d",2);
+		assertEquals("Sollte gleich sein",aBsString.retrieve(1),"a");
 		assertEquals("Sollte gleich sein",aBsString.retrieve(2),"d");
 		assertEquals("Sollte gleich sein",aBsString.retrieve(3),"b");
 		assertEquals("Sollte gleich sein",aBsString.retrieve(4),"c");
+		aBsString.insert("z",2);
+		assertEquals("Sollte gleich sein",aBsString.retrieve(1),"a");
+		assertEquals("Sollte gleich sein",aBsString.retrieve(2),"z");
+		assertEquals("Sollte gleich sein",aBsString.retrieve(3),"d");
+		assertEquals("Sollte gleich sein",aBsString.retrieve(4),"b");
+		assertEquals("Sollte gleich sein",aBsString.retrieve(5),"c");
 	}
 
 	/**
@@ -126,9 +126,9 @@ public class EinfachVerketteteListeTest {
 	@Test
 	public void testEntfernen(){
 		List<String> aBsString = new EinfachVerketteteListe<>();
-		aBsString.insert("a", 0);
-		aBsString.delete(0);
-		assertEquals("Element sollte nicht in der Liste sein",aBsString.retrieve(0),null);
+		aBsString.insert("a", 1);
+		aBsString.delete(1);
+		assertEquals("Element sollte nicht in der Liste sein",aBsString.retrieve(1),null);
 		assertEquals("Anzahl der Elemente sollte 0 sein",aBsString.size(),0);
 	}
 	
@@ -138,15 +138,15 @@ public class EinfachVerketteteListeTest {
 	@Test
 	public void testEntfernenMitte(){
 		List<Character> aBsChar = new EinfachVerketteteListe<>();
-		aBsChar.insert('a', 0);
-		aBsChar.insert('b', 1);
-		aBsChar.insert('c', 2);
-		aBsChar.insert('d', 3);
-		aBsChar.delete(1);
+		aBsChar.insert('a', 1);
+		aBsChar.insert('b', 2);
+		aBsChar.insert('c', 3);
+		aBsChar.insert('d', 4);
+		aBsChar.delete(2);
 		assertEquals("Anzahl der Elemente sollte 3 sein",aBsChar.size(),3);
-		assertEquals("Sollte 'a' sein",aBsChar.retrieve(0),'a');
-		assertEquals("Sollte 'c' sein",aBsChar.retrieve(1),'c');
-		assertEquals("Sollte 'd' sein",aBsChar.retrieve(2),'d');
+		assertEquals("Sollte 'a' sein",aBsChar.retrieve(1),'a');
+		assertEquals("Sollte 'c' sein",aBsChar.retrieve(2),'c');
+		assertEquals("Sollte 'd' sein",aBsChar.retrieve(3),'d');
 	}
 
 	/**
@@ -155,15 +155,15 @@ public class EinfachVerketteteListeTest {
 	@Test
 	public void testFinde() {
 		List<Integer> aBsInt = new EinfachVerketteteListe<>();
-		aBsInt.insert(11, 0);
-		aBsInt.insert(22, 1);
-		aBsInt.insert(33, 2);
-		assertEquals("Sollte an der Position 1 sein",aBsInt.find(22),1);
-		assertEquals("Sollte an der Position 2 sein",aBsInt.find(33),2);
+		aBsInt.insert(11, 1);
+		aBsInt.insert(22, 2);
+		aBsInt.insert(33, 3);
+		assertEquals("Sollte an der Position 1 sein",aBsInt.find(22),2);
+		assertEquals("Sollte an der Position 2 sein",aBsInt.find(33),3);
 		assertEquals("Sollte nicht in der Liste sein",aBsInt.find(66),-1);
-		aBsInt.delete(0);
 		aBsInt.delete(1);
-		aBsInt.delete(0);
+		aBsInt.delete(2);
+		aBsInt.delete(1);
 		assertEquals("Sollte nicht in der Liste sein",aBsInt.find(22),-1);
 	}
 	
@@ -173,12 +173,12 @@ public class EinfachVerketteteListeTest {
 	@Test
 	public void testElementAnPosition(){
 		List<Character> aBsChar = new EinfachVerketteteListe<>();
-		aBsChar.insert('A', 0);
-		aBsChar.insert('H', 1);
-		aBsChar.insert('A', 2);
-		assertEquals("Sollte gleich sein (A)",aBsChar.retrieve(0),'A');
-		assertEquals("Sollte gleich sein (H)",aBsChar.retrieve(1),'H');
-		assertEquals("Sollte gleich sein (A)",aBsChar.retrieve(2),'A');
+		aBsChar.insert('A', 1);
+		aBsChar.insert('H', 2);
+		aBsChar.insert('A', 3);
+		assertEquals("Sollte gleich sein (A)",aBsChar.retrieve(1),'A');
+		assertEquals("Sollte gleich sein (H)",aBsChar.retrieve(2),'H');
+		assertEquals("Sollte gleich sein (A)",aBsChar.retrieve(3),'A');
 	}
 	
 	/**
@@ -200,7 +200,7 @@ public class EinfachVerketteteListeTest {
 	@Test
 	public void testEntfernennIndexOutOfBoundsExceptionKap(){
 		List<Character> aBsChar = new EinfachVerketteteListe<>();
-		aBsChar.insert('a', 0);
+		aBsChar.insert('a', 1);
 		exception.expect(IndexOutOfBoundsException.class);
 		exception.expectMessage("Ungueltiger Index Zugriff: 2");
 		aBsChar.delete(2);
@@ -212,7 +212,7 @@ public class EinfachVerketteteListeTest {
 	@Test
 	public void testEntfernennIndexOutOfBoundsExceptionNeg(){
 		List<Character> aBsString = new EinfachVerketteteListe<>();
-		aBsString.insert('a', 0);
+		aBsString.insert('a', 1);
 		exception.expect(IndexOutOfBoundsException.class);
 		exception.expectMessage("Ungueltiger Index Zugriff: -2");
 		aBsString.delete(-2);
@@ -238,27 +238,27 @@ public class EinfachVerketteteListeTest {
 	@Test
 	public void testListenZusammenfuegen() {
 		List<Integer> aBs = new EinfachVerketteteListe<>();
-		aBs.insert(1, 0);
+		aBs.insert(1, 1);
 		List<Integer> aBsDiff = new EinfachVerketteteListe<>();
-		aBsDiff.insert(2, 0);
+		aBsDiff.insert(2, 1);
 		aBs.concat(aBsDiff);
 		assertEquals("Sollte Groesse 2 haben", aBs.size(), 2);
-		assertEquals("Sollte 1 sein", aBs.retrieve(0), 1);
-		assertEquals("Sollte 2 sein", aBs.retrieve(1), 2);
-		aBsDiff.insert(3, 1);
-		aBsDiff.insert(4, 2);
+		assertEquals("Sollte 1 sein", aBs.retrieve(1), 1);
+		assertEquals("Sollte 2 sein", aBs.retrieve(2), 2);
+		aBsDiff.insert(3, 2);
+		aBsDiff.insert(4, 3);
 		aBs.concat(aBsDiff);
 		assertEquals("Sollte Groesse 5 haben", aBs.size(), 5);
-		assertEquals("Sollte 4 sein", aBs.retrieve(4), 2);
+		assertEquals("Sollte 4 sein", aBs.retrieve(5), 2);
 		List<Number> aBsNumber = new EinfachVerketteteListe<>();
 		List<Number> aBsNumber2 = new EinfachVerketteteListe<>();
-		aBsNumber.insert(3, 0);
-		aBsNumber2.insert(-4, 0);
+		aBsNumber.insert(3, 1);
+		aBsNumber2.insert(-4, 1);
 		aBsNumber.concat(aBsNumber2);
 		assertEquals("Sollte Groesse 2 haben", aBsNumber.size(), 2);
 		// Testfall das die Liste nicht vom Typ EinfachVerketteteListe<E> ist
-		List<Number> eVl = new ArrayBoundedSize<>(1);
-		eVl.insert(1, 0);
+		List<Number> eVl = new ArrayBoundedSize<>(2);
+		eVl.insert(1, 1);
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage("Die konkrete Klasse die das Interface Liste<E>"
 					+ "implementiert muss vom Typ EinfachVerketteteListe<E> sein");
@@ -284,8 +284,7 @@ public class EinfachVerketteteListeTest {
 	public void testGroesseDerListe(){
 		List<Integer> gDL = new EinfachVerketteteListe<>();
 		assertEquals("Sollte kein Element enthalten", gDL.size(), 0);
-		gDL.insert(10, 0);
-		gDL.insert(1, 1);
+		gDL.insert(10, 1);
 		gDL.insert(1, 2);
 		gDL.insert(1, 3);
 		gDL.insert(1, 4);
@@ -294,6 +293,7 @@ public class EinfachVerketteteListeTest {
 		gDL.insert(1, 7);
 		gDL.insert(1, 8);
 		gDL.insert(1, 9);
+		gDL.insert(1, 10);
 		assertEquals("Sollte 10 Elemente enthalten", gDL.size(), 10);
 		gDL.delete(9);
 		gDL.delete(8);
