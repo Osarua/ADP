@@ -40,12 +40,13 @@ public class ArrayBoundedSize<E> implements List<E>{
 	/**
 	 * Erweiterte Postcondition: Falls die groesse des Arrays nicht ausreicht 
 	 * wird ein groesseres Array allokiert.
-	 * @throws IndexOutOfBoundsException pos < 1 || pos > Laenge der Liste
 	 */
 	@Override
 	public void insert(E elem, int pos) throws 
 	IndexOutOfBoundsException, IllegalArgumentException {
-		gueltigePosition(pos);
+		if ((pos < 1) || (pos > size() + 1)) {
+			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
+		}
 		elementUngleichNull(elem);
 		if (anzahlDerElemente+1 >= list.length) {
 			arrayVergroessern();
@@ -72,11 +73,13 @@ public class ArrayBoundedSize<E> implements List<E>{
 	}
 	
 	/**
-	 * @throws IndexOutOfBoundsException pos < 1 || pos >= Laenge der Liste
+	 * @throws IndexOutOfBoundsException pos < 1 || pos > Anzahl der Elemente 
 	 */
 	@Override
 	public void delete(int pos) throws IndexOutOfBoundsException {
-		gueltigePosition(pos);
+		if ((pos < 1) || (pos > size())) {
+			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
+		}
 		list[pos] = list[size()-1];
 		list[size() - 1] = null;
 		anzahlDerElemente--;
@@ -93,12 +96,11 @@ public class ArrayBoundedSize<E> implements List<E>{
 		return -1;
 	}
 
-	/**
-	 * @throws IndexOutOfBoundsException pos < 1 || pos > Laenge der Liste
-	 */
 	@Override
 	public Object retrieve(int pos) throws IndexOutOfBoundsException {
-		gueltigePosition(pos);
+		if ((pos < 1) || (pos > size())) {
+			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
+		}
 		return list[pos-1];
 	}
 
@@ -138,20 +140,6 @@ public class ArrayBoundedSize<E> implements List<E>{
 	private void elementUngleichNull(Object elem) throws IllegalArgumentException {
 		if (elem == null) {
 			throw new IllegalArgumentException("Element darf nicht null sein");
-		}
-	}
-	
-    /**
-     * gueltigePosition: LIST X POS -> POS
-     * Precondition: Die Position muss ein positiver Integer sein und darf 
-     * nicht größer als die Anzahl der Elemente sein.
-     * Postcondition: Es wurde überprüft ob die Position einen korrekten Index Zugriff gewährleistet.
-     * @param position welche ueberprueft werden soll
-     * @throws IndexOutOfBoundsException pos < 1 || pos > Laenge der Liste
-     */
-	private void gueltigePosition(int pos) throws IndexOutOfBoundsException {
-		if ((pos < 1) || (pos > list.length)) {
-			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
 		}
 	}
 }

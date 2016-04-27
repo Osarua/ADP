@@ -33,7 +33,7 @@ public class EinfachVerketteteListeTest {
 	 * es Teil der Liste ist und sich die Anzahl der Elemente um eins erhoeht hat.
 	 */
 	@Test
-	public void testEinfuegen(){
+	public void testInsert(){
 		List<Integer> aBs= new EinfachVerketteteListe<>();
 		aBs.insert(1, 1);
 		assertEquals("Sollte ein Element enthalten",aBs.size(),1);
@@ -66,7 +66,7 @@ public class EinfachVerketteteListeTest {
 	 * Testet ob ein Element korrekt in der Mitte der Liste eingefuegt wird.
 	 */
 	@Test
-	public void testEinfuegenNachruecken(){
+	public void testInsertNachruecken(){
 		List<String> aBsString = new EinfachVerketteteListe<>();
 		aBsString.insert("a", 1);
 		aBsString.insert("b", 2);
@@ -86,10 +86,10 @@ public class EinfachVerketteteListeTest {
 
 	/**
 	 *  Testet ob die IndexOutOfBoundsException Exception ausgeloesst wird, wenn der 
-	 *  aktuelle Parameter position < 0.
+	 *  aktuelle Parameter pos < 1.
 	 */
 	@Test
-	public void testEinfuegenIndexOutOfBoundsException(){
+	public void testInsertIndexOutOfBoundsException(){
 		List<String> aBsString = new EinfachVerketteteListe<>();
 		exception.expect(IndexOutOfBoundsException.class);
 		exception.expectMessage("Ungueltiger Index Zugriff: -1");
@@ -98,10 +98,10 @@ public class EinfachVerketteteListeTest {
 	
 	/**
 	 *  Testet ob die IndexOutOfBoundsException Exception ausgeloesst wird, wenn der 
-	 *  aktuelle Parameter position >= Kapazitaet ist.
+	 *  aktuelle Parameter pos > Anzahl der Elemente +1  ist.
 	 */
 	@Test
-	public void testEinfuegenIndexOutOfBoundsExceptionKap(){
+	public void testInsertIndexOutOfBoundsExceptionKap(){
 		List<String> aBsString = new EinfachVerketteteListe<>();
 		exception.expect(IndexOutOfBoundsException.class);
 		exception.expectMessage("Ungueltiger Index Zugriff: 3");
@@ -113,7 +113,7 @@ public class EinfachVerketteteListeTest {
 	 * aktuelle Parameter Element eine Referenz auf null hat.
 	 */
 	@Test
-	public void testEinfuegenIllegalArgumentException(){
+	public void testInsertIllegalArgumentException(){
 		List<String> aBsString = new EinfachVerketteteListe<>();
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage("Element darf nicht null sein");
@@ -124,19 +124,20 @@ public class EinfachVerketteteListeTest {
 	 * Testet die Methode entfernen(int), wenn ein Element am Ende der Liste entfernt wird.
 	 */
 	@Test
-	public void testEntfernen(){
+	public void testDelete(){
 		List<String> aBsString = new EinfachVerketteteListe<>();
 		aBsString.insert("a", 1);
 		aBsString.delete(1);
-		assertEquals("Element sollte nicht in der Liste sein",aBsString.retrieve(1),null);
-		assertEquals("Anzahl der Elemente sollte 0 sein",aBsString.size(),0);
+		exception.expect(IndexOutOfBoundsException.class);
+		exception.expectMessage("Ungueltiger Index Zugriff: 1");
+		aBsString.retrieve(1);
 	}
 	
 	/**
 	 * Testet die Methode entfernen(int), wenn ein Element in der Mitte der Liste entfernt wird.
 	 */
 	@Test
-	public void testEntfernenMitte(){
+	public void testDeleteMitte(){
 		List<Character> aBsChar = new EinfachVerketteteListe<>();
 		aBsChar.insert('a', 1);
 		aBsChar.insert('b', 2);
@@ -153,7 +154,7 @@ public class EinfachVerketteteListeTest {
 	 * Testet ob ein Element korrekt gesucht wird und der Index richtig zurueckgegeben wird. 
 	 */
 	@Test
-	public void testFinde() {
+	public void testFind() {
 		List<Integer> aBsInt = new EinfachVerketteteListe<>();
 		aBsInt.insert(11, 1);
 		aBsInt.insert(22, 2);
@@ -171,7 +172,7 @@ public class EinfachVerketteteListeTest {
 	 * Testet ob ein Element korrekt zurueckgegeben wird an der uebergebenen Position.
 	 */
 	@Test
-	public void testElementAnPosition(){
+	public void testRetrieve(){
 		List<Character> aBsChar = new EinfachVerketteteListe<>();
 		aBsChar.insert('A', 1);
 		aBsChar.insert('H', 2);
@@ -185,7 +186,7 @@ public class EinfachVerketteteListeTest {
 	 * Testet ob bei einem ungueltigen Index zu
 	 */
 	@Test
-	public void testElementAnPositionIndexOutOfBoundsException(){
+	public void testRetrieveIndexOutOfBoundsException(){
 		List<Character> aBsChar = new ArrayBoundedSize<>(1);
 		exception.expect(IndexOutOfBoundsException.class);
 		exception.expectMessage("Ungueltiger Index Zugriff: -2");
@@ -198,7 +199,7 @@ public class EinfachVerketteteListeTest {
 	 *  Parameter position >= Kapazitaet ist. 
 	 */
 	@Test
-	public void testEntfernennIndexOutOfBoundsExceptionKap(){
+	public void testRetrieveIndexOutOfBoundsExceptionKap(){
 		List<Character> aBsChar = new EinfachVerketteteListe<>();
 		aBsChar.insert('a', 1);
 		exception.expect(IndexOutOfBoundsException.class);
@@ -207,10 +208,10 @@ public class EinfachVerketteteListeTest {
 	}
 	
 	/**
-	 *  Fuer den Fall das position < 0 ist. 
+	 *  Fuer den Fall das position < 1 ist. 
 	 */
 	@Test
-	public void testEntfernennIndexOutOfBoundsExceptionNeg(){
+	public void testRetrieveIndexOutOfBoundsExceptionNeg(){
 		List<Character> aBsString = new EinfachVerketteteListe<>();
 		aBsString.insert('a', 1);
 		exception.expect(IndexOutOfBoundsException.class);
@@ -221,13 +222,13 @@ public class EinfachVerketteteListeTest {
 	/**
 	 *  Fuer den Fall das die Anzahl der Elemente == 0 ist
 	 */
-	
-	public void testEntfernennIllegalArgumentException(){
+	@Test
+	public void testRetrieveIllegalArgumentException(){
 		List<Character> aBsString = new EinfachVerketteteListe<>();
-		aBsString.insert('a', 0);
-		aBsString.delete(0);
-		exception.expect(IllegalArgumentException.class);
-		exception.expectMessage("Anzahl der Elemente muss groesser 0 sein");
+		aBsString.insert('a', 1);
+		aBsString.delete(1);
+		exception.expect(IndexOutOfBoundsException.class);
+		exception.expectMessage("Ungueltiger Index Zugriff: 1");
 		aBsString.delete(1);
 	}
 	
@@ -236,7 +237,7 @@ public class EinfachVerketteteListeTest {
 	 * Liste von gleichen Typ korrekt am Ende der Liste angefuegt? 
 	 */
 	@Test
-	public void testListenZusammenfuegen() {
+	public void testConcat() {
 		List<Integer> aBs = new EinfachVerketteteListe<>();
 		aBs.insert(1, 1);
 		List<Integer> aBsDiff = new EinfachVerketteteListe<>();
@@ -270,7 +271,7 @@ public class EinfachVerketteteListeTest {
 	 * eine Referenz auf null hat.
 	 */
 	@Test
-	public void testListenZusammenfuegenIllegalArgumentException(){
+	public void testConcatIllegalArgumentException(){
 		List<String> aBsString = new EinfachVerketteteListe<>();
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage("Liste<E> andereListe darf nicht null sein");
@@ -281,7 +282,7 @@ public class EinfachVerketteteListeTest {
 	 * Testet ob die anzahl der Elemente in der Methode korrekt zurueckgegeben wird.
 	 */
 	@Test
-	public void testGroesseDerListe(){
+	public void testSize(){
 		List<Integer> gDL = new EinfachVerketteteListe<>();
 		assertEquals("Sollte kein Element enthalten", gDL.size(), 0);
 		gDL.insert(10, 1);

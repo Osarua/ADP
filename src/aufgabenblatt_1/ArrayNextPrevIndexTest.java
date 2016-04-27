@@ -50,7 +50,7 @@ public class ArrayNextPrevIndexTest {
 	 * es Teil der Liste ist und sich die Anzahl der Elemente um eins erhoeht hat.
 	 */
 	@Test
-	public void testEinfuegen(){
+	public void testInsert(){
 		List<Integer> aBs= new ArrayNextPrevIndex<>(1);
 		aBs.insert(1, 1);
 		assertEquals("Sollte ein Element enthalten",aBs.size(),1);
@@ -83,7 +83,7 @@ public class ArrayNextPrevIndexTest {
 	 * Testet ob ein Element korrekt in der Mitte der Liste eingefuegt wird.
 	 */
 	@Test
-	public void testEinfuegenNachruecken(){
+	public void testInsertNachruecken(){
 		List<String> aBsString = new ArrayNextPrevIndex<>(4);
 		aBsString.insert("a", 1);
 		aBsString.insert("b", 2);
@@ -106,7 +106,7 @@ public class ArrayNextPrevIndexTest {
 	 *  aktuelle Parameter position < 0.
 	 */
 	@Test
-	public void testEinfuegenIndexOutOfBoundsException(){
+	public void testInsertIndexOutOfBoundsException(){
 		List<String> aBsString = new ArrayNextPrevIndex<>(4);
 		exception.expect(IndexOutOfBoundsException.class);
 		exception.expectMessage("Ungueltiger Index Zugriff: -1");
@@ -115,10 +115,10 @@ public class ArrayNextPrevIndexTest {
 	
 	/**
 	 *  Testet ob die IndexOutOfBoundsException Exception ausgeloesst wird, wenn der 
-	 *  aktuelle Parameter position > Kapazitaet-2 ist.
+	 *  aktuelle Parameter pos >  Anzahl der Elemente + 1.
 	 */
 	@Test
-	public void testEinfuegenIndexOutOfBoundsExceptionKap(){
+	public void testInsertIndexOutOfBoundsExceptionKap(){
 		List<String> aBsString = new ArrayNextPrevIndex<>(3);
 		exception.expect(IndexOutOfBoundsException.class);
 		exception.expectMessage("Ungueltiger Index Zugriff: 4");
@@ -130,30 +130,18 @@ public class ArrayNextPrevIndexTest {
 	 * aktuelle Parameter Element eine Referenz auf null hat.
 	 */
 	@Test
-	public void testEinfuegenIllegalArgumentException(){
+	public void testInsertIllegalArgumentException(){
 		List<String> aBsString = new ArrayNextPrevIndex<>(1);
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage("Element darf nicht null sein");
 		aBsString.insert(null, 1);	
 	}
-	
-	/**
-	 * Testet die Methode entfernen(int), wenn ein Element am Ende der Liste entfernt wird.
-	 */
-	@Test
-	public void testEntfernen(){
-		List<String> aBsString = new ArrayNextPrevIndex<>(1);
-		aBsString.insert("a", 1);
-		aBsString.delete(1);
-		assertEquals("Element sollte nicht in der Liste sein",aBsString.retrieve(1),null);
-		assertEquals("Anzahl der Elemente sollte 0 sein",aBsString.size(),0);
-	}
-	
+
 	/**
 	 * Testet die Methode entfernen(int), wenn ein Element in der Mitte der Liste entfernt wird.
 	 */
 	@Test
-	public void testEntfernenMitte(){
+	public void testDeleteMitte(){
 		List<Character> aBsChar = new ArrayNextPrevIndex<>(4);
 		aBsChar.insert('a', 1);
 		aBsChar.insert('b', 2);
@@ -164,14 +152,13 @@ public class ArrayNextPrevIndexTest {
 		assertEquals("Sollte 'a' sein",aBsChar.find('a'),1);
 		assertEquals("Sollte 'd' sein",aBsChar.retrieve(2),'d');
 		assertEquals("Sollte 'c' sein",aBsChar.retrieve(3),'c');
-		assertEquals("Sollte null sein",aBsChar.retrieve(4),null);
 	}
 
 	/**
 	 * Testet ob ein Element korrekt gesucht wird und der Index richtig zurueckgegeben wird. 
 	 */
 
-	public void testFinde() {
+	public void testFind() {
 		List<Integer> aBsInt = new ArrayNextPrevIndex<>(3);
 		aBsInt.insert(11, 0);
 		aBsInt.insert(22, 1);
@@ -202,22 +189,22 @@ public class ArrayNextPrevIndexTest {
 	/**
 	 * Testet ob ein Element korrekt zurueckgegeben wird an der uebergebenen Position.
 	 */
-	
-	public void testElementAnPosition(){
+	@Test
+	public void testRetrieve(){
 		List<Character> aBsChar = new ArrayNextPrevIndex<>(4);
-		aBsChar.insert('A', 0);
-		aBsChar.insert('H', 1);
-		aBsChar.insert('A', 2);
-		assertEquals("Sollte gleich sein (A)",aBsChar.retrieve(0),'A');
-		assertEquals("Sollte gleich sein (H)",aBsChar.retrieve(1),'H');
-		assertEquals("Sollte gleich sein (A)",aBsChar.retrieve(2),'A');
+		aBsChar.insert('A', 1);
+		aBsChar.insert('H', 2);
+		aBsChar.insert('A', 3);
+		assertEquals("Sollte gleich sein (A)",aBsChar.retrieve(1),'A');
+		assertEquals("Sollte gleich sein (H)",aBsChar.retrieve(2),'H');
+		assertEquals("Sollte gleich sein (A)",aBsChar.retrieve(3),'A');
 	}
 	
 	/**
 	 * Testet ob bei einem ungueltigen Index zu
 	 */
 	@Test
-	public void testElementAnPositionIndexOutOfBoundsException(){
+	public void testRetrieveIndexOutOfBoundsException(){
 		List<Character> aBsChar = new ArrayNextPrevIndex<>(1);
 		exception.expect(IndexOutOfBoundsException.class);
 		exception.expectMessage("Ungueltiger Index Zugriff: -2");
@@ -230,7 +217,7 @@ public class ArrayNextPrevIndexTest {
 	 *  Parameter position >= Kapazitaet ist. 
 	 */
 	@Test
-	public void testEntfernennIndexOutOfBoundsExceptionKap(){
+	public void testDeleteIndexOutOfBoundsExceptionKap(){
 		List<Character> aBsChar = new ArrayNextPrevIndex<>(1);
 		aBsChar.insert('a', 1);
 		exception.expect(IndexOutOfBoundsException.class);
@@ -242,7 +229,7 @@ public class ArrayNextPrevIndexTest {
 	 *  Fuer den Fall das position < 0 ist. 
 	 */
 	@Test
-	public void testEntfernennIndexOutOfBoundsExceptionNeg(){
+	public void testDeleteIndexOutOfBoundsExceptionNeg(){
 		List<Character> aBsString = new ArrayNextPrevIndex<>(1);
 		aBsString.insert('a', 1);
 		exception.expect(IndexOutOfBoundsException.class);
@@ -255,7 +242,7 @@ public class ArrayNextPrevIndexTest {
 	 * Liste von gleichen Typ korrekt am Ende der Liste angefuegt? 
 	 */
 	@Test
-	public void testListenZusammenfuegen() {
+	public void testConcat() {
 		List<Integer> aBs = new ArrayNextPrevIndex<>(1);
 		aBs.insert(1, 1);
 		List<Integer> aBsDiff = new ArrayNextPrevIndex<>(1);
@@ -282,7 +269,7 @@ public class ArrayNextPrevIndexTest {
 	 * eine Referenz auf null hat.
 	 */
 	@Test
-	public void testListenZusammenfuegenIllegalArgumentException(){
+	public void testConcatIllegalArgumentException(){
 		List<String> aBsString = new ArrayNextPrevIndex<>(1);
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage("Liste<E> andereListe darf nicht null sein");
@@ -293,7 +280,7 @@ public class ArrayNextPrevIndexTest {
 	 * Testet ob die anzahl der Elemente in der Methode korrekt zurueckgegeben wird.
 	 */
 	@Test
-	public void testGroesseDerListe(){
+	public void testSize(){
 		List<Integer> gDL = new ArrayNextPrevIndex<>(6);
 		assertEquals("Sollte kein Element enthalten", gDL.size(), 0);
 		gDL.insert(10, 1);

@@ -80,7 +80,6 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements List<E>{
 	/**
 	 * Erweiterte Postcondition: Die Elemente sind 
 	 * durch einen next- und previous-Index aufsteigend sortiert.
-	 * @throws IndexOutOfBoundsException pos < 1 || pos > Länge der Liste
 	 */
 	@Override
 	public void insert(E elem, int pos) throws IndexOutOfBoundsException, 
@@ -89,7 +88,9 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements List<E>{
 		if (anzahlDerElemente == list.length ) {
 			arrayVergroessern();
 		}
-		gueltigePosition(pos);
+		if ((pos < 1) || (pos > size() + 1)) {
+			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
+		}
 		for (int i = anzahlDerElemente -1; i >= pos-1; --i) {
 			list[i + 1] = list[i];
 		}
@@ -149,12 +150,11 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements List<E>{
 		list[list.length-1] = listenEnde;
 	}
 	
-	/**
-	 *  @throws IndexOutOfBoundsException pos < 1 || pos > Laenge der Liste
-	 */
 	@Override
 	public void delete(int pos) throws IndexOutOfBoundsException {
-		gueltigePosition(pos);
+		if ((pos < 1) || (pos > size())) {
+			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
+		}
 		@SuppressWarnings("unchecked")
 		Knoten anPosition = (ArrayNextPrevIndex<E>.Knoten) list[pos-1];
 		if (anPosition.next.equals(listenEnde)) {
@@ -183,12 +183,11 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements List<E>{
 		return -1;
 	}
 
-	/**
-	 * @throws IndexOutOfBoundsException pos < 1 || pos > Laenge der Liste
-	 */
 	@Override
 	public Object retrieve(int pos) throws IndexOutOfBoundsException {
-		gueltigePosition(pos);
+		if ((pos < 1) || (pos > size())) {
+			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
+		}
 		@SuppressWarnings("unchecked")
 		Knoten anPosition = (ArrayNextPrevIndex<E>.Knoten) list[pos-1];
 		if(anPosition==null){
@@ -231,20 +230,6 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements List<E>{
 	private void elementUngleichNull(Object elem) throws IllegalArgumentException {
 		if (elem == null) {
 			throw new IllegalArgumentException("Element darf nicht null sein");
-		}
-	}
-	
-    /**
-     * gueltigePosition: LIST X POS -> POS
-     * Precondition: Die Position muss ein positiver Integer sein und darf 
-     * nicht größer als die Anzahl der Elemente sein.
-     * Postcondition: Es wurde überprüft ob die Position einen korrekten Index Zugriff gewährleistet.
-     * @param pos Position welche ueberprueft werden soll
-     * @throws IndexOutOfBoundsException pos < 1 || pos > Laenge der Liste
-     */
-	private void gueltigePosition(int pos) throws IndexOutOfBoundsException {
-		if ((pos < 1) || (pos > list.length)) {
-			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
 		}
 	}
 }

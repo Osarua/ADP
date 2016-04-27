@@ -50,7 +50,7 @@ public class ArrayBoundedSizeTest {
 	 * es Teil der Liste ist und sich die Anzahl der Elemente um eins erhoeht hat.
 	 */
 	@Test
-	public void testEinfuegen(){
+	public void testInsert(){
 		List<Integer> aBs= new ArrayBoundedSize<>(1);
 		aBs.insert(1, 1);
 		assertEquals("Sollte ein Element enthalten",aBs.size(),1);
@@ -83,7 +83,7 @@ public class ArrayBoundedSizeTest {
 	 * Testet ob ein Element korrekt in der Mitte der Liste eingefuegt wird.
 	 */
 	@Test
-	public void testEinfuegenNachruecken(){
+	public void testInsertNachruecken(){
 		List<String> aBsString = new ArrayBoundedSize<>(4);
 		aBsString.insert("a", 1);
 		aBsString.insert("b", 2);
@@ -106,7 +106,7 @@ public class ArrayBoundedSizeTest {
 	 *  aktuelle Parameter position < 0.
 	 */
 	@Test
-	public void testEinfuegenIndexOutOfBoundsException(){
+	public void testInsertIndexOutOfBoundsException(){
 		ArrayBoundedSize<String> aBsString = new ArrayBoundedSize<>(4);
 		exception.expect(IndexOutOfBoundsException.class);
 		exception.expectMessage("Ungueltiger Index Zugriff: -1");
@@ -118,7 +118,7 @@ public class ArrayBoundedSizeTest {
 	 *  aktuelle Parameter position >= Kapazitaet ist.
 	 */
 	@Test
-	public void testEinfuegenIndexOutOfBoundsExceptionKap(){
+	public void testInsertIndexOutOfBoundsExceptionKap(){
 		List<String> aBsString = new ArrayBoundedSize<>(3);
 		exception.expect(IndexOutOfBoundsException.class);
 		exception.expectMessage("Ungueltiger Index Zugriff: 5");
@@ -130,7 +130,7 @@ public class ArrayBoundedSizeTest {
 	 * aktuelle Parameter Element eine Referenz auf null hat.
 	 */
 	@Test
-	public void testEinfuegenIllegalArgumentException(){
+	public void testInsertIllegalArgumentException(){
 		List<String> aBsString = new ArrayBoundedSize<>(1);
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage("Element darf nicht null sein");
@@ -138,22 +138,10 @@ public class ArrayBoundedSizeTest {
 	}
 	
 	/**
-	 * Testet die Methode entfernen(int), wenn ein Element am Ende der Liste entfernt wird.
-	 */
-	@Test
-	public void testEntfernen(){
-		List<String> aBsString = new ArrayBoundedSize<>(1);
-		aBsString.insert("a", 1);
-		aBsString.delete(1);
-		assertEquals("Element sollte nicht in der Liste sein",aBsString.retrieve(1),null);
-		assertEquals("Anzahl der Elemente sollte 0 sein",aBsString.size(),0);
-	}
-	
-	/**
 	 * Testet die Methode entfernen(int), wenn ein Element in der Mitte der Liste entfernt wird.
 	 */
 	@Test
-	public void testEntfernenMitte(){
+	public void testDeleteMitte(){
 		List<Character> aBsChar = new ArrayBoundedSize<>(4);
 		aBsChar.insert('a', 1);
 		aBsChar.insert('b', 2);
@@ -164,14 +152,13 @@ public class ArrayBoundedSizeTest {
 		assertEquals("Sollte 'a' sein",aBsChar.retrieve(1),'a');
 		assertEquals("Sollte 'd' sein",aBsChar.retrieve(2),'d');
 		assertEquals("Sollte 'c' sein",aBsChar.retrieve(3),'c');
-		assertEquals("Sollte null sein",aBsChar.retrieve(4),null);
 	}
 
 	/**
 	 * Testet ob ein Element korrekt gesucht wird und der Index richtig zurueckgegeben wird. 
 	 */
 	@Test
-	public void testFinde() {
+	public void testFind() {
 		List<Integer> aBsInt = new ArrayBoundedSize<>(3);
 		aBsInt.insert(11, 1);
 		aBsInt.insert(22, 2);
@@ -181,7 +168,7 @@ public class ArrayBoundedSizeTest {
 		assertEquals("Sollte nicht in der Liste sein",aBsInt.find(66),-1);
 		aBsInt.delete(1);
 		aBsInt.delete(2);
-		aBsInt.delete(3);
+		aBsInt.delete(1);
 		assertEquals("Sollte nicht in der Liste sein",aBsInt.find(22),-1);
 	}
 	
@@ -189,7 +176,7 @@ public class ArrayBoundedSizeTest {
 	 * Testet ob ein Element korrekt zurueckgegeben wird an der uebergebenen Position.
 	 */
 	@Test
-	public void testElementAnPosition(){
+	public void testRetrieve(){
 		List<Character> aBsChar = new ArrayBoundedSize<>(4);
 		aBsChar.insert('A', 1);
 		aBsChar.insert('H', 2);
@@ -203,7 +190,7 @@ public class ArrayBoundedSizeTest {
 	 * Testet ob bei einem ungueltigen Index zu
 	 */
 	@Test
-	public void testElementAnPositionIndexOutOfBoundsException(){
+	public void testRetrieveIndexOutOfBoundsException(){
 		List<Character> aBsChar = new ArrayBoundedSize<>(1);
 		exception.expect(IndexOutOfBoundsException.class);
 		exception.expectMessage("Ungueltiger Index Zugriff: -2");
@@ -216,7 +203,7 @@ public class ArrayBoundedSizeTest {
 	 *  Parameter position >= Kapazitaet ist. 
 	 */
 	@Test
-	public void testEntfernennIndexOutOfBoundsExceptionKap(){
+	public void testDeleteIndexOutOfBoundsExceptionKap(){
 		List<Character> aBsChar = new ArrayBoundedSize<>(1);
 		aBsChar.insert('a', 1);
 		exception.expect(IndexOutOfBoundsException.class);
@@ -228,7 +215,7 @@ public class ArrayBoundedSizeTest {
 	 *  Fuer den Fall das position < 0 ist. 
 	 */
 	@Test
-	public void testEntfernennIndexOutOfBoundsExceptionNeg(){
+	public void testDeletenIndexOutOfBoundsExceptionNeg(){
 		List<Character> aBsString = new ArrayBoundedSize<>(1);
 		aBsString.insert('a', 1);
 		exception.expect(IndexOutOfBoundsException.class);
@@ -240,7 +227,7 @@ public class ArrayBoundedSizeTest {
 	 *  Fuer den Fall das die Anzahl der Elemente == 0 ist
 	 */
 	
-	public void testEntfernennIllegalArgumentException(){
+	public void testDeleteIllegalArgumentException(){
 		List<Character> aBsString = new ArrayBoundedSize<>(1);
 		aBsString.insert('a', 0);
 		aBsString.delete(0);
@@ -254,7 +241,7 @@ public class ArrayBoundedSizeTest {
 	 * Liste von gleichen Typ korrekt am Ende der Liste angefuegt? 
 	 */
 	@Test
-	public void testListenZusammenfuegen() {
+	public void testConcat() {
 		List<Integer> aBs = new ArrayBoundedSize<>(1);
 		aBs.insert(1, 1);
 		List<Integer> aBsDiff = new ArrayBoundedSize<>(1);
@@ -288,7 +275,7 @@ public class ArrayBoundedSizeTest {
 	 * eine Referenz auf null hat.
 	 */
 	@Test
-	public void testListenZusammenfuegenIllegalArgumentException(){
+	public void testConcatIllegalArgumentException(){
 		List<String> aBsString = new ArrayBoundedSize<>(1);
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage("Liste<E> andereListe darf nicht null sein");
@@ -299,7 +286,7 @@ public class ArrayBoundedSizeTest {
 	 * Testet ob die anzahl der Elemente in der Methode korrekt zurueckgegeben wird.
 	 */
 	@Test
-	public void testGroesseDerListe(){
+	public void testSize(){
 		List<Integer> gDL = new ArrayBoundedSize<>(6);
 		assertEquals("Sollte kein Element enthalten", gDL.size(), 0);
 		gDL.insert(10, 1);

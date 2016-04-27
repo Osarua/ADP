@@ -56,13 +56,12 @@ public class EinfachVerketteteListe<E> implements List<E> {
 		listenEnde= listenKopf;
 	}
 	
-	/**
-	 * @throws IndexOutOfBoundsException pos < 1 || pos > Anzahl der Elemente + 1
-	 */
 	@Override
 	public void insert(E elem, int pos) throws IndexOutOfBoundsException, IllegalArgumentException {
 		elementUngleichNull(elem);
-		gueltigePosition(pos);
+		if ((pos < 1) || (pos > size() + 1)) {
+			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
+		}
 		if(listenKopf.nachfolger == null) {
 			einfuegenNach(elem,listenKopf);
 		}
@@ -91,9 +90,6 @@ public class EinfachVerketteteListe<E> implements List<E> {
 		}
 	}
 
-	/**
-	 * 	@throws IndexOutOfBoundsException pos < 1 || pos > Anzahl der Elemente 
-	 */
 	@Override
 	public void delete(int pos) throws IndexOutOfBoundsException {
 		if ((pos < 1) || (pos > size())) {
@@ -123,12 +119,11 @@ public class EinfachVerketteteListe<E> implements List<E> {
 		return -1;
 	}
 
-	/**
-	 * 	@throws IndexOutOfBoundsException pos < 1 || pos > Anzahl der Elemente +1
-	 */
 	@Override
 	public Object retrieve(int pos) throws IndexOutOfBoundsException {
-		gueltigePosition(pos);
+		if ((pos < 1) || (pos > size())) {
+			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
+		}
 		int i = 1;
 		Knoten knotenTest = listenKopf;
 		while (knotenTest.nachfolger != null) {
@@ -151,7 +146,9 @@ public class EinfachVerketteteListe<E> implements List<E> {
 	 * @throws IndexOutOfBoundsException pos < 1 || pos > Anzahl der Elemente + 1
 	 */
 	public Knoten knotenAnPosition(int pos) throws IndexOutOfBoundsException {
-		gueltigePosition(pos);
+		if ((pos < 1) || (pos > size() + 1)) {
+			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
+		}
 		int i = 1;
 		Knoten knotenTest = listenKopf;
 		while (knotenTest.nachfolger != null) {
@@ -198,20 +195,6 @@ public class EinfachVerketteteListe<E> implements List<E> {
 	private void elementUngleichNull(Object elem) throws IllegalArgumentException {
 		if (elem == null) {
 			throw new IllegalArgumentException("Element darf nicht null sein");
-		}
-	}
-	
-    /**
-     * gueltigePosition: LIST X POS -> POS
- 	 * Precondition: Die Position muss ein positiver Integer sein und darf 
-     * nicht größer als die Anzahl der Elemente sein.
-     * Postcondition: Es wurde überprüft ob die Position einen korrekten Index Zugriff gewährleistet.
-     * @param pos welche ueberprueft werden soll
-	 * @throws IndexOutOfBoundsException pos < 1 || pos > Anzahl der Elemente + 1
-     */
-	private void gueltigePosition(int pos) throws IndexOutOfBoundsException {
-		if ((pos < 1) || (pos > size() + 1)) {
-			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
 		}
 	}
 }
