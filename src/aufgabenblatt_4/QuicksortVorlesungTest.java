@@ -104,23 +104,186 @@ public class QuicksortVorlesungTest {
 		return (int) (Math.random() * (n*100)) + (700 * n);
 	}
 	
+//	/**
+//	 * Untersuchung mit k = 1
+//	 */
+//	@Test
+//	public void testQuicksortNk1() {
+//		int n = 10;
+//		Integer[] feldI = new Integer[n];
+//		for(int i = 0; i < n; i++) {
+//			feldI[i]= erstelleSchluessel(n);
+//		}
+//		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
+//		long zeit= System.currentTimeMillis();
+//		qs.quicksort(feldI, 0, feldI.length-1);
+//		zeit = System.currentTimeMillis() - zeit;
+//		System.out.println(qs);
+//		System.out.println("N: " + n + ", Laufzeit: " + zeit + "\n");
+//		
+//		boolean korrektSortiert = true;
+//		for(int i = 0; i < n-1; i++) {
+//			if(feldI[i].hashCode() > feldI[i+1].hashCode()) {
+//				korrektSortiert = false;
+//			}
+//		}
+//		assertEquals("Sollte true sein, wenn Array korrekt sortiert ist",korrektSortiert,true);
+//	}
+//	
+//	/**
+//	 * Untersuchung mit k = 2
+//	 */
+//	@Test
+//	public void testQuicksortNk2() {
+//		int n = 100;
+//		Integer[] feldI = new Integer[n];
+//		for(int i = 0; i < n; i++) {
+//			feldI[i]= erstelleSchluessel(n);
+//		}
+//		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
+//		long zeit= System.currentTimeMillis();
+//		qs.quicksort(feldI, 0, feldI.length-1);
+//		zeit = System.currentTimeMillis() - zeit;
+//		System.out.println(qs);
+//		System.out.println("N: " + n + ", Laufzeit: " + zeit + "\n");
+//		
+//		boolean korrektSortiert = true;
+//		for(int i = 0; i < n-1; i++) {
+//			if(feldI[i].hashCode() > feldI[i+1].hashCode()) {
+//				korrektSortiert = false;
+//			}
+//		}
+//		assertEquals("Sollte true sein, wenn Array korrekt sortiert ist",korrektSortiert,true);
+//	}
+//	
+//	/**
+//	 * Untersuchung mit k = 3
+//	 */
+//	@Test
+//	public void testQuicksortNk3() {
+//		int n = 1000;
+//		Integer[] feldI = new Integer[n];
+//		for(int i = 0; i < n; i++) {
+//			feldI[i]= erstelleSchluessel(n);
+//		}
+//		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
+//		long zeit= System.currentTimeMillis();
+//		qs.quicksort(feldI, 0, feldI.length-1);
+//		zeit = System.currentTimeMillis() - zeit;
+//		System.out.println(qs);
+//		System.out.println("N: " + n + ", Laufzeit: " + zeit +  "\n");
+//		
+//		boolean korrektSortiert = true;
+//		for(int i = 0; i < n-1; i++) {
+//			if(feldI[i].hashCode() > feldI[i+1].hashCode()) {
+//				korrektSortiert = false;
+//			}
+//		}
+//		assertEquals("Sollte true sein, wenn Array korrekt sortiert ist",korrektSortiert,true);
+//	}
+//	
+//	/**
+//	 * Untersuchung mit k = 4
+//	 */
+//	@Test
+//	public void testQuicksortNk4() {
+//		int n = 10000;
+//		Integer[] feldI = new Integer[n];
+//		for(int i = 0; i < n; i++) {
+//			feldI[i]= erstelleSchluessel(n);
+//		}
+//		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
+//		long zeit= System.currentTimeMillis();
+//		qs.quicksort(feldI, 0, feldI.length-1);
+//		zeit = System.currentTimeMillis() - zeit;
+//		System.out.println(qs);
+//		System.out.println("N: " + n + ", Laufzeit: " + zeit +  "\n");
+//		
+//		boolean korrektSortiert = true;
+//		for(int i = 0; i < n-1; i++) {
+//			if(feldI[i].hashCode() > feldI[i+1].hashCode()) {
+//				korrektSortiert = false;
+//			}
+//		}
+//		assertEquals("Sollte true sein, wenn Array korrekt sortiert ist",korrektSortiert,true);
+//	}
+//	
+//	/**
+//	 * Untersuchung mit k = 5
+//	 */
+//	@Test
+//	public void testQuicksortNk5() {
+//		int n = 100000;
+//		Integer[] feldI = new Integer[n];
+//		for(int i = 0; i < n; i++) {
+//			feldI[i]= erstelleSchluessel(n);
+//		}
+//		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
+//		long zeit= System.currentTimeMillis();
+//		qs.quicksort(feldI, 0, feldI.length-1);
+//		zeit = System.currentTimeMillis() - zeit;
+//		System.out.println(qs);
+//		System.out.println("N: " + n + ", Laufzeit: " + zeit + "\n");
+//		
+//		boolean korrektSortiert = true;
+//		for(int i = 0; i < n-1; i++) {
+//			if(feldI[i].hashCode() > feldI[i+1].hashCode()) {
+//				korrektSortiert = false;
+//			}
+//		}
+//		assertEquals("Sollte true sein, wenn Array korrekt sortiert ist",korrektSortiert,true);
+//	}
+//	
+//	/**
+//	 * Untersuchung mit k = 6
+//	 */
+//	@Test
+//	public void testQuicksortNk6() {
+//		int n = 1000000;
+//		Integer[] feldI = new Integer[n];
+//		for(int i = 0; i < n; i++) {
+//			feldI[i]= erstelleSchluessel(n);
+//		}
+//		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
+//		long zeit= System.currentTimeMillis();
+//		qs.quicksort(feldI, 0, feldI.length-1);
+//		zeit = System.currentTimeMillis() - zeit;
+//		System.out.println(qs);
+//		System.out.println("N: " + n + ", Laufzeit: " + zeit + "\n");
+//		
+//		boolean korrektSortiert = true;
+//		for(int i = 0; i < n-1; i++) {
+//			if(feldI[i].hashCode() > feldI[i+1].hashCode()) {
+//				korrektSortiert = false;
+//			}
+//		}
+//		assertEquals("Sollte true sein, wenn Array korrekt sortiert ist",korrektSortiert,true);
+//	}
+	
+	public void erstelleSchluesselAufsteigend(Integer[] feldI) {
+		for(int i = 0; i <feldI.length ;i++) {
+			feldI[i] = 700*feldI.length+i;
+		}		
+			   for (int i = 0;i<feldI.length/100;i++) {
+			    int pos = (int)(Math.random()*feldI.length);
+			    feldI[i]=feldI[pos];
+			   }
+	}
+	
 	/**
 	 * Untersuchung mit k = 1
 	 */
 	@Test
-	public void testQuicksortNk1() {
+	public void testQuicksortNk1AufsteigendS() {
 		int n = 10;
 		Integer[] feldI = new Integer[n];
-		for(int i = 0; i < n; i++) {
-			feldI[i]= erstelleSchluessel(n);
-		}
+		erstelleSchluesselAufsteigend(feldI);
 		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
 		long zeit= System.currentTimeMillis();
 		qs.quicksort(feldI, 0, feldI.length-1);
 		zeit = System.currentTimeMillis() - zeit;
 		System.out.println(qs);
 		System.out.println("N: " + n + ", Laufzeit: " + zeit + "\n");
-		
 		boolean korrektSortiert = true;
 		for(int i = 0; i < n-1; i++) {
 			if(feldI[i].hashCode() > feldI[i+1].hashCode()) {
@@ -134,19 +297,16 @@ public class QuicksortVorlesungTest {
 	 * Untersuchung mit k = 2
 	 */
 	@Test
-	public void testQuicksortNk2() {
+	public void testQuicksortNk2AufsteigendS() {
 		int n = 100;
 		Integer[] feldI = new Integer[n];
-		for(int i = 0; i < n; i++) {
-			feldI[i]= erstelleSchluessel(n);
-		}
+		erstelleSchluesselAufsteigend(feldI);
 		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
 		long zeit= System.currentTimeMillis();
 		qs.quicksort(feldI, 0, feldI.length-1);
 		zeit = System.currentTimeMillis() - zeit;
 		System.out.println(qs);
 		System.out.println("N: " + n + ", Laufzeit: " + zeit + "\n");
-		
 		boolean korrektSortiert = true;
 		for(int i = 0; i < n-1; i++) {
 			if(feldI[i].hashCode() > feldI[i+1].hashCode()) {
@@ -160,19 +320,16 @@ public class QuicksortVorlesungTest {
 	 * Untersuchung mit k = 3
 	 */
 	@Test
-	public void testQuicksortNk3() {
+	public void testQuicksortNk3AufsteigendS() {
 		int n = 1000;
 		Integer[] feldI = new Integer[n];
-		for(int i = 0; i < n; i++) {
-			feldI[i]= erstelleSchluessel(n);
-		}
+		erstelleSchluesselAufsteigend(feldI);
 		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
 		long zeit= System.currentTimeMillis();
 		qs.quicksort(feldI, 0, feldI.length-1);
 		zeit = System.currentTimeMillis() - zeit;
 		System.out.println(qs);
-		System.out.println("N: " + n + ", Laufzeit: " + zeit +  "\n");
-		
+		System.out.println("N: " + n + ", Laufzeit: " + zeit + "\n");
 		boolean korrektSortiert = true;
 		for(int i = 0; i < n-1; i++) {
 			if(feldI[i].hashCode() > feldI[i+1].hashCode()) {
@@ -186,19 +343,16 @@ public class QuicksortVorlesungTest {
 	 * Untersuchung mit k = 4
 	 */
 	@Test
-	public void testQuicksortNk4() {
+	public void testQuicksortNk4AufsteigendS() {
 		int n = 10000;
 		Integer[] feldI = new Integer[n];
-		for(int i = 0; i < n; i++) {
-			feldI[i]= erstelleSchluessel(n);
-		}
+		erstelleSchluesselAufsteigend(feldI);
 		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
 		long zeit= System.currentTimeMillis();
 		qs.quicksort(feldI, 0, feldI.length-1);
 		zeit = System.currentTimeMillis() - zeit;
 		System.out.println(qs);
-		System.out.println("N: " + n + ", Laufzeit: " + zeit +  "\n");
-		
+		System.out.println("N: " + n + ", Laufzeit: " + zeit + "\n");
 		boolean korrektSortiert = true;
 		for(int i = 0; i < n-1; i++) {
 			if(feldI[i].hashCode() > feldI[i+1].hashCode()) {
@@ -211,20 +365,17 @@ public class QuicksortVorlesungTest {
 	/**
 	 * Untersuchung mit k = 5
 	 */
-	@Test
-	public void testQuicksortNk5() {
+	
+	public void testQuicksortNk5AufsteigendS() {
 		int n = 100000;
 		Integer[] feldI = new Integer[n];
-		for(int i = 0; i < n; i++) {
-			feldI[i]= erstelleSchluessel(n);
-		}
+		erstelleSchluesselAufsteigend(feldI);
 		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
 		long zeit= System.currentTimeMillis();
 		qs.quicksort(feldI, 0, feldI.length-1);
 		zeit = System.currentTimeMillis() - zeit;
 		System.out.println(qs);
 		System.out.println("N: " + n + ", Laufzeit: " + zeit + "\n");
-		
 		boolean korrektSortiert = true;
 		for(int i = 0; i < n-1; i++) {
 			if(feldI[i].hashCode() > feldI[i+1].hashCode()) {
@@ -238,19 +389,16 @@ public class QuicksortVorlesungTest {
 	 * Untersuchung mit k = 6
 	 */
 	@Test
-	public void testQuicksortNk6() {
+	public void testQuicksortNk6AufsteigendS() {
 		int n = 1000000;
 		Integer[] feldI = new Integer[n];
-		for(int i = 0; i < n; i++) {
-			feldI[i]= erstelleSchluessel(n);
-		}
+		erstelleSchluesselAufsteigend(feldI);
 		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
 		long zeit= System.currentTimeMillis();
 		qs.quicksort(feldI, 0, feldI.length-1);
 		zeit = System.currentTimeMillis() - zeit;
 		System.out.println(qs);
 		System.out.println("N: " + n + ", Laufzeit: " + zeit + "\n");
-		
 		boolean korrektSortiert = true;
 		for(int i = 0; i < n-1; i++) {
 			if(feldI[i].hashCode() > feldI[i+1].hashCode()) {

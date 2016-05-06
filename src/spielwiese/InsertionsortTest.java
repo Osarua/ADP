@@ -8,7 +8,7 @@ public class InsertionsortTest {
 
 	@Test
 	public void testInsertionsort() {
-		int[] feldI= new int[8];
+		Integer[] feldI= new Integer[8];
 		feldI[0] = 2;
 		feldI[1] = 5;
 		feldI[2] = 6;
@@ -19,14 +19,37 @@ public class InsertionsortTest {
 		feldI[7] = 7;
 		Insertionsort inSort = new Insertionsort();
 		inSort.insertionsort(feldI);
-		assertEquals(feldI[0],1);
-		assertEquals(feldI[1],2);
-		assertEquals(feldI[2],3);
-		assertEquals(feldI[3],5);
-		assertEquals(feldI[4],6);
-		assertEquals(feldI[5],7);
-		assertEquals(feldI[6],9);
-		assertEquals(feldI[7],100);
+		assertEquals((int)feldI[0],1);
+		assertEquals((int)feldI[1],2);
+		assertEquals((int)feldI[2],3);
+		assertEquals((int)feldI[3],5);
+		assertEquals((int)feldI[4],6);
+		assertEquals((int)feldI[5],7);
+		assertEquals((int)feldI[6],9);
+		assertEquals((int)feldI[7],100);
+		Integer[] feldInteger = new Integer[1000000];
+		erstelleSchluesselAufsteigend(feldInteger);
+		long zeit= System.currentTimeMillis();
+		inSort.insertionsort(feldInteger);
+		zeit = System.currentTimeMillis() - zeit;
+		System.out.println("N: " + ", Laufzeit: " + zeit + "\n");
+		boolean korrektSortiert = true;
+		for(int i = 0; i < feldInteger.length-1; i++) {
+			if(feldInteger[i].hashCode() > feldInteger[i+1].hashCode()) {
+				korrektSortiert = false;
+			}
+		}
+		assertEquals("Sollte true sein, wenn Array korrekt sortiert ist",korrektSortiert,true);
 	}
 
+	public void erstelleSchluesselAufsteigend(Integer[] feldI) {
+		for(int i = 0; i <feldI.length ;i++) {
+			feldI[i] = 700*feldI.length+i;
+		}
+			   for (int i = 0;i<feldI.length/100;i++) {
+			    int pos = (int)(Math.random()*feldI.length);
+			    feldI[i]=feldI[pos];
+
+			   }
+	}
 }
