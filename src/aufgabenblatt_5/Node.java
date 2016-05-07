@@ -3,8 +3,8 @@ package aufgabenblatt_5;
 /**
  * TI3 ADP, SS16 
  * Gruppe: Julian Magierski (julian.magierski@haw-hamburg.de)
- * Kristian Exﬂ (kristian.exss@haw-hamburg) 
- * Aufgabenblatt 5: Bin‰rer Suchbaum
+ * Kristian Ex√ü (kristian.exss@haw-hamburg) 
+ * Aufgabenblatt 5: Bin√§rer Suchbaum
  * Ein Node hat einen intValue und die Summe der Vorgaenger plus dem intValue.
  */
 public class Node {
@@ -39,7 +39,7 @@ public class Node {
 
 	/**
 	 * Precondition: keine
-	 * Postcondition: positiver Integer key
+	 * Postcondition: positiver Integer Wert
 	 */
 	public int getIntValue() {
 		return intValue;
@@ -47,7 +47,7 @@ public class Node {
 
 	/**
 	 * Precondition: keine
-	 * Postcondition: Die Summe der Vorgaenger plus diesen key.
+	 * Postcondition: Die Summe der Vorgaenger plus den Key dieses Nodes.
 	 */
 	public int getSumP() {
 		return sumPrevious;
