@@ -3,10 +3,10 @@ package aufgabenblatt_5;
 /**
  * TI3 ADP, SS16 
  * Gruppe: Julian Magierski (julian.magierski@haw-hamburg.de)
- * Kristian Exﬂ (kristian.exss@haw-hamburg) 
+ * Kristian Ex√ü (kristian.exss@haw-hamburg) 
  * Aufgabenblatt 5: Binaerer Suchbaum
  * Die Klasse stellt einen binary search tree in einem Array da. 
- * Es ist mˆglich sich die Summe der Nodes (positive Integerwerte) zwischen zwei 
+ * Es ist m√∂glich sich die Summe der Nodes (positive Integerwerte) zwischen zwei 
  * Zahlen n und M ausgeben zulassen.
  */
 public class BinarySearchTree {
@@ -22,8 +22,8 @@ public class BinarySearchTree {
 	private int depth;
 
 	/**
+	 * Precondition: Der Tree wurde initialisiert mit der L√§nge von zwei hoch der Tiefe. ???
 	 * Postcondition: Die Tiefe des Baumes muss ein positiver Integerwert sein. 
-	 * Precondition: Das Array tree wurde initialisiert mit der L‰nge von zwei hoch der Tiefe.
 	 * @param depthPar Tiefe des Baumes
 	 * @throws IllegalArgumentException depth muss ein positiver Integer sein
 	 */
@@ -43,8 +43,8 @@ public class BinarySearchTree {
 
 	/**
 	 * Precondition: Es muss ein positiver Integerwert uebergeben werden.
-	 * Postcondition: Ein neuer Knoten mit den uerbgebenen Integertwert steht an
-	 * der korrekten Position im bin‰ren Suchbaum. Der neue Knoten hat die Summe seiner 
+	 * Postcondition: Ein neuer Knoten mit den uebergebenen Integetwert steht an
+	 * der korrekten Position im bin√§ren Suchbaum. Der neue Knoten hat die Summe seiner 
 	 * Vorgaenger plus dem uebergebenen Integertwert. Die Vorgaenger sind alle Knoten die einen
 	 * Integerwert kleiner gleich des neuen Knoten besitzen.
 	 * @param intValue positiver Integerwert des neuen Knoten
@@ -75,8 +75,8 @@ public class BinarySearchTree {
 
 	/**
 	 * Precondition: Die Methode wurde von der Methode insert(int) aufgerufen.
-	 * Postcondition: Der neue Knoten steht an der korrekten Position im bin‰ren Suchbaum.
-	 * Wenn die groesse des Arrays, welches den bin‰ren Suchbaum darstellt nicht ausreicht 
+	 * Postcondition: Der neue Knoten steht an der korrekten Position im bin√§ren Suchbaum.
+	 * Wenn die groesse des Arrays, welches den bin√§ren Suchbaum darstellt nicht ausreicht 
 	 * wird dieses vergroessert. 
 	 * @param newN Der hinzuzufuegende Knoten
 	 * @param pos Die aktuelle Position im Suchbaum 
@@ -100,7 +100,7 @@ public class BinarySearchTree {
 	
 	/**
 	 * Precondition: keine
-	 * Postcondition: Array ist um alte Kapazitaet mal zwei vergroessert. 
+	 * Postcondition: Die Kapazitaet des Arrays hat sich verdoppelt.
 	 */
 	private void treeArrayBigger() {
 		Node[] treeBigger;
@@ -113,7 +113,7 @@ public class BinarySearchTree {
 	}
 
 	/**
-	 * Precondition: Die Zahlen m und M m¸ssen einen positiven Integerwert haben. 
+	 * Precondition: Die Zahlen m und M m√ºssen einen positiven Integerwert haben. 
 	 * Postcondition: Die Summe der Integerwerte von den Knoten die zwischen m und M liegen 
 	 * (m <= ai <= M) 
 	 * @param littlem positiver Integerwert m
