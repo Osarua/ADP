@@ -277,7 +277,9 @@ public class QuicksortVorlesungTest {
 	public void testQuicksortNk1AufsteigendS() {
 		int n = 10;
 		Integer[] feldI = new Integer[n];
-		erstelleSchluesselAufsteigend(feldI);
+		for (int i = 0; i < n; i++) {
+			feldI[i] = erstelleSchluessel(n);
+		}
 		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
 		long zeit= System.currentTimeMillis();
 		qs.quicksort(feldI, 0, feldI.length-1);
@@ -300,7 +302,9 @@ public class QuicksortVorlesungTest {
 	public void testQuicksortNk2AufsteigendS() {
 		int n = 100;
 		Integer[] feldI = new Integer[n];
-		erstelleSchluesselAufsteigend(feldI);
+		for (int i = 0; i < n; i++) {
+			feldI[i] = erstelleSchluessel(n);
+		}
 		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
 		long zeit= System.currentTimeMillis();
 		qs.quicksort(feldI, 0, feldI.length-1);
@@ -323,7 +327,9 @@ public class QuicksortVorlesungTest {
 	public void testQuicksortNk3AufsteigendS() {
 		int n = 1000;
 		Integer[] feldI = new Integer[n];
-		erstelleSchluesselAufsteigend(feldI);
+		for (int i = 0; i < n; i++) {
+			feldI[i] = erstelleSchluessel(n);
+		}
 		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
 		long zeit= System.currentTimeMillis();
 		qs.quicksort(feldI, 0, feldI.length-1);
@@ -346,7 +352,9 @@ public class QuicksortVorlesungTest {
 	public void testQuicksortNk4AufsteigendS() {
 		int n = 10000;
 		Integer[] feldI = new Integer[n];
-		erstelleSchluesselAufsteigend(feldI);
+		for (int i = 0; i < n; i++) {
+			feldI[i] = erstelleSchluessel(n);
+		}
 		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
 		long zeit= System.currentTimeMillis();
 		qs.quicksort(feldI, 0, feldI.length-1);
@@ -365,11 +373,13 @@ public class QuicksortVorlesungTest {
 	/**
 	 * Untersuchung mit k = 5
 	 */
-	
+	@Test
 	public void testQuicksortNk5AufsteigendS() {
 		int n = 100000;
 		Integer[] feldI = new Integer[n];
-		erstelleSchluesselAufsteigend(feldI);
+		for (int i = 0; i < n; i++) {
+			feldI[i] = erstelleSchluessel(n);
+		}
 		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
 		long zeit= System.currentTimeMillis();
 		qs.quicksort(feldI, 0, feldI.length-1);
@@ -392,7 +402,9 @@ public class QuicksortVorlesungTest {
 	public void testQuicksortNk6AufsteigendS() {
 		int n = 1000000;
 		Integer[] feldI = new Integer[n];
-		erstelleSchluesselAufsteigend(feldI);
+		for (int i = 0; i < n; i++) {
+			feldI[i] = erstelleSchluessel(n);
+		}
 		QuicksortVorlesung<Integer> qs = new QuicksortVorlesung<>();
 		long zeit= System.currentTimeMillis();
 		qs.quicksort(feldI, 0, feldI.length-1);
