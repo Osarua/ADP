@@ -16,7 +16,7 @@ public class Bucketsort<E>  {
 	
 	private int zuweisungen;
 	
-	private FieldList[] buckets;
+	private FeldList[] buckets;
 	
 	private int min;
 	
@@ -175,7 +175,7 @@ public class Bucketsort<E>  {
 		vergleiche++;
 		zuweisungen++;
 		for (int i = 0; i < buckets.length; i++) {
-			buckets[i] = new FieldList(laenge);
+			buckets[i] = new FeldList(laenge);
 			zuweisungen++;
 			vergleiche++;
 			rechenoperation++;

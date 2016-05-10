@@ -2,11 +2,11 @@ package aufgabenblatt_4b;
 
 public class Heapsort extends Thread {
 
-	private FieldList feld;
+	private FeldList feld;
 	
 	private Bucketsort<?> v;
 	
-	public Heapsort(FieldList feldPar, Bucketsort<?> vPar) {
+	public Heapsort(FeldList feldPar, Bucketsort<?> vPar) {
 		v = vPar;v.
 		addiereZuweisungen();
 		v.addiereZuweisungen();
