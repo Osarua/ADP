@@ -16,8 +16,7 @@ public class Bucketsort<E>  {
 	
 	private int zuweisungen;
 	
-
-	private FeldList[] buckets;
+	private FieldList[] buckets;
 	
 	private int min;
 	
@@ -30,6 +29,7 @@ public class Bucketsort<E>  {
 	@SuppressWarnings("unchecked")
 	public void bucketsort(E[] feld) {
 		berechneBuckets(feld.length);
+		initBuckets(anzahlBuckets);
 		vergleiche++;
 		zuweisungen++;
 		for (int i = 0; i < feld.length; i++) {
@@ -64,43 +64,42 @@ public class Bucketsort<E>  {
 			vergleiche++;
 			rechenoperation++;
 		}
-		zuweisungen++;
-		zuweisungen++;
+			zuweisungen++;
+			zuweisungen++;
 		int b = 0;
 		int k = 0;
-		vergleiche++;
-		zuweisungen++;
-		for (int i = 0; i < buckets.length; i++) {
 			vergleiche++;
+			zuweisungen++;
+		for (int i = 0; i < buckets.length; i++) {
+				vergleiche++;
 			while (b < buckets[i].size()) {	
 				feld[k + b] = (E) buckets[i].get(b);
 				b++;
-				vergleiche++;
-				rechenoperation++;
-				rechenoperation++;
+						vergleiche++;
+						rechenoperation++;
+						rechenoperation++;
 			}
 			k = k + b;
 			b = 0;
-			vergleiche++;
-			rechenoperation++;
-			rechenoperation++;
+				vergleiche++;
+				rechenoperation++;
+				rechenoperation++;
 		}
 	}
 	
 	private void berechneBuckets(int size) {
 		switch (size) {
 		case 1000000:
-			vergleiche+=1;
-			zuweisungen++;
+				vergleiche+=1;
+				zuweisungen++;
 			min = 700000000;
-			zuweisungen++;
+				zuweisungen++;
 			wertebereich = 100000000; 
-			zuweisungen++;
+				zuweisungen++;
 			anzahlBuckets = 100;
 			zuweisungen++;
 			heapsort = new ArrayList<Heapsort>();
 			zuweisungen++;
-			buckets = new FeldList[anzahlBuckets];
 			initBuckets(5000);
 			break;
 		case 100000:
@@ -114,7 +113,6 @@ public class Bucketsort<E>  {
 			zuweisungen++;
 			heapsort = new ArrayList<Heapsort>();
 			zuweisungen++;
-			buckets = new FeldList[anzahlBuckets];
 			initBuckets(3000);
 			break;
 		case 10000:
@@ -128,7 +126,6 @@ public class Bucketsort<E>  {
 			zuweisungen++;
 			heapsort = new ArrayList<Heapsort>();
 			zuweisungen++;
-			buckets = new FeldList[anzahlBuckets];
 			initBuckets(100);
 			break;
 		case 1000:
@@ -142,7 +139,6 @@ public class Bucketsort<E>  {
 			zuweisungen++;
 			heapsort = new ArrayList<Heapsort>();
 			zuweisungen++;
-			buckets = new FeldList[anzahlBuckets];
 			initBuckets(100);
 			break;
 		case 100:
@@ -156,7 +152,6 @@ public class Bucketsort<E>  {
 			zuweisungen++;
 			heapsort = new ArrayList<Heapsort>();
 			zuweisungen++;
-			buckets = new FeldList[anzahlBuckets];
 			initBuckets(10);
 			break;
 		case 10:
@@ -171,7 +166,6 @@ public class Bucketsort<E>  {
 			zuweisungen++;
 			heapsort = new ArrayList<Heapsort>();
 			zuweisungen++;
-			buckets = new FeldList[anzahlBuckets];
 			initBuckets(10);
 			break;
 		}
@@ -181,7 +175,7 @@ public class Bucketsort<E>  {
 		vergleiche++;
 		zuweisungen++;
 		for (int i = 0; i < buckets.length; i++) {
-			buckets[i] = new FeldList(laenge);
+			buckets[i] = new FieldList(laenge);
 			zuweisungen++;
 			vergleiche++;
 			rechenoperation++;

@@ -39,7 +39,7 @@ public class Node {
 
 	/**
 	 * Precondition: keine
-	 * Postcondition: positiver Integer key
+	 * Postcondition: liefert positiven Integer intValue
 	 */
 	public int getIntValue() {
 		return intValue;
@@ -47,16 +47,16 @@ public class Node {
 
 	/**
 	 * Precondition: keine
-	 * Postcondition: Die Summe der Vorgaenger plus diesen key.
+	 * Postcondition: Die Summe der Vorgaenger plus dem intValue.
 	 */
 	public int getSumP() {
 		return sumPrevious;
 	}
 
 	/**
-	 * Precondition: key ist ein positiver Integerwert
+	 * Precondition: Argument ist ein positiver Integerwert
 	 * Postcondition: Die Integer Summe der Vorgaenger ist 
-	 * addiert um den Wert von key.
+	 * addiert um den Wert von intValue.
 	 */
 	public void addSumP(int intValuePar) throws IllegalArgumentException {
 		try {

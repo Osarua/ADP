@@ -3,6 +3,7 @@ package aufgabenblatt_5;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
 /**
  * TI3 ADP, SS16 
  * Gruppe: Julian Magierski (julian.magierski@haw-hamburg.de)

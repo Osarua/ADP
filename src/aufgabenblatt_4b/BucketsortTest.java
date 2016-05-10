@@ -17,8 +17,11 @@ public class BucketsortTest {
 	public void testSchnellesSortierenNk1() {
 		int n = 10;
 		Integer[] feldI = new Integer[n];
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n/4; i++) {
 			feldI[i] = erstelleSchluessel(n);
+		}
+		for (int i = (int) ( n/4); i < n; i++) {
+			feldI[i] = n * 700 + i;
 		}
 		Bucketsort<Integer> sS = new Bucketsort<>();
 		long zeit = System.currentTimeMillis();
@@ -42,8 +45,11 @@ public class BucketsortTest {
 	public void testSchnellesSortierenNk2() {
 		int n = 100;
 		Integer[] feldI = new Integer[n];
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n/4; i++) {
 			feldI[i] = erstelleSchluessel(n);
+		}
+		for (int i = (int) ( n/4); i < n; i++) {
+			feldI[i] = n * 700 + i;
 		}
 		Bucketsort<Integer> sS = new Bucketsort<>();
 		long zeit = System.currentTimeMillis();
@@ -67,8 +73,11 @@ public class BucketsortTest {
 	public void testSchnellesSortierenNk3() {
 		int n = 1000;
 		Integer[] feldI = new Integer[n];
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n/4; i++) {
 			feldI[i] = erstelleSchluessel(n);
+		}
+		for (int i = (int) ( n/4); i < n; i++) {
+			feldI[i] = n * 700 + i;
 		}
 		Bucketsort<Integer> sS = new Bucketsort<>();
 		long zeit = System.currentTimeMillis();
@@ -92,8 +101,11 @@ public class BucketsortTest {
 	public void testSchnellesSortierenNk4() {
 		int n = 10000;
 		Integer[] feldI = new Integer[n];
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n/4; i++) {
 			feldI[i] = erstelleSchluessel(n);
+		}
+		for (int i = (int) ( n/4); i < n; i++) {
+			feldI[i] = n * 700 + i;
 		}
 		Bucketsort<Integer> sS = new Bucketsort<>();
 		long zeit = System.currentTimeMillis();
@@ -117,8 +129,11 @@ public class BucketsortTest {
 	public void testSchnellesSortierenNk5() {
 		int n = 100000;
 		Integer[] feldI = new Integer[n];
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n/4; i++) {
 			feldI[i] = erstelleSchluessel(n);
+		}
+		for (int i = (int) ( n/4); i < n; i++) {
+			feldI[i] = n * 700 + i;
 		}
 		Bucketsort<Integer> sS = new Bucketsort<>();
 		long zeit = System.currentTimeMillis();
@@ -142,8 +157,11 @@ public class BucketsortTest {
 	public void testSchnellesSortierenNk6() {
 		int n = 1000000;
 		Integer[] feldI = new Integer[n];
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n/4; i++) {
 			feldI[i] = erstelleSchluessel(n);
+		}
+		for (int i = (int) ( n/4); i < n; i++) {
+			feldI[i] = n * 700 +i;
 		}
 		Bucketsort<Integer> sS = new Bucketsort<>();
 		long zeit = System.currentTimeMillis();

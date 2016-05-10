@@ -2,11 +2,11 @@ package aufgabenblatt_4b;
 
 public class Heapsort extends Thread {
 
-	private FeldList feld;
+	private FieldList feld;
 	
 	private Bucketsort<?> v;
 	
-	public Heapsort(FeldList feldPar, Bucketsort<?> vPar) {
+	public Heapsort(FieldList feldPar, Bucketsort<?> vPar) {
 		v = vPar;v.
 		addiereZuweisungen();
 		v.addiereZuweisungen();
@@ -25,7 +25,6 @@ public class Heapsort extends Thread {
 		 swap(0, i-1);
 		 absinkenMaxHeap(0, i-1);
 		 v.addiereVergleiche();
-		 v.addiereRechenOp();
 		 v.addiereRechenOp();
 		 }
 	}
@@ -131,7 +130,6 @@ public class Heapsort extends Thread {
 				break;
 			} else {
 				v.addiereZuweisungen();
-				v.addiereVertauschungen();
 				feld.set(index, feld.get(j));
 				v.addiereZuweisungen();
 				index = j;
@@ -139,6 +137,7 @@ public class Heapsort extends Thread {
 			v.addiereRechenOp();
 			v.addiereVergleiche();
 		}
+		v.addiereVertauschungen();
 		v.addiereZuweisungen();
 		feld.set(index, wert);
 	}

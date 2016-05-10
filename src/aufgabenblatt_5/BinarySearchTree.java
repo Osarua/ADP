@@ -1,5 +1,7 @@
 package aufgabenblatt_5;
 
+
+
 /**
  * TI3 ADP, SS16 
  * Gruppe: Julian Magierski (julian.magierski@haw-hamburg.de)
@@ -23,6 +25,7 @@ public class BinarySearchTree {
 
 	/**
 	 * Postcondition: Die Tiefe des Baumes muss ein positiver Integerwert sein. 
+	 * Der Wurzelknoten sollte die Tiefe 1 haben der Nachfolger Knoten hat die Tiefe 2 usw.. 
 	 * Precondition: Das Array tree wurde initialisiert mit der Länge von zwei hoch der Tiefe.
 	 * @param depthPar Tiefe des Baumes
 	 * @throws IllegalArgumentException depth muss ein positiver Integer sein
@@ -43,7 +46,7 @@ public class BinarySearchTree {
 
 	/**
 	 * Precondition: Es muss ein positiver Integerwert uebergeben werden.
-	 * Postcondition: Ein neuer Knoten mit den uerbgebenen Integertwert steht an
+	 * Postcondition: Ein neuer Knoten mit dem uerbgebenem Integertwert steht an
 	 * der korrekten Position im binären Suchbaum. Der neue Knoten hat die Summe seiner 
 	 * Vorgaenger plus dem uebergebenen Integertwert. Die Vorgaenger sind alle Knoten die einen
 	 * Integerwert kleiner gleich des neuen Knoten besitzen.
@@ -83,18 +86,16 @@ public class BinarySearchTree {
 	 * @param depthPar Die aktuelle Tiefe des Baumes 
 	 */
 	private void insertR(Node newN, int pos, int depthPar) {
-			if (depthPar > depth) {
-				System.out.printf("Baum ist voll \n");
-				treeArrayBigger();
-			}
+		if (depthPar > depth) {
+			System.out.printf("Baum ist voll \n");
+			treeArrayBigger();
+		}
 		if (tree[pos] == null) {
 			tree[pos] = newN;
+		} else if (newN.getIntValue() <= tree[pos].getIntValue()) {
+			insertR(newN, pos * 2 + 1, depthPar + 1);
 		} else {
-			if (newN.getIntValue() <= tree[pos].getIntValue()) {
-				insertR(newN, pos * 2 + 1, depthPar + 1);
-			} else {
-				insertR(newN, pos * 2 + 2, depthPar + 1);
-			}
+			insertR(newN, pos * 2 + 2, depthPar + 1);
 		}
 	}
 	

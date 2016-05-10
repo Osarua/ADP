@@ -1,12 +1,12 @@
 package aufgabenblatt_4b;
 
-public class FeldList {
+public class FieldList {
 	
 	private Object[] bucket;
 	
 	private int anzahlElements;
 	
-	public FeldList(int laenge){
+	public FieldList(int laenge){
 		bucket = new Object[laenge];
 	}
 	
