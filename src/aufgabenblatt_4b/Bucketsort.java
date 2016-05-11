@@ -29,7 +29,7 @@ public class Bucketsort<E>  {
 	@SuppressWarnings("unchecked")
 	public void bucketsort(E[] feld) {
 		berechneBuckets(feld.length);
-		initBuckets(anzahlBuckets);
+		//initBuckets(anzahlBuckets);
 		vergleiche++;
 		zuweisungen++;
 		for (int i = 0; i < feld.length; i++) {

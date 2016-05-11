@@ -80,7 +80,10 @@ public class ArrayBoundedSize<E> implements List<E>{
 		if ((pos < 1) || (pos > size())) {
 			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
 		}
-		list[pos] = list[size()-1];
+		for (int i = pos -1; i < size(); i++) {
+			
+		}
+		//list[pos] = list[size()-1];
 		list[size() - 1] = null;
 		anzahlDerElemente--;
 	}

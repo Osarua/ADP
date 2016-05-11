@@ -52,6 +52,7 @@ public class BinarySearchTreeTest {
 		assertEquals(sb.sumBetweenTwoNumbers(4, 18), 65);
 		assertEquals(sb.sumBetweenTwoNumbers(4, 19), 65);
 		assertEquals(sb.sumBetweenTwoNumbers(4, 190), 65);
+		assertEquals(sb.sumBetweenTwoNumbers(0, 7), 12);
 	}
 	
 	@Test

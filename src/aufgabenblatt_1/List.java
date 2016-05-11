@@ -37,7 +37,8 @@ public interface List<E> {
 	 * gleich der Anzahl der Elemente sein. 
 	 * Postcondition: Die Liste beinhaltet nicht mehr das Element an dieser Position (Index).
 	 * Wird das Element nicht am Ende der Liste entfernt, wird die entstandene Lücke
-	 * mit einem anderen Element der Liste gefüllt. 
+	 * mit dem nächsten Element in der Liste gefüllt. 
+	 * Die nächsten Elemente rücken eine Position nach vorne 
 	 * Die Anzahl der Elemente in der Liste wird um eins reduziert. 
 	 * @param pos an dieser Position soll ein Element entfernt werden
 	 * @throws IndexOutOfBoundsException pos < 1 || pos > Anzahl der Elemente
@@ -70,9 +71,9 @@ public interface List<E> {
 	/**
 	 * concat: LIST X LIST -> LIST
 	 * Precondition: Andere Liste muss vom konkreten Typ der Liste sein.
-	 * Postcondition: Wenn die beiden Listen Typen kompatibel sind, fügt 
-	 * die Methode diese zusammen. Dabei erhöht sich die Anzahl der Elemente um die Anzahl 
-	 * der neuen Elemente. 
+	 * Postcondition: Die andere Liste wird am Ende der Liste angefügt. 
+	 * Dabei erhöht sich die Anzahl der Elemente um die Anzahl 
+	 * der Elemente der anderen Liste. 
 	 * @param otherList Die Liste, welche mit dieser zusammengefügt werden soll.
 	 * @throws IllegalArgumentException Liste<E> otherList darf nicht null sein
 	 * @throws IllegalArgumentException otherList muss mit den konkreten 
