@@ -30,11 +30,17 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements List<E>{
 		 * Verweis auf den naechsten Knoten
 		 */
 		Knoten next;
+		
+		/**
+		 * Index der Position im Array
+		 */
+		int arrayPos;
 
-		public Knoten(E elemPar, Knoten previousPar, Knoten nextPar) {
+		public Knoten(E elemPar, Knoten previousPar, Knoten nextPar, int arrayPosPar) {
 			elem = elemPar;
 			previous = previousPar;
 			next = nextPar;
+			arrayPos = arrayPosPar;
 		}
 	}
 	
@@ -71,8 +77,10 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements List<E>{
 		if (anfangsKapazitaet <= 0) {
 			throw new IllegalArgumentException("Ungueltige Anfangskapazitaet: " + anfangsKapazitaet);
 		} else {
-			listenKopf = new Knoten(null, null, null);
-			listenEnde = new Knoten(null, null, null);
+			listenKopf = new Knoten(null, null, null, 0);
+			listenEnde = new Knoten(null, null, null, 0);
+			listenKopf.next=listenEnde;
+			listenEnde.previous=listenKopf;
 			list = new Object[anfangsKapazitaet];
 		}
 	}
@@ -91,48 +99,24 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements List<E>{
 		if ((pos < 1) || (pos > size() + 1)) {
 			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
 		}
-		for (int i = anzahlDerElemente -1; i >= pos-1; --i) {
-			list[i + 1] = list[i];
-		}
-		Knoten knotenAdd = new Knoten(elem, null, null);
-		list[pos-1] = knotenAdd;
-		knotenEinfuegen(knotenAdd);
-		anzahlDerElemente++;
-	}
-	
-	/**
-	 * knotenEinfuegen: KNOTEN X LIST -> LIST
-	 * Precondition: Hilfsmethode, welche von einfuegen(E, int) aufgerufen wird.
-	 * Postcondition: Knoten befindet sich in der aufsteigend sortierten Liste.
-	 * Der Knoten zeigt auf den korrekten next und previous-Index.
-	 */
-	private void knotenEinfuegen(Knoten knotenAdd){
-		if (listenKopf.next == null) {
-			listenKopf.next = knotenAdd;
-			knotenAdd.previous = listenKopf;
-			knotenAdd.next = listenEnde;
-			listenEnde.previous = knotenAdd;
+		Knoten vorgaenger = null;
+		if (anzahlDerElemente == 0 || anzahlDerElemente/2 >= pos) {
+			vorgaenger = listenKopf;
+			for (int i = 1; i < pos; i++) {
+				vorgaenger = vorgaenger.next;
+			}
 		} else {
-			Knoten durchlauf = listenKopf;
-			int vergleich = 0;
-			while (durchlauf.next != null) {
-				vergleich = durchlauf.next.elem.compareTo(knotenAdd.elem);
-				if (vergleich >= 0) {
-					knotenAdd.next = durchlauf.next;
-					knotenAdd.next.previous = knotenAdd;
-					durchlauf.next = knotenAdd;
-					knotenAdd.previous = durchlauf;
-					break;
-				} else if (durchlauf.next.equals(listenEnde.previous)) {
-					durchlauf.next.next = knotenAdd;
-					knotenAdd.previous = durchlauf.next;
-					knotenAdd.next = listenEnde;
-					listenEnde.previous = knotenAdd;
-					break;
-				}
-				durchlauf = durchlauf.next;
+			vorgaenger = listenEnde.previous;
+			for (int i = anzahlDerElemente; i >= pos; i--) {
+				vorgaenger = vorgaenger.previous;
 			}
 		}
+		Knoten nachfolger = vorgaenger.next;
+		Knoten knotenAdd = new Knoten(elem, vorgaenger, nachfolger, anzahlDerElemente);
+		nachfolger.previous=knotenAdd;
+		vorgaenger.next=knotenAdd;
+		list[anzahlDerElemente] = knotenAdd;
+		anzahlDerElemente++;
 	}
 
 	/**
@@ -155,16 +139,22 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements List<E>{
 		if ((pos < 1) || (pos > size())) {
 			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
 		}
-		@SuppressWarnings("unchecked")
-		Knoten anPosition = (ArrayNextPrevIndex<E>.Knoten) list[pos-1];
-		if (anPosition.next.equals(listenEnde)) {
-			anPosition.previous.next = listenEnde;
+		Knoten loeschender = listenKopf;
+		for (int i=0;i<pos;i++) {
+			loeschender = loeschender.next;
 		}
-		Knoten knotenDanach = anPosition.next;
-		anPosition.previous.next = knotenDanach;
-		knotenDanach.previous = anPosition.previous;
-		list[pos-1] = list[size() - 1];
-		list[size() - 1] = null;
+		Knoten vorgaenger = loeschender.previous;
+		Knoten nachfolger = loeschender.next;
+		vorgaenger.next=nachfolger;
+		nachfolger.previous=vorgaenger;
+		if (loeschender.arrayPos!=anzahlDerElemente-1) {
+			@SuppressWarnings("unchecked")
+			Knoten letzter =(Knoten) list [anzahlDerElemente-1];
+			letzter.arrayPos=loeschender.arrayPos;
+			list[loeschender.arrayPos]= list[anzahlDerElemente-1];
+		} else {
+			list[anzahlDerElemente-1]= null;	
+		}
 		anzahlDerElemente--;
 	}
 
@@ -188,12 +178,19 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements List<E>{
 		if ((pos < 1) || (pos > size())) {
 			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
 		}
-		@SuppressWarnings("unchecked")
-		Knoten anPosition = (ArrayNextPrevIndex<E>.Knoten) list[pos-1];
-		if(anPosition==null){
-			return null;
+		Knoten lieferKnoten = null;
+		if (anzahlDerElemente/2 >= pos) {
+			lieferKnoten = listenKopf;
+			for (int i = 1; i <= pos; i++) {
+				lieferKnoten = lieferKnoten.next;
+			}
+		} else {
+			lieferKnoten = listenEnde.previous;
+			for (int i = anzahlDerElemente; i > pos; i--) {
+				lieferKnoten = lieferKnoten.previous;
+			}
 		}
-		return anPosition.elem;
+		return lieferKnoten.elem;
 	}
 
 	/**

@@ -150,8 +150,8 @@ public class ArrayNextPrevIndexTest {
 		aBsChar.delete(2);
 		assertEquals("Anzahl der Elemente sollte 3 sein",aBsChar.size(),3);
 		assertEquals("Sollte 'a' sein",aBsChar.find('a'),1);
-		assertEquals("Sollte 'd' sein",aBsChar.retrieve(2),'d');
-		assertEquals("Sollte 'c' sein",aBsChar.retrieve(3),'c');
+		assertEquals("Sollte 'c' sein",aBsChar.retrieve(2),'c');
+		assertEquals("Sollte 'd' sein",aBsChar.retrieve(3),'d');
 	}
 
 	/**

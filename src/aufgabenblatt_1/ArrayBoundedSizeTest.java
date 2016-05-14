@@ -149,9 +149,9 @@ public class ArrayBoundedSizeTest {
 		aBsChar.insert('d', 4);
 		aBsChar.delete(1);
 		assertEquals("Anzahl der Elemente sollte 3 sein",aBsChar.size(),3);
-		assertEquals("Sollte 'a' sein",aBsChar.retrieve(1),'a');
-		assertEquals("Sollte 'd' sein",aBsChar.retrieve(2),'d');
-		assertEquals("Sollte 'c' sein",aBsChar.retrieve(3),'c');
+		assertEquals("Sollte 'b' sein",aBsChar.retrieve(1),'b');
+		assertEquals("Sollte 'c' sein",aBsChar.retrieve(2),'c');
+		assertEquals("Sollte 'd' sein",aBsChar.retrieve(3),'d');
 	}
 
 	/**
