@@ -4,16 +4,27 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
 
-
+/**
+ * TI3 ADP, SS16 
+ * Gruppe: Julian Magierski (julian.magierski@haw-hamburg.de)
+ * Kristian Exß (kristian.exss@haw-hamburg) 
+ * Aufgabenblatt 6: Binärer Baum
+ * Die Klasse implementiert die Huffmann Kodierung mit Hilfe eines String.
+ * Es ist möglich einen String zu codieren und mit der Codierung wieder den
+ * Ausgangsstring zurück zu erhalten. 
+ */
 public class Huffmann_Baum {
 	
 	/**
-	 * 
-	 *
+	 *  Ein Knoten ist entweder ein Blatt oder hat zwei Nachfolger.  
 	 */
 	public class Knoten {
+		
+		
 		int wert;
+		
 		String zeichen;
+		
 		Knoten kleinerNachfolger, grosserNachfolger;
 
 		public Knoten(int wertPar) {
@@ -31,16 +42,28 @@ public class Huffmann_Baum {
 		}
 	}
 	
+	/**
+	 * Der Huffmann Baum
+	 */
 	private Knoten baum;
 	
 	/**
-	 * Precondition: text darf nur ascii Zeichen enthalten und muss mindestens 1 Zeichen enthalten
-	 * @param text
+	 * Precondition: Text darf nur ascii Zeichen enthalten und muss mindestens 1 Zeichen enthalten.
+	 * Postcondition: Baum für die Huffmann-Kodierung ist aufgebaut.
+	 * @param text welcher für die Generierung des Huffmann Baums benötigt wird 
+	 * @throws IllegalArgumentException wenn String leer ist
+	 * @throws IndexOutOfBoundsException Text muss aus ascii Zeichen bestehen
 	 */
-	public Huffmann_Baum(String text) {
+	public Huffmann_Baum(String text) throws IllegalArgumentException, IndexOutOfBoundsException {
+		if (text.isEmpty()) {
+			throw new IllegalArgumentException("String muss mind. 1 Zeichen enthalten");
+		}
 		int haeufigkeit[] = new int[256];
 		for (int i = 0; i < text.length(); i++) {
 			int lokalChar = text.charAt(i);
+			if (lokalChar >= 256) {
+				throw new IndexOutOfBoundsException("Text muss aus ascii Zeichen bestehen");
+			}
 			haeufigkeit[lokalChar] = haeufigkeit[lokalChar] + 1;
 		}
 		List<Knoten> knotenListe = new ArrayList<Knoten>();
@@ -56,7 +79,7 @@ public class Huffmann_Baum {
 		for (int i = 1; i < knotenListe.size(); i++) {
 			baum = baum_erstellen(baum, knotenListe.get(i));
 		}
-		//Sonderfall für einen 1 Knoten Baum
+		//Sonderfall für einen Knoten im Baum
 		if (baum.grosserNachfolger == null && baum.kleinerNachfolger == null) {
 			Knoten neueWurzel = new Knoten(baum.wert);
 			neueWurzel.grosserNachfolger = baum;
@@ -76,6 +99,7 @@ public class Huffmann_Baum {
 		}
 		return neueWurzel;
 	}
+	
 	/**
 	 * Postcondition: Codiert einen String in ein boolean array, nach dem Huffmann Baum.
 	 * 				  Sollten Zeichen verwendet werden die nicht im Baum vorkommen werden diese
@@ -97,7 +121,8 @@ public class Huffmann_Baum {
 				list.add(true);
 				zeichenZuCode(list, zeichen, knoten.grosserNachfolger);
 			}
-		} else if (knoten.kleinerNachfolger != null) {
+		} 
+		if (knoten.kleinerNachfolger != null) {
 			if (knoten.kleinerNachfolger.zeichen.contains(zeichen)) {
 				list.add(false);
 				zeichenZuCode(list, zeichen, knoten.kleinerNachfolger);
