@@ -13,7 +13,7 @@ import java.util.LinkedList;
  * Es ist möglich einen String zu codieren und mit der Codierung wieder den
  * Ausgangsstring zurück zu erhalten. 
  */
-public class Huffmann_Baum {
+public class P {
 	
 	/**
 	 *  Ein Knoten ist entweder ein Blatt oder hat zwei Nachfolger.  
@@ -54,8 +54,8 @@ public class Huffmann_Baum {
 	 * @throws IllegalArgumentException wenn String leer ist
 	 * @throws IndexOutOfBoundsException Text muss aus ascii Zeichen bestehen
 	 */
-	public Huffmann_Baum(String text) throws IllegalArgumentException, IndexOutOfBoundsException {
-		if (text.isEmpty()) {
+	public P(String text) throws IllegalArgumentException, IndexOutOfBoundsException {
+		if (text == null || text.isEmpty()) {
 			throw new IllegalArgumentException("String muss mind. 1 Zeichen enthalten");
 		}
 		int haeufigkeit[] = new int[256];

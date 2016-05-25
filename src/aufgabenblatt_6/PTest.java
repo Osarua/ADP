@@ -10,12 +10,12 @@ import org.junit.Test;
  * Aufgabenblatt 6: Binärer Baum
  * Testklasse
  */
-public class Huffmann_BaumTest {
+public class PTest {
 
 	@Test
 	public void testAbC() {
 		String beispielString = "abbcccddddeeeee";
-		Huffmann_Baum hB = new Huffmann_Baum(beispielString);
+		P hB = new P(beispielString);
 		Boolean[] code = hB.textCodieren(beispielString);
 		assertEquals(hB.textDecodieren(code),beispielString);
 	}
@@ -23,12 +23,12 @@ public class Huffmann_BaumTest {
 	@Test
 	public void TestEinZeichen() {
 		String aString = "a";
-		Huffmann_Baum hB = new Huffmann_Baum(aString);
+		P hB = new P(aString);
 		Boolean[] code = hB.textCodieren(aString);
 		assertEquals(hB.textDecodieren(code),aString);
 		
 		String bString = "bbbb";
-		Huffmann_Baum hBb = new Huffmann_Baum(bString);
+		P hBb = new P(bString);
 		Boolean[] codeB = hBb.textCodieren("b");
 		assertEquals(hBb.textDecodieren(codeB),"b");
 	}
@@ -37,7 +37,7 @@ public class Huffmann_BaumTest {
 	public void testNullZeichen() {
 		String zeichen = "";
 		try {
-			Huffmann_Baum hB = new Huffmann_Baum(zeichen);
+			P hB = new P(zeichen);
 			Boolean[] code = hB.textCodieren(zeichen);
 			assertEquals(hB.textDecodieren(code), zeichen);
 			assertTrue(false);
@@ -50,7 +50,7 @@ public class Huffmann_BaumTest {
 	public void testKeinAscii() {
 		String zeichen = "€";
 		try {
-			Huffmann_Baum hB = new Huffmann_Baum(zeichen);
+			P hB = new P(zeichen);
 			Boolean[] code = hB.textCodieren(zeichen);
 			assertEquals(hB.textDecodieren(code), zeichen);
 			assertTrue(false);
@@ -62,12 +62,12 @@ public class Huffmann_BaumTest {
 	@Test
 	public void testDoppeltAuB() {
 		String beispielString = "aabb";
-		Huffmann_Baum hB = new Huffmann_Baum(beispielString);
+		P hB = new P(beispielString);
 		Boolean[] code = hB.textCodieren("bbaa");
 		assertEquals(hB.textDecodieren(code),"bbaa");
 		
 		String beispielStringR = "bbaa";
-		Huffmann_Baum hBr = new Huffmann_Baum(beispielStringR);
+		P hBr = new P(beispielStringR);
 		Boolean[] codeR = hBr.textCodieren("aabb");
 		assertEquals(hBr.textDecodieren(codeR),"aabb");
 	}
@@ -75,7 +75,7 @@ public class Huffmann_BaumTest {
 	@Test
 	public void testCodierungAnders() {
 		String beispielString = "-XXYYXX-";
-		Huffmann_Baum hB = new Huffmann_Baum(beispielString);
+		P hB = new P(beispielString);
 		Boolean[] code = hB.textCodieren("AA");
 		assertEquals(hB.textDecodieren(code),"");
 	}
