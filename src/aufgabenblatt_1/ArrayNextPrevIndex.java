@@ -4,7 +4,7 @@ package aufgabenblatt_1;
  * Gruppe: Julian Magierski (julian.magierski@haw-hamburg.de)
  * Kristian Exﬂ (kristian.exss@haw-hamburg) 
  * Aufgabenblatt 1: Eine Liste umgesetzt mit einem Array. Die Elemente sind durch einen
- * next- und previous-Index sortiert, welcher in jedem 
+ * next- und previous-Index verkettet, welcher in jedem 
  * Array-Element abgespeichert ist.
  * @param <E> Elemente eines Typen 
  */
@@ -100,7 +100,7 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements List<E>{
 			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
 		}
 		Knoten vorgaenger = null;
-		if (anzahlDerElemente == 0 || anzahlDerElemente/2 >= pos) {
+		if (listenKopf.next == null || anzahlDerElemente/2 >= pos) {
 			vorgaenger = listenKopf;
 			for (int i = 1; i < pos; i++) {
 				vorgaenger = vorgaenger.next;
@@ -139,9 +139,17 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements List<E>{
 		if ((pos < 1) || (pos > size())) {
 			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
 		}
-		Knoten loeschender = listenKopf;
-		for (int i=0;i<pos;i++) {
-			loeschender = loeschender.next;
+		Knoten loeschender = null;
+		if (anzahlDerElemente/2 >= pos) {
+			loeschender = listenKopf.next;
+			for (int i = 1; i < pos; i++) {
+				loeschender = loeschender.next;
+			}
+		} else {
+			loeschender = listenEnde.previous;
+			for (int i = anzahlDerElemente; i > pos; i--) {
+				loeschender = loeschender.previous;
+			}
 		}
 		Knoten vorgaenger = loeschender.previous;
 		Knoten nachfolger = loeschender.next;
