@@ -61,7 +61,7 @@ public class P {
 		int haeufigkeit[] = new int[256];
 		for (int i = 0; i < text.length(); i++) {
 			int lokalChar = text.charAt(i);
-			if (lokalChar >= 256) {
+			if (lokalChar >= 256 || lokalChar < 0) {
 				throw new IndexOutOfBoundsException("Text muss aus ascii Zeichen bestehen");
 			}
 			haeufigkeit[lokalChar] = haeufigkeit[lokalChar] + 1;
@@ -101,7 +101,7 @@ public class P {
 	}
 	
 	/**
-	 * Postcondition: Codiert einen String in ein boolean array, nach dem Huffmann Baum.
+	 * Postcondition: Codiert einen String in ein boolean Array, nach dem Huffmann Baum.
 	 * 				  Sollten Zeichen verwendet werden die nicht im Baum vorkommen werden diese
 	 * 				  nicht codiert
 	 * @param textPar
