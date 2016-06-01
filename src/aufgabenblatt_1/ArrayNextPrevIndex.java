@@ -139,7 +139,7 @@ public class ArrayNextPrevIndex<E extends Comparable<E>> implements List<E>{
 		if ((pos < 1) || (pos > size())) {
 			throw new IndexOutOfBoundsException("Ungueltiger Index Zugriff: " + pos);
 		}
-		Knoten loeschender = null;
+		Knoten loeschender;
 		if (anzahlDerElemente/2 >= pos) {
 			loeschender = listenKopf.next;
 			for (int i = 1; i < pos; i++) {

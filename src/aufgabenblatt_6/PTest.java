@@ -73,6 +73,20 @@ public class PTest {
 	}
 	
 	@Test
+	public void testBeispiel () {
+		String beispielString = "If you give someone a program you will frustrate them for a day? If you teach them how to"
+								+"program, you will frustrate them for a lifetime. The computing scientist?s main challenge is not to"
+								+"get confused by the complexities of his own making. Beauty is more important in computing than"
+								+"anywhere else in technology because software is so complicated. Beauty is the ultimate defence"
+								+"against complexity.";
+		System.out.println(beispielString.length()*16);
+		P hB = new P(beispielString);
+		Boolean[] code = hB.textCodieren(beispielString);
+		System.out.println (code.length);
+		assertEquals(hB.textDecodieren(code),beispielString);
+	}
+	
+	@Test
 	public void testCodierungAnders() {
 		String beispielString = "-XXYYXX-";
 		P hB = new P(beispielString);
